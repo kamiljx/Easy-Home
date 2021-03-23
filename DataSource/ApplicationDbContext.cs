@@ -7,10 +7,16 @@ namespace DataSource
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
+        private readonly string _connectionString;
+
+        public ApplicationDbContext(string connectionString)
         {
-            Database.EnsureCreated();
+            _connectionString = connectionString;
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(_connectionString);
         }
 
     }

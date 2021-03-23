@@ -32,7 +32,7 @@ namespace EasyHomeWebApp
 
             services.AddDbContext<ApplicationDbContext>(o =>
             {
-                o.UseSqlServer(Configuration["connectionString:EasyHomeDbConnectionString"]);
+                o.UseSqlServer(Configuration["name=ConnectionString:EasyHomeDbConnectionString"]);
             });
 
             // DODAÆ service.AddIdentity...

@@ -7,6 +7,13 @@ namespace DataSource
 {
     public class UnitOfWork : IUnitOfWork
     {
+        private readonly ApplicationDbContext _dbContext;
+
+        public UnitOfWork()
+        {
+            _dbContext = new ApplicationDbContext("name = ConnectionString:EasyHomeDbConnectionString");
+        }
+
         public void Commit()
         {
             throw new NotImplementedException();
