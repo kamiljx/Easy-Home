@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <form [formGroup]='registerForm' (ngSubmit)="register()" autocomplete="off">
+            <h1 class="text-center text-primary">Załóż konto!</h1>
+            <hr>
+            <app-text-form-input [formControl]='registerForm.controls["email"]' [label]='"E-mail"'></app-text-form-input>
+            <app-text-form-input [formControl]='registerForm.controls["password"]' [label]='"Hasło"' type="password"></app-text-form-input>
+            <app-text-form-input [formControl]='registerForm.controls["confirmPassword"]' [label]='"Powtórz hasło"' type="password"></app-text-form-input>
+            <div class="form-group">
+                <label >Typ konta</label>
+                <select 
+                    formControlName="role" 
+                    class="form-control">
+                        <option *ngFor="let roles of role" [value]="roles.Role">{{roles.name}}</option>
+                </select>
+            </div>
+            <app-text-form-input [formControl]='registerForm.controls["firstName"]' [label]='"Imię"'></app-text-form-input>
+            <app-text-form-input [formControl]='registerForm.controls["lastName"]' [label]='"Nazwisko"'></app-text-form-input>
+            <app-date-form-input [formControl]='registerForm.controls["dateOfBirth"]' [label]='"Data urodzenia"'[maxDate]='maxDate' ></app-date-form-input>
+            <div class="form-group">
+                <label>Województwo</label>
+                <select 
+                    formControlName="state" 
+                    class="form-control">
+                        <option *ngFor="let state of states">{{state.name}}</option>
+                </select>
+            </div>
+            <app-text-form-input [formControl]='registerForm.controls["zipCode"]' [label]='"Kod pocztowy"'></app-text-form-input>
+            <app-text-form-input [formControl]='registerForm.controls["city"]' [label]='"Miasto"'></app-text-form-input>
+            <app-text-form-input [formControl]='registerForm.controls["street"]' [label]='"Ulica"'></app-text-form-input>
+            <app-text-form-input [formControl]='registerForm.controls["streetNo"]' [label]='"Numer budynku"'></app-text-form-input>
+
+            <div class="row" *ngIf="validationErrors.length > 0">
+                <ul class="text-danger">
+                    <li *ngFor="let error of validationErrors">{{error}}</li>
+                </ul>
+            </div>
+
+            <div class="form-group text-center">
+                <button class="btn btn-success mr-1"
+                [disabled]="!registerForm.valid"
+                 type="submit">Zarejestruj</button>
+                <button class="btn btn-danger ml-1" (click)="cancel()">Anuluj</button>
+            </div>
+
+        </form>
+        
+        <p>Form value {{registerForm.value | json}}</p>
+        <p>Form status {{registerForm.status | json}}</p>
+    </div>
+</div>

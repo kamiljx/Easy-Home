@@ -30,10 +30,10 @@ namespace EasyHomeWebApp
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.AddDbContext<ApplicationDbContext>(o =>
+/*            services.AddDbContext<ApplicationDbContext>(o =>
             {
                 o.UseSqlServer(Configuration["name=ConnectionString:EasyHomeDbConnectionString"]);
-            });
+            });*/
 
             // DODAÆ service.AddIdentity...
         }
