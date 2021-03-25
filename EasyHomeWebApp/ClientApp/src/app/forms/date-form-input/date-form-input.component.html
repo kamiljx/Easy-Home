@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="col-xs-12 col-12 col-md-12 form-group">
+        <label>Data urodzenia</label>
+        <input
+            type="text"
+            [class.is-invalid]='ngControl.control.touched && ngControl.control.invalid'
+            class='form-control'
+            [formControl]='ngControl.control'
+            placeholder="{{label}}"
+            bsDatepicker
+                [bsConfig]='bsConfig'
+                [maxDate]='maxDate'
+        >
+        <div *ngIf="ngControl.control.errors?.requied" class="invalid-feedback">{{label}} jest wymagana</div>
+    </div>
+</div>
