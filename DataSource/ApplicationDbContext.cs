@@ -1,17 +1,27 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Models.DataSource;
 
 namespace DataSource
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
+        private readonly string _connectionString;
+
+        public ApplicationDbContext(string connectionString)
         {
-            Database.EnsureCreated();
+            _connectionString = connectionString;
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(_connectionString);
+        }
+
+        // PONIŻEJ DbEntity<> dodawać
 
     }
 }
