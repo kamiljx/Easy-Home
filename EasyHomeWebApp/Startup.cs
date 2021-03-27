@@ -2,12 +2,13 @@ using DataSource;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
+using Models.DataSource;
 
 namespace EasyHomeWebApp
 {
@@ -30,12 +31,12 @@ namespace EasyHomeWebApp
                 configuration.RootPath = "ClientApp/dist";
             });
 
-/*            services.AddDbContext<ApplicationDbContext>(o =>
+            services.AddDbContext<ApplicationDbContext>(o =>
             {
                 o.UseSqlServer(Configuration["name=ConnectionString:EasyHomeDbConnectionString"]);
-            });*/
+            });
 
-            // DODAÆ service.AddIdentity...
+            services.AddIdentity<ApplicationUser, IdentityRole>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

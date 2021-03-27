@@ -16,17 +16,33 @@ namespace DataSource
 
         public void Commit()
         {
-            throw new NotImplementedException();
+            _dbContext.SaveChanges();
+
+            if (_dbContext.Database.CurrentTransaction != null)
+            {
+                _dbContext.Database.CurrentTransaction.Commit();
+            }
         }
 
         public void Rollback()
         {
-            throw new NotImplementedException();
+            if (_dbContext.Database.CurrentTransaction != null)
+            {
+                _dbContext.Database.CurrentTransaction.Rollback();
+            }
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            if (_dbContext.Database.CurrentTransaction != null)
+            {
+                _dbContext.Database.CurrentTransaction.Dispose();
+            }
+
+            if (_dbContext != null)
+            {
+                _dbContext.Dispose();
+            }
         }
 
     }

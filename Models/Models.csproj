@@ -21,8 +21,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DataSource\Entities\" />
-  </ItemGroup>
-
 </Project>

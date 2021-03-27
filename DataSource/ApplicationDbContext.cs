@@ -1,11 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Models.DataSource;
 
 namespace DataSource
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         private readonly string _connectionString;
 
@@ -18,6 +20,8 @@ namespace DataSource
         {
             optionsBuilder.UseSqlServer(_connectionString);
         }
+
+        // PONIŻEJ DbEntity<> dodawać
 
     }
 }
