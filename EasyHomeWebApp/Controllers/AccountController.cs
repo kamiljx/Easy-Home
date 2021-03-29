@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using DataSource;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Models.DataSource;
@@ -9,25 +10,35 @@ using System.Threading.Tasks;
 
 namespace EasyHomeWebApp.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseApiController
     {
-        private readonly UserManager<ApplicationUser> userManager;
-        private readonly SignInManager<ApplicationUser> signInManager;
-        private readonly ILogger<AccountController> logger;
+        private readonly ApplicationDbContext _appDbContext;
+        private readonly UserManager<ApplicationUser>_userManager;
+        private readonly SignInManager<ApplicationUser>_signInManager;
+        private readonly ILogger<AccountController> _logger;
+
 
         public AccountController(
+            ApplicationDbContext AppDbContext,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<AccountController> logger)
         {
-            this.userManager = userManager;
-            this.signInManager = signInManager;
-            this.logger = logger;
+            _appDbContext = AppDbContext;
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _logger = logger;
         }
 
-        public IActionResult Index()
+        [HttpPost("register")]
+        public async Task<ActionResult<ApplicationUser>> Register(string email, string password)
         {
-            return View();
+            var user = new ApplicationUser
+            {
+                Email = email,
+                PasswordHash = password
+            };
+            return user;
         }
     }
 }

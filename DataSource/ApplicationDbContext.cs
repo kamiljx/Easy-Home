@@ -13,18 +13,26 @@ namespace DataSource
         IdentityUserClaim<int>, AppUserRole, IdentityUserLogin<int>,
         IdentityRoleClaim<int>, IdentityUserToken<int>>
     {
-        private readonly string _connectionString;
-
-        public ApplicationDbContext(string connectionString)
+        
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-            _connectionString = connectionString;
+            
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(_connectionString);
-        }
 
+        //private readonly string _connectionString;
+
+        //public ApplicationDbContext(string connectionString)
+        //{
+        //    _connectionString = connectionString;
+        //}
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer(_connectionString);
+        //}
+
+        // PONIŻEJ DbEntity<> dodawać
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -43,7 +51,7 @@ namespace DataSource
                 .IsRequired();
         }
 
-        // PONIŻEJ DbEntity<> dodawać
+        
 
     }
 }

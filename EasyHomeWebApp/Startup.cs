@@ -1,4 +1,5 @@
 using DataSource;
+using EasyHomeWebApp.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,10 +34,11 @@ namespace EasyHomeWebApp
 
             services.AddDbContext<ApplicationDbContext>(o =>
             {
-                o.UseSqlServer(Configuration["name=ConnectionString:EasyHomeDbConnectionString"]);
+                o.UseSqlServer(Configuration["Data:EasyHome:ConnectionString"]);
             });
-
-            services.AddIdentity<ApplicationUser, IdentityRole>();
+            services.AddControllers();
+            services.AddCors();
+            services.AddIdentityServices(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,8 +62,11 @@ namespace EasyHomeWebApp
                 app.UseSpaStaticFiles();
             }
 
+            
+            
             app.UseRouting();
-
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
