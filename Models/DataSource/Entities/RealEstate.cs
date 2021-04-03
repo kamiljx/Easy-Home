@@ -25,6 +25,6 @@ namespace Models.DataSource.Entities
         public Guid AccessCode { get; set; }
         // Tu powinna być relacja one-to-many (jedna nieruchomość - wiele płatności). Sprawdzić czy napewno to się tak definiuje
         public IEnumerable<Payment> Payments { get; set; }
-       
+               
     }
 }
