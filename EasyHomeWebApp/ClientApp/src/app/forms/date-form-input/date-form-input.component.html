@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-xs-12 col-12 col-md-12 form-group">
-        <label>Data urodzenia</label>
+        <label>{{label}}</label>
         <input
             type="text"
             [class.is-invalid]='ngControl.control.touched && ngControl.control.invalid'
@@ -11,6 +11,6 @@
                 [bsConfig]='bsConfig'
                 [maxDate]='maxDate'
         >
-        <div *ngIf="ngControl.control.errors?.requied" class="invalid-feedback">{{label}} jest wymagana</div>
+        <div *ngIf="ngControl.control.errors?.requied" class="invalid-feedback">{{label | lowercase}} {{'validation.required' | translate}}</div>
     </div>
 </div>

@@ -1,0 +1,32 @@
+{    
+    "default":{
+    "register": "Rejestracja",
+    "cancel": "Anuluj",
+    "confirm": "Potwierdź"
+    },
+    "user":{
+        "email": "E-mail",
+        "password": "Hasło",
+        "confirmPassword": "Powtórz Hasło",
+        "role": "Typ konta",
+        "firstName": "Imię",
+        "lastName": "Nazwisko",
+        "dateOfBirth": "Data urodzenia",
+        "state": "Województwo",
+        "zipCode": "Kod pocztowy",
+        "city": "Miasto",
+        "address": "Adres"
+    },
+    "role":{
+        "owner": "Właściciel",
+        "rentier": "Lokator",
+        "admin": "Administrator"
+    },
+    "validation":{
+        "pleaseToInput": "Proszę wprowadzić",
+        "hasMin": "musi mieć przynajmniej",
+        "hasMax": "musi mieć maksymalnie",
+        "signs": "znaków",
+        "notMatch": "Nie pasują"
+    }
+}

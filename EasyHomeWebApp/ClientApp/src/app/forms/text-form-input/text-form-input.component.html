@@ -6,8 +6,8 @@
         class="form-control" 
         [formControl]="ngControl.control"
         placeholder={{label}}>
-        <div *ngIf="ngControl.control.errors?.required" class="invalid-feedback">Proszę wprowadzić {{label}}</div>
-        <div *ngIf="ngControl.control.errors?.minlength" class="invalid-feedback">{{label}} musi mieć przynamniej {{ngControl.control.errors.minlength['requiredLength']}} znaków</div>
-        <div *ngIf="ngControl.control.errors?.maxlength" class="invalid-feedback">{{label}} musi mieć maksymalnie {{ngControl.control.errors.maxlength['requiredLength']}} znaków</div>
-        <div *ngIf="ngControl.control.errors?.isMatching" class="invalid-feedback">Hasła nie pasują do siebie</div>
+        <div *ngIf="ngControl.control.errors?.required" class="invalid-feedback">{{'validation.pleaseToInput' | translate}} {{label | lowercase}}</div>
+        <div *ngIf="ngControl.control.errors?.minlength" class="invalid-feedback">{{label | lowercase}} {{'validation.minLength' | translate}} {{ngControl.control.errors.minlength['requiredLength']}} {{'validation.signs' | translate}}</div>
+        <div *ngIf="ngControl.control.errors?.maxlength" class="invalid-feedback">{{label | lowercase}} {{'validation.maxLength' | translate}} {{ngControl.control.errors.maxlength['requiredLength']}} {{'validation.signs' | translate}}</div>
+        <div *ngIf="ngControl.control.errors?.isMatching" class="invalid-feedback">{{'validation.notMatch' | translate}}</div>
 </div>
