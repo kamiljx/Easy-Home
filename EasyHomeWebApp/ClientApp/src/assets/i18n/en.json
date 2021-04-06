@@ -1,0 +1,33 @@
+{
+    "default":{
+        "register": "Register",
+        "cancel": "Cancel",
+        "confirm": "Confirm"
+    },
+    "user":{
+        "email": "E-mail",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "role": "Role",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "dateOfBirth": "Date Of Birth",
+        "state": "State",
+        "zipCode": "ZIP Code",
+        "city": "City",
+        "address": "Address"
+    },
+    "role":{
+        "owner": "Owner",
+        "rentier": "Rentier",
+        "admin": "Admin"
+    },
+    "validation":{
+        "pleaseToInput": "Please to input" ,
+        "minLength": "must be at least",
+        "maxLength": "",
+        "signs": "signs",
+        "notMatch": "doesn't match",
+        "required": "is required"
+    }
+}

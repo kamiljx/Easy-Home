@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { AccountService } from '../services/account.service';
 
 @Component({
@@ -32,12 +33,13 @@ export class RegisterComponent implements OnInit {
     {name: 'Zachodniopomorskie'},
   ]
   role:any = [
-    {Role: 'owner', name: "Właściciel"},
-    {Role: 'rentier', name: "Najemca"}
+    {Role: 'owner', name: "owner" },
+    {Role: 'rentier', name: "rentier"}
   ]
 
 
-  constructor(private accountService: AccountService, private fb: FormBuilder, private router: Router) { }
+  constructor(private accountService: AccountService, private fb: FormBuilder, 
+    private router: Router, private translateService: TranslateService) {  }
 
   ngOnInit(): void {
     this.initializeForm();
@@ -47,17 +49,16 @@ export class RegisterComponent implements OnInit {
   initializeForm(){
     this.registerForm = this.fb.group({
       email: ['',[Validators.required, Validators.email]],
-      password: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(15)]],
+      password: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(128)]],
       confirmPassword: ['', [Validators.required, this.matchValues('password')]],
-      role: [this.role[1]],
-      firstName: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(15)]],
-      lastName: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
+      role: ['owner'],
+      firstName: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(35)]],
+      lastName: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(35)]],
       dateOfBirth: ['',[Validators.required]],
-      state: [this.states[0]],
-      zipCode: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
-      city: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(15)]],
-      street: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
-      streetNo: ['',[Validators.required]],
+      state: ['Dolnośląskie',this.states[0]],
+      zipCode: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(11)]],
+      city: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(45)]],
+      address: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(95)]],
 
 
     })
