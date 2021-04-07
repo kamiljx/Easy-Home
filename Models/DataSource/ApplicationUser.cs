@@ -16,7 +16,7 @@ namespace Models.DataSource
         public string City { get; set; }
         public string Street { get; set; }
 
-        public string HauseNumber { get; set; }
+        public string HouseNumber { get; set; }
 
         public ICollection<AppUserRole> UserRoles { get; set; }
     }

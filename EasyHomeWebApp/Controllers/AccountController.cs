@@ -52,7 +52,7 @@ namespace EasyHomeWebApp.Controllers
                 ZipCode = registerDto.ZipCode,
                 City = registerDto.City,
                 Street = registerDto.Street,
-                HauseNumber = registerDto.HouseNumber
+                HouseNumber = registerDto.HouseNumber
 
             };
 
