@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataSource.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210331012437_Identity")]
+    [Migration("20210407112208_Identity")]
     partial class Identity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -131,7 +131,7 @@ namespace DataSource.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("HauseNumber")
+                    b.Property<string>("HouseNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
