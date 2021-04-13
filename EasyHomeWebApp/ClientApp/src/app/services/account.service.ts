@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AccountService {
-  baseUrl=""//TODO
+  baseUrl="https://localhost:5001/api/"//TODO
   private currentUserSource = new ReplaySubject<User>(1);
   constructor(private http: HttpClient) { }
 

@@ -51,10 +51,10 @@ export class RegisterComponent implements OnInit {
       email: ['',[Validators.required, Validators.email]],
       password: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(128)]],
       confirmPassword: ['', [Validators.required, this.matchValues('password')]],
-      role: ['owner'],
+      /*role: ['owner'],*/
       firstName: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(35)]],
       lastName: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(35)]],
-      dateOfBirth: ['',[Validators.required]],
+   /*   dateOfBirth: ['',[Validators.required]],*/
       state: ['Dolnośląskie',this.states[0]],
       zipCode: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(11)]],
       city: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(45)]],
@@ -70,12 +70,12 @@ export class RegisterComponent implements OnInit {
   }
 
   register(){
-    // this.accountService.register(this.registerForm.value).subscribe(response =>{
-    //   console.log(response)
-    //   // this.router.navigateByUrl('#')
-    // }, error =>{
-    //   this.validationErrors = error;
-    // })
+     this.accountService.register(this.registerForm.value).subscribe(response =>{
+       console.log(response)
+       // this.router.navigateByUrl('#')
+     }, error =>{
+       this.validationErrors = error;
+     })
   }
   
   cancel(){

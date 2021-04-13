@@ -44,15 +44,15 @@ namespace EasyHomeWebApp.Controllers
 
             var user = new ApplicationUser
             {
-                UserName = registerDto.Username,
+                UserName = registerDto.Email,
+                FirstName = registerDto.FirstName,
+                LastName = registerDto.LastName,
+                DateOfBirth = registerDto.DateOfBirth,
                 Email = registerDto.Email,
-                Name = registerDto.Name,
-                Surname = registerDto.Surname,
                 State = registerDto.State,
                 ZipCode = registerDto.ZipCode,
                 City = registerDto.City,
-                Street = registerDto.Street,
-                HouseNumber = registerDto.HouseNumber
+                Address = registerDto.Address
 
             };
 

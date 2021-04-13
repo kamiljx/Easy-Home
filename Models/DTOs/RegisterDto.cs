@@ -7,8 +7,12 @@ namespace Models.DTOs
 {
     public class RegisterDto
     {
+
         [Required]
-        public string Username { get; set; }
+        public string FirstName { get; set; }
+
+        [Required]
+        public string LastName { get; set; }
 
         [Required]
         [EmailAddress]
@@ -18,11 +22,7 @@ namespace Models.DTOs
         public string Password { get; set; }
 
         [Required]
-        public string Name { get; set; }
-
-        [Required]
-        public string Surname { get; set; }
-
+        public DateTime DateOfBirth { get; set; }
         [Required]
         public string State { get; set; }
         [Required]
@@ -32,9 +32,7 @@ namespace Models.DTOs
         public string City { get; set; }
 
         [Required]
-        public string Street { get; set; }
+        public string Address { get; set; }
 
-        [Required]
-        public string HouseNumber { get; set; }
     }
 }

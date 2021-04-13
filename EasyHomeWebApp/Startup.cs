@@ -39,6 +39,7 @@ namespace EasyHomeWebApp
             services.AddControllers();
             services.AddCors();
             services.AddIdentityServices(Configuration);
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,8 +63,11 @@ namespace EasyHomeWebApp
                 app.UseSpaStaticFiles();
             }
 
-            
-            
+
+            app.UseCors(builder => builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
@@ -83,8 +87,8 @@ namespace EasyHomeWebApp
                 //spa.UseAngularCliServer(npmScript: "start");
                 if (env.IsDevelopment())
                 {
-                    spa.UseAngularCliServer(npmScript: "start");
-                    //spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+                    //spa.UseAngularCliServer(npmScript: "start");
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                 }
             });
         }
