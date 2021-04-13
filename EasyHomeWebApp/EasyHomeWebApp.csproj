@@ -11,6 +11,7 @@
     <!-- Set this to true if you enable server-side prerendering -->
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
     <NoWin32Manifest>true</NoWin32Manifest>
+    <UserSecretsId>d2c03c1f-fcb4-45a6-8fa4-74b90e457ba9</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -45,11 +46,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\environments\environment.prod.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DataSource\DataSource.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="ClientApp\ssl\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\environments\environment.prod.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
