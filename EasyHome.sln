@@ -13,9 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Servic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Commons", "Commons\Commons.csproj", "{6A492320-3C47-4BC8-A03B-5A409E1006DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{ED331E1F-B8AC-4B31-86B4-3994449EF256}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "WebAPI\WebAPI.csproj", "{ED331E1F-B8AC-4B31-86B4-3994449EF256}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyHomeWebApp", "EasyHomeWebApp\EasyHomeWebApp.csproj", "{B2615FA7-53ED-48F5-9AB4-A6ADF05BD3A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyHomeWebApp", "EasyHomeWebApp\EasyHomeWebApp.csproj", "{B2615FA7-53ED-48F5-9AB4-A6ADF05BD3A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

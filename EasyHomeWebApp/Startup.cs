@@ -1,13 +1,15 @@
 using DataSource;
+using EasyHomeWebApp.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
+using Models.DataSource;
 
 namespace EasyHomeWebApp
 {
@@ -32,10 +34,12 @@ namespace EasyHomeWebApp
 
             services.AddDbContext<ApplicationDbContext>(o =>
             {
-                o.UseSqlServer(Configuration["connectionString:EasyHomeDbConnectionString"]);
+                o.UseSqlServer(Configuration["Data:EasyHome:ConnectionString"]);
             });
-
-            // DODAÆ service.AddIdentity...
+            services.AddControllers();
+            services.AddCors();
+            services.AddIdentityServices(Configuration);
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,8 +63,14 @@ namespace EasyHomeWebApp
                 app.UseSpaStaticFiles();
             }
 
-            app.UseRouting();
 
+            app.UseCors(builder => builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -74,10 +84,11 @@ namespace EasyHomeWebApp
                 // see https://go.microsoft.com/fwlink/?linkid=864501
 
                 spa.Options.SourcePath = "ClientApp";
-
+                //spa.UseAngularCliServer(npmScript: "start");
                 if (env.IsDevelopment())
                 {
-                    spa.UseAngularCliServer(npmScript: "start");
+                    //spa.UseAngularCliServer(npmScript: "start");
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                 }
             });
         }
