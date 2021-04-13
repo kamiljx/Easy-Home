@@ -16,7 +16,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { MemberDetailComponent } from './member/member-detail/member-detail.component';
 import { HomeComponent } from './home/home.component';
 import { HomeLoginComponent } from './home-login/home-login.component';
-
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown'
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -40,6 +40,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     ReactiveFormsModule,
     SharedModule,
+    BsDropdownModule.forRoot(),
     RouterModule.forRoot([
     ]),
     AppRoutingModule,

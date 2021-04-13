@@ -11,7 +11,7 @@ import { AccountService } from '../services/account.service';
 export class HomeLoginComponent implements OnInit {
   model: any ={}
   password: string;
-  loggedIn: boolean
+  
   @Input() translatedFrom : string
   constructor(private router: Router, private translateService: TranslateService, private accountService: AccountService) { }
 
@@ -19,6 +19,7 @@ export class HomeLoginComponent implements OnInit {
     this.translateService.get('user.password').subscribe((data:any)=> {
       this.password = data
      });
+     this.getCurrentUser()
   }
   gotToPage(page:string){
     this.router.navigate([page])
@@ -29,9 +30,16 @@ login(){
   console.log(this.model)
   this.accountService.login(this.model).subscribe(response=>{
     console.log(response)
-    this.loggedIn = true;
+    this.accountService.loggedIn = true;
   }, error =>{
     console.log(error)
   })
 }
+  getCurrentUser(){
+    this.accountService.currentUser$.subscribe(user =>{
+      this.accountService.loggedIn = !!user;
+    }, error =>{
+      console.log(error)
+    })
+  }
 }
