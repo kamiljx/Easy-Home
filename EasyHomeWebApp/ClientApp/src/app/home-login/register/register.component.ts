@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { AccountService } from '../services/account.service';
+import { AccountService } from '../../services/account.service';
 
 @Component({
   selector: 'app-register',
@@ -70,12 +70,12 @@ export class RegisterComponent implements OnInit {
   }
 
   register(){
-    // this.accountService.register(this.registerForm.value).subscribe(response =>{
-    //   console.log(response)
-    //   // this.router.navigateByUrl('#')
-    // }, error =>{
-    //   this.validationErrors = error;
-    // })
+     this.accountService.register(this.registerForm.value).subscribe(response =>{
+       console.log(response)
+        this.router.navigateByUrl('#')
+     }, error =>{
+       this.validationErrors = error;
+     })
   }
   
   cancel(){

@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AccountService {
-  baseUrl=""//TODO
+  baseUrl="https://localhost:5001/api/"
   private currentUserSource = new ReplaySubject<User>(1);
   constructor(private http: HttpClient) { }
 
@@ -22,5 +22,8 @@ export class AccountService {
         }
       })
     )
+  }
+  login(model:any){
+    return this.http.post(this.baseUrl + 'account/login', model)
   }
 }

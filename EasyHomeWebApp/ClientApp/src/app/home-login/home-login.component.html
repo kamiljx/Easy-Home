@@ -1,0 +1,32 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-5 leftbox">
+            <div class="inner">
+                <h1>nie masz konta</h1>
+                <h2> opis </h2>
+                <button (click)="gotToPage('register')" class="btn btn-primary btn-lg mr-2">{{'default.register' | translate}}!</button> 
+                <button class="btn btn-outline-light btn-lg my-2 my-sm-0">{{'home.lm' | translate}}</button> 
+            </div>
+        </div>
+        <div class="col-md-7 rightbox">
+                <div class="form-group w-50 h-25">
+                    <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off" >
+                        <input 
+                        name="email"
+                        [(ngModel)]="model.email"
+                        class="form-control mr-sm-2 formInput"
+                        type="text"
+                        placeholder="E-mail">
+                        <input 
+                        name="password"
+                        [(ngModel)]="model.password"
+                        class="form-control mr-sm-2 formInput"
+                        type="password"
+                        placeholder={{password}}>
+                        <button class="btn btn-lg btn-outline-success my-2 my-sm-0"> {{'default.confirm' | translate}}</button>
+                    </form> 
+                </div>
+                
+        </div>
+    </div>
+</div>
