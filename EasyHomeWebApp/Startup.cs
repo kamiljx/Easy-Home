@@ -30,7 +30,7 @@ namespace EasyHomeWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<ITokenService, TokenService>();
+            
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -38,26 +38,10 @@ namespace EasyHomeWebApp
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.AddDbContext<ApplicationDbContext>(o =>
-            {
-                o.UseSqlServer(Configuration["Data:EasyHome:ConnectionString"]);
-            });
+            services.AddApplicationServices(Configuration);
             services.AddControllers();
             services.AddCors();
-            services.AddIdentityServices(Configuration);
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["TokenKey"])),
-                        ValidateIssuer = false,
-                        ValidateAudience = false
-                    };
-
-                });
-            
+            services.AddIdentityServices(Configuration);        
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
