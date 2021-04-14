@@ -9,9 +9,9 @@ namespace DataSource
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public UnitOfWork()
+        public UnitOfWork(ApplicationDbContext dbcontext)
         {
-            _dbContext = new ApplicationDbContext("name = ConnectionString:EasyHomeDbConnectionString");
+            _dbContext = dbcontext;
         }
 
         public void Commit()

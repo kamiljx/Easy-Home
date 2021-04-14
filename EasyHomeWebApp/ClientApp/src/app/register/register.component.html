@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <form [formGroup]='registerForm' (ngSubmit)="register()" autocomplete="off">
+            <h1 class="text-center text-primary">{{'default.register' | translate}}</h1>
+
+
+            <hr>
+            <app-text-form-input [formControl]='registerForm.controls["email"]' [label]='"email"'></app-text-form-input>
+            <app-text-form-input [formControl]='registerForm.controls["password"]' [label]='"password"' type="password"></app-text-form-input>
+            <app-text-form-input [formControl]='registerForm.controls["confirmPassword"]' [label]='"confirmPassword"' type="password"></app-text-form-input>
+            <div class="form-group">
+                <label >{{'user.role' | translate}}</label>
+                <select 
+                    formControlName="role" 
+                    class="form-control">
+                        <option value="owner">{{'role.owner' | translate}}</option>
+                        <option value="rentier">{{'role.rentier' | translate}}</option>
+                </select>
+            </div> 
+            <!-- <div class="form-group">
+                <label >{{'user.role' | translate}}</label>
+                <select class="form-control">
+                    <option value="owner">{{'role.owner' | translate}}</option>
+                    <option value="rentier">{{'role.rentier' | translate}}</option>
+                </select>
+            </div> -->
+            <app-text-form-input [formControl]='registerForm.controls["firstName"]' [label]='"firstName"'></app-text-form-input> 
+            <app-text-form-input [formControl]='registerForm.controls["lastName"]' [label]='"lastName"'></app-text-form-input>
+            <app-date-form-input [formControl]='registerForm.controls["dateOfBirth"]' [label]='"dateOfBirth"'[maxDate]='maxDate' ></app-date-form-input>
+            <div class="form-group">
+                <label>{{'user.state' | translate}}</label>
+                <select 
+                    formControlName="state" 
+                    class="form-control">
+                        <option *ngFor="let state of states">{{state.name}}</option>
+                </select>
+            </div>
+            <app-text-form-input [formControl]='registerForm.controls["zipCode"]' [label]='"zipCode"'></app-text-form-input>
+            <app-text-form-input [formControl]='registerForm.controls["city"]' [label]='"city"'></app-text-form-input>
+            <app-text-form-input [formControl]='registerForm.controls["address"]' [label]='"address"'></app-text-form-input>
+
+            <div class="row" *ngIf="validationErrors.length > 0">
+                <ul class="text-danger">
+                    <li *ngFor="let error of validationErrors">{{error}}</li>
+                </ul>
+            </div>
+
+            <div class="form-group text-center">
+                <button class="btn btn-success mr-1"
+                [disabled]="!registerForm.valid"
+                 type="submit">{{'default.confirm' | translate}}</button>
+                <button class="btn btn-danger ml-1" (click)="cancel()">{{'default.cancel' | translate}}</button>
+            </div>
+
+        </form>
+        
+        <p>Form value {{registerForm.value | json}}</p>
+        <p>Form status {{registerForm.status | json}}</p>
+    </div>
+</div>

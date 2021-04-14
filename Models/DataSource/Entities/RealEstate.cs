@@ -24,7 +24,7 @@ namespace Models.DataSource.Entities
         // Access code will be generated on creation of real estate
         public Guid AccessCode { get; set; }
         // Tu powinna być relacja one-to-many (jedna nieruchomość - wiele płatności). Sprawdzić czy napewno to się tak definiuje
-        public List<Payment> Payments { get; set; }
-
+        public IEnumerable<Payment> Payments { get; set; }
+               
     }
 }
