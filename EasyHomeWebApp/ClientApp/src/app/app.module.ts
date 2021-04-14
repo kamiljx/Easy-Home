@@ -17,6 +17,7 @@ import { MemberDetailComponent } from './member/member-detail/member-detail.comp
 import { HomeComponent } from './home/home.component';
 import { HomeLoginComponent } from './home-login/home-login.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown'
+import { ToastrModule } from 'ngx-toastr';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -44,6 +45,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     RouterModule.forRoot([
     ]),
     AppRoutingModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right'
+    }),
     TranslateModule.forRoot({
       loader: {
           provide: TranslateLoader,

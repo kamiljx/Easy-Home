@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../services/account.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class HomeLoginComponent implements OnInit {
   password: string;
   
   @Input() translatedFrom : string
-  constructor(private router: Router, private translateService: TranslateService, private accountService: AccountService) { }
+  constructor(private router: Router, private translateService: TranslateService, private accountService: AccountService,
+                private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.translateService.get('user.password').subscribe((data:any)=> {
@@ -33,6 +35,7 @@ login(){
     this.accountService.loggedIn = true;
   }, error =>{
     console.log(error)
+    this.toastr.error(error.error)
   })
 }
   getCurrentUser(){
