@@ -37,7 +37,7 @@ namespace EasyHomeWebApp.Controllers
         }
 
         [HttpPost("register")]
-        
+
         public async Task<ActionResult<ApplicationUser>> Register([FromBody] RegisterDto registerDto)
         {
 

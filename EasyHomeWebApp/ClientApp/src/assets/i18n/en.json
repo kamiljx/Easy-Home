@@ -29,5 +29,10 @@
         "signs": "signs",
         "notMatch": "doesn't match",
         "required": "is required"
+    },
+    "home":{
+        "noAccount": "Hmm... it seems you don't have an account",
+        "dwtl": "Don't wait too long",
+        "lm": "Learn more"
     }
 }
