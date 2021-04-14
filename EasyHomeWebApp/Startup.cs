@@ -1,4 +1,5 @@
 using DataSource;
+using EasyHomeWebApp.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,7 +34,7 @@ namespace EasyHomeWebApp
 
             services.AddDbContext<ApplicationDbContext>(o =>
             {
-                o.UseSqlServer(Configuration["name=ConnectionString:EasyHomeDbConnectionString"]);
+                o.UseSqlServer(Configuration["Data:EasyHome:ConnectionString"]);
             });
             services.AddControllers();
             services.AddCors();
@@ -68,7 +69,8 @@ namespace EasyHomeWebApp
                     .AllowAnyMethod()
                     .AllowAnyHeader());
             app.UseRouting();
-
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -82,7 +84,7 @@ namespace EasyHomeWebApp
                 // see https://go.microsoft.com/fwlink/?linkid=864501
 
                 spa.Options.SourcePath = "ClientApp";
-
+                //spa.UseAngularCliServer(npmScript: "start");
                 if (env.IsDevelopment())
                 {
                     //spa.UseAngularCliServer(npmScript: "start");
