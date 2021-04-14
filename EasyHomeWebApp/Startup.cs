@@ -35,8 +35,10 @@ namespace EasyHomeWebApp
             {
                 o.UseSqlServer(Configuration["name=ConnectionString:EasyHomeDbConnectionString"]);
             });
+            services.AddControllers();
+            services.AddCors();
+            services.AddIdentityServices(Configuration);
 
-            services.AddIdentity<ApplicationUser, IdentityRole>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +62,11 @@ namespace EasyHomeWebApp
                 app.UseSpaStaticFiles();
             }
 
+
+            app.UseCors(builder => builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
@@ -78,7 +85,8 @@ namespace EasyHomeWebApp
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseAngularCliServer(npmScript: "start");
+                    //spa.UseAngularCliServer(npmScript: "start");
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                 }
             });
         }
