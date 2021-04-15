@@ -24,9 +24,14 @@
     },
     "validation":{
         "pleaseToInput": "Proszę wprowadzić",
-        "hasMin": "musi mieć przynajmniej",
-        "hasMax": "musi mieć maksymalnie",
+        "minLength": "musi mieć przynajmniej",
+        "maxLength": "musi mieć maksymalnie",
         "signs": "znaków",
         "notMatch": "Nie pasują"
+    },
+    "home":{
+        "noAccount": "Hmm... wygląda na to, że nie masz jeszcze konta",
+        "dwtl": "Nie zwlekaj",
+        "lm": "Dowiedz się więcej"
     }
 }
