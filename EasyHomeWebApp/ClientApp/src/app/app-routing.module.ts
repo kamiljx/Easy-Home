@@ -6,13 +6,23 @@ import { MemberDetailComponent } from './member/member-detail/member-detail.comp
 import { NavComponent } from './nav/nav.component';
 import { RegisterComponent } from './home-login/register/register.component';
 import { HomeLoginComponent } from './home-login/home-login.component';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   //{path: '', component: AppComponent},
   {path: 'nav', component: NavComponent},
-  {path: 'login', component: HomeLoginComponent},
+  {path: 'login', component: HomeLoginComponent },
   {path: 'register', component: RegisterComponent},
-  {path: 'members/:id', component: MemberDetailComponent},
+  // {
+  //   path: '',
+  //   runGuardsAndResolvers: "always",
+  //   canActivate: [AuthGuard],
+  //   children: [
+    
+    //   ]
+    // },
+    {path: 'members/:id', component: MemberDetailComponent},
+    {path: 'members', component: MemberDetailComponent , canActivate: [AuthGuard]}, 
   {path: '**', component: HomeComponent }
   
 ]
