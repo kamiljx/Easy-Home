@@ -18,6 +18,15 @@ import { HomeComponent } from './home/home.component';
 import { HomeLoginComponent } from './home-login/home-login.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown'
 import { ToastrModule } from 'ngx-toastr';
+import { MaterialModule } from './shared/material.module';
+import { MaterialNavComponent } from './dashboard/material-nav/material-nav.component';
+import { OwnerDashboardComponent } from './dashboard/owner-dashboard/owner-dashboard.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { LayoutModule } from '@angular/cdk/layout';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -26,6 +35,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
+    MaterialNavComponent,
     AppComponent,
     NavComponent,
     RegisterComponent,
@@ -34,12 +44,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     MemberDetailComponent,
     HomeComponent,
     HomeLoginComponent,
+    OwnerDashboardComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MaterialModule,
     SharedModule,
     BsDropdownModule.forRoot(),
     RouterModule.forRoot([
@@ -55,6 +67,12 @@ export function HttpLoaderFactory(http: HttpClient) {
           deps: [HttpClient]
       }
   }),
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    LayoutModule,
   ],
   providers: [
     HttpClient
