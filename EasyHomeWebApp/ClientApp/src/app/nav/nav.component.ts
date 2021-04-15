@@ -10,7 +10,7 @@ import { AccountService } from '../services/account.service';
 export class NavComponent implements OnInit {
   lang: string;
   loggedIn: boolean
-  constructor(private accountService : AccountService) { }
+  constructor(public accountService : AccountService) { }
 
   ngOnInit(): void {
    this.loggedIn = this.accountService.loggedIn
