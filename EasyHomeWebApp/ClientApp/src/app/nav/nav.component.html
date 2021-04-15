@@ -22,7 +22,7 @@
         </li>
       </ul>
 
-      <div class="dropdown onRight" *ngIf="!loggedIn" dropdown>
+      <div class="dropdown onRight" *ngIf="accountService.currentUser$ | async" dropdown>
         <a class="dropdown-toggle" dropdownToggle>Welcome User</a>
         <div class="dropdown-menu" *dropdownMenu>
           <a class="dropdown-item">Edit</a>
