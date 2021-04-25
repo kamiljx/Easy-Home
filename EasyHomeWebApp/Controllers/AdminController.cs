@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Models.DTOs;
 
 namespace EasyHomeWebApp.Controllers
 {
@@ -19,14 +19,14 @@ namespace EasyHomeWebApp.Controllers
         }
 
         [HttpPost("createRole")]
-        public async Task<IActionResult> CreateRole([FromBody] object roleName)
+        public async Task<IActionResult> CreateRole([FromBody] RoleDto roleDto)
         {
-            var roleExist = await _roleManager.RoleExistsAsync(roleName.ToString());
+            var roleExist = await _roleManager.RoleExistsAsync(roleDto.RoleName);
             if (!roleExist)
             {
-                var role = new AppRole { Name = roleName.ToString() };
+                var role = new AppRole { Name = roleDto.RoleName};
                 await _roleManager.CreateAsync(role);
-                return Ok();
+                return Ok(role);
             }
             return Conflict();
         }
