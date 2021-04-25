@@ -39,8 +39,15 @@ namespace EasyHomeWebApp.Extensions
                 .AddSignInManager<SignInManager<ApplicationUser>>()
                 .AddRoleValidator<RoleValidator<AppRole>>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            return services;  
+
+            services.AddAuthorization(opt =>
+            {
+                opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+            });
+
+            return services;              
         }
+        
 
     }
 }

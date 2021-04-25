@@ -71,11 +71,13 @@ namespace EasyHomeWebApp.Controllers
             var asignrole = await _userManager.AddToRoleAsync(user, registerDto.Role);
             if (!asignrole.Succeeded) return BadRequest("Failed to asign role");
 
+            
+
             return new UserDto
             {
 
                 Username = user.UserName,
-                Token = _tokenService.CreateToken(user)
+                Token = await _tokenService.CreateToken(user)
             };
         }
 
@@ -91,7 +93,7 @@ namespace EasyHomeWebApp.Controllers
             return new UserDto
             {
                 Username = user.UserName,
-                Token = _tokenService.CreateToken(user)
+                Token = await _tokenService.CreateToken(user)
             };
         }
 
