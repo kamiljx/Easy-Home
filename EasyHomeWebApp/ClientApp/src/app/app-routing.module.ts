@@ -9,12 +9,14 @@ import { HomeLoginComponent } from './home-login/home-login.component';
 import { AuthGuard } from './guard/auth.guard';
 import { OwnerDashboardComponent } from './dashboard/owner-dashboard/owner-dashboard.component';
 import { MaterialNavComponent } from './dashboard/material-nav/material-nav.component';
+import { OptionsComponent } from './dashboard/options/options.component';
 
 const routes: Routes = [
   //{path: '', component: AppComponent},
   {path: 'owner', component: MaterialNavComponent,canActivate: [AuthGuard],
     children:[
     {path: 'dashboard', component: OwnerDashboardComponent },
+    {path: 'settings', component: OptionsComponent},
 
 ]},
   {path: 'nav', component: NavComponent},
