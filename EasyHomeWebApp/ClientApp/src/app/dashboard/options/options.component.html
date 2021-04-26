@@ -1,0 +1,31 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Settings</h1>
+  <mat-grid-list cols="2" rowHeight="340px">
+    <mat-grid-tile>
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            Theme 
+            <span style="flex:auto;" ></span>
+          </mat-card-title>
+          <span style="flex:auto;" ></span>
+          <mat-slide-toggle [(ngModel)] = "themeDark" (change)="isDarkTheme()">
+
+            <span class="material-icons">dark_mode</span>
+          </mat-slide-toggle>  
+
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <div *ngFor="let theme of themes" class="list-group mb-2">
+            <div class="list-group-item clearfix option-{{theme.value}}"
+            (click)="themeColor(theme.value)"
+
+            >{{theme.viewValue}}</div>
+          </div>
+
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+

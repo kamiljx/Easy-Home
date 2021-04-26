@@ -1,5 +1,5 @@
 
-<app-nav></app-nav>
+<app-nav *ngIf="!hasRoute('owner' || 'rentier')" ></app-nav>
 <router-outlet></router-outlet>
 
     

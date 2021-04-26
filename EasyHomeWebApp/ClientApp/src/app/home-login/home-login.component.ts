@@ -22,7 +22,7 @@ export class HomeLoginComponent implements OnInit {
       this.password = data
      });
      this.getCurrentUser()
-  }
+ }
   gotToPage(page:string){
     this.router.navigate([page])
   }
