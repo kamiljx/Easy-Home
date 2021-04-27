@@ -7,27 +7,27 @@ namespace Models.DataSource.Entities
 {
     public class RealEstate
     {
-        [Required]
+        
         public int Id { get; set; }
-        [Required]
-        public string OwnerId { get; set; }
-        [Required]
+        
+        public ApplicationUser Owner { get; set; }
+        
         public string Name { get; set; }
-        [Required]
+        
         public string City { get; set; }
-        [Required]
+        
         public string ZipCode { get; set; }
-        [Required]
+        
         public string Address { get; set; }
 
-        [Required]
+        
         public string Country { get; set; }
         // Access code will be generated on creation of real estate
         public Guid AccessCode { get; set; }
         // Tu powinna być relacja one-to-many (jedna nieruchomość - wiele płatności). Sprawdzić czy napewno to się tak definiuje
-        public IEnumerable<Payment> Payments { get; set; }
+        public ICollection<Payment> Payments { get; set; }
 
-        public ApplicationUser[] Rentiers { get; set; }
+        public ICollection<ApplicationUser> Rentiers { get; set; }
         
         
                

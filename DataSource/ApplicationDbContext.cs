@@ -51,6 +51,10 @@ namespace DataSource
                 .IsRequired();
         }
 
+        public DbSet<RealEstate> RealEstates { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+
+
         
 
     }
