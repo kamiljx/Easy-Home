@@ -41,7 +41,8 @@ namespace EasyHomeWebApp
             services.AddApplicationServices(Configuration);
             services.AddControllers();
             services.AddCors();
-            services.AddIdentityServices(Configuration);        
+            services.AddIdentityServices(Configuration);
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

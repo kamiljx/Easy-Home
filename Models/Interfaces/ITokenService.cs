@@ -2,11 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Models.Interfaces
 {
     public interface ITokenService
     {
-        string CreateToken(ApplicationUser user);
+        Task<string> CreateToken(ApplicationUser user);
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Models.DataSource;
+using Models.DataSource.Entities;
 using Models.DTOs;
 using Models.Interfaces;
 using System;
@@ -20,6 +21,7 @@ namespace EasyHomeWebApp.Controllers
         private readonly ITokenService _tokenService;
         private readonly ApplicationDbContext _appDbContext;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<AppRole> _roleManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<AccountController> _logger;
 
@@ -29,6 +31,7 @@ namespace EasyHomeWebApp.Controllers
             ITokenService tokenService,
             ApplicationDbContext appDbContext,
             UserManager<ApplicationUser> userManager,
+            RoleManager<AppRole> roleManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<AccountController> logger
             )
@@ -36,6 +39,7 @@ namespace EasyHomeWebApp.Controllers
             _tokenService = tokenService;
             _appDbContext = appDbContext;
             _userManager = userManager;
+            _roleManager = roleManager;
             _signInManager = signInManager;
             _logger = logger;
 
@@ -63,10 +67,17 @@ namespace EasyHomeWebApp.Controllers
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
             if (!result.Succeeded) return BadRequest(result.Errors);
-            return new UserDto 
-            { 
+            
+            var asignrole = await _userManager.AddToRoleAsync(user, registerDto.Role);
+            if (!asignrole.Succeeded) return BadRequest("Failed to asign role");
+
+            
+
+            return new UserDto
+            {
+
                 Username = user.UserName,
-                Token = _tokenService.CreateToken(user)
+                Token = await _tokenService.CreateToken(user)
             };
         }
 
@@ -82,7 +93,7 @@ namespace EasyHomeWebApp.Controllers
             return new UserDto
             {
                 Username = user.UserName,
-                Token = _tokenService.CreateToken(user)
+                Token = await _tokenService.CreateToken(user)
             };
         }
 
