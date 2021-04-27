@@ -20,14 +20,16 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown'
 import { ToastrModule } from 'ngx-toastr';
 import { MaterialModule } from './shared/material.module';
 import { MaterialNavComponent } from './dashboard/material-nav/material-nav.component';
-import { OwnerDashboardComponent } from './dashboard/owner-dashboard/owner-dashboard.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { LayoutModule } from '@angular/cdk/layout';
+import { RealestateComponent } from './dashboard/realestate/realestate.component';
 import { OptionsComponent } from './dashboard/options/options.component';
+import { AddRentierComponent } from './dashboard/realestate/add-rentier/add-rentier.component';
+import { MaterialTextFormInputComponent } from './forms/material-text-form-input/material-text-form-input.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -45,8 +47,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     MemberDetailComponent,
     HomeComponent,
     HomeLoginComponent,
-    OwnerDashboardComponent,
     OptionsComponent,
+    RealestateComponent,
+    AddRentierComponent,
+    MaterialTextFormInputComponent,
+
+  ],
+  entryComponents:[
+    AddRentierComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -79,6 +87,6 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [
     HttpClient
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

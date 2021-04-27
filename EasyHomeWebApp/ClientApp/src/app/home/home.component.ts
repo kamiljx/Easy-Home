@@ -14,15 +14,23 @@ export class HomeComponent implements OnInit {
   constructor(private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
-    this.initializeForm();
-  }
-  initializeForm() {
-    this.loginForm = this.fb.group({
-      email: ['',[Validators.required, Validators.email]],
-      password: ['',[Validators.required, Validators.minLength(5), Validators.maxLength(128)]],
-    })
-  }
+    this.hasDarkTheme()
+    this.hasTheme()
 
+  }
+  
+  hasDarkTheme(){
+    let isDarkTheme =localStorage.getItem("isDarkTheme")
+    if(isDarkTheme === null){
+      localStorage.setItem("isDarkTheme", "true")
+    }
+  }
+  hasTheme(){
+    let hasTheme =localStorage.getItem("theme")
+    if(hasTheme === null){
+      localStorage.setItem("theme", "deeppurple-amber")
+    }
+  }
   gotToPage(page:string){
     this.router.navigate([page])
   }

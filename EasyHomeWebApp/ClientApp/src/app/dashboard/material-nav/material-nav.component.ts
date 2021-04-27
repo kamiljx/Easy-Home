@@ -13,9 +13,8 @@ import { OptionsComponent } from '../options/options.component';
   styleUrls: ['./material-nav.component.css']
 })
 export class MaterialNavComponent implements OnInit {
-  activeThemeCssClass: string;
   storedTheme: string
-  public storedDarkTheme: boolean
+  storedDarkTheme: boolean
   constructor(private breakpointObserver: BreakpointObserver, private router: Router, private translateService: TranslateService,
     private themeService: ThemeService) {
 
@@ -25,7 +24,7 @@ export class MaterialNavComponent implements OnInit {
       this.storedTheme = this.themeService.storedTheme;
     }
   
-
+    
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
