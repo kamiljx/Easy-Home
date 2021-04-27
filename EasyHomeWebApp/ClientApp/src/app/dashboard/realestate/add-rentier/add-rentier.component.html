@@ -1,0 +1,29 @@
+<div class="container mat-app-background {{storedTheme}}"  [ngClass] = "{'dark-theme-mode' : storedDarkTheme}">
+<h2 mat-dialog-title>Add real estate</h2>
+
+<mat-dialog-content class="mat-typography">
+  
+  
+  <div class="row examplecontainer" >
+    <app-material-text-form-input [formControl]='addRealEstateForm.controls["email"]' [validate]="'email'" [label]='"email"' [placeholder]="'email'" [icon]="'airplay'" [hint]="'realEstate'" [translatedFrom]="'user'"></app-material-text-form-input>
+    <app-material-text-form-input [formControl]='addRealEstateForm.controls["name"]' [validate]="'name'" [label]='"city"' [placeholder]="'city'" [icon]="'location_city'" [hint]="'realEstate'" [translatedFrom]="'user'"></app-material-text-form-input>
+    
+  </div>
+  <div class="row examplecontainer" >
+    <app-material-text-form-input [formControl]='addRealEstateForm.controls["city"]' [validate]="'city'" [label]='"city"' [placeholder]="'city'" [icon]="'airplay'" [hint]="'realEstate'" [translatedFrom]="'user'"></app-material-text-form-input>
+    <app-material-text-form-input [formControl]='addRealEstateForm.controls["zipcode"]' [validate]="'zipcode'" [label]='"zipCode"' [placeholder]="'zipcode'" [icon]="'airplay'" [hint]="'realEstate'" [translatedFrom]="'user'"></app-material-text-form-input>
+  </div>
+
+  <div class="row examplecontainer" >
+    <app-material-text-form-input [formControl]='addRealEstateForm.controls["address"]' [validate]="'address'" [label]='"address"' [placeholder]="'address'" [icon]="'airplay'" [hint]="'realEstate'" [translatedFrom]="'user'"></app-material-text-form-input>
+    <app-material-text-form-input [formControl]='addRealEstateForm.controls["country"]' [validate]="'country'" [label]='"country"' [placeholder]="'country'" [icon]="'airplay'" [hint]="'realEstate'" [translatedFrom]="'user'"></app-material-text-form-input>
+  </div>
+
+
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+</mat-dialog-actions>
+</div>

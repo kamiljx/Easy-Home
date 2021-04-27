@@ -1,0 +1,10 @@
+.transparent .mat-dialog-container {
+  box-shadow: none;
+  background: rgba(0, 0, 0, 0);
+}
+.examplecontainer {
+  margin: 8px;
+}
+.mat-form-field + .mat-form-field {
+  margin: 8px;
+}
