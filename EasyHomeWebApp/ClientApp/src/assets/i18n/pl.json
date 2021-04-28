@@ -15,7 +15,9 @@
         "state": "Województwo",
         "zipCode": "Kod pocztowy",
         "city": "Miasto",
-        "address": "Adres"
+        "address": "Adres",
+        "country": "Kraj"
+
     },
     "role":{
         "owner": "Właściciel",
@@ -33,5 +35,8 @@
         "noAccount": "Hmm... wygląda na to, że nie masz jeszcze konta",
         "dwtl": "Nie zwlekaj",
         "lm": "Dowiedz się więcej"
+    },
+    "realEstate":{
+        "required": "Pole wymagane"
     }
 }

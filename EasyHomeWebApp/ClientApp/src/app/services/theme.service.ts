@@ -6,8 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class ThemeService {
   storedDarkTheme: string = localStorage.getItem('isDarkTheme')
-  darkThemeValue = this.storedDarkTheme.toLowerCase() == 'true';
-  themeDark:boolean = this.darkThemeValue;
+   darkThemeValue = this.storedDarkTheme.toLowerCase() == 'true';
+   themeDark:boolean = this.darkThemeValue;
   activeTheme: string;
   theme:any =[
     {value: 'deeppurple-amber', viewValue: 'Deeppurple Amber'},

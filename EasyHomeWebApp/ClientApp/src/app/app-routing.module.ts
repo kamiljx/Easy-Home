@@ -7,16 +7,18 @@ import { NavComponent } from './nav/nav.component';
 import { RegisterComponent } from './home-login/register/register.component';
 import { HomeLoginComponent } from './home-login/home-login.component';
 import { AuthGuard } from './guard/auth.guard';
-import { OwnerDashboardComponent } from './dashboard/owner-dashboard/owner-dashboard.component';
 import { MaterialNavComponent } from './dashboard/material-nav/material-nav.component';
 import { OptionsComponent } from './dashboard/options/options.component';
+import { RealestateComponent } from './dashboard/realestate/realestate.component';
+import { AddRentierComponent } from './dashboard/realestate/add-rentier/add-rentier.component';
 
 const routes: Routes = [
   //{path: '', component: AppComponent},
-  {path: 'owner', component: MaterialNavComponent,canActivate: [AuthGuard],
+  {path: 'dashboard', component: MaterialNavComponent,canActivate: [AuthGuard],
     children:[
-    {path: 'dashboard', component: OwnerDashboardComponent },
+    {path: 'realestate', component: RealestateComponent },
     {path: 'settings', component: OptionsComponent},
+    {path: 'cos', component: AddRentierComponent},
 
 ]},
   {path: 'nav', component: NavComponent},
