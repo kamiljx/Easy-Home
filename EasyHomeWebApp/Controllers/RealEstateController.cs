@@ -23,9 +23,9 @@ namespace EasyHomeWebApp.Controllers
         }
 
         [HttpGet("name")]
-        public async Task<IQueryable<RealEstate>> GetRealEstatesById(RealEstateDto realEstateDto)
+        public async Task<IQueryable<RealEstate>> GetRealEstatesByName(string Name)
         {
-            var user = await _userManager.FindByNameAsync(realEstateDto.ownerName);
+            var user = await _userManager.FindByNameAsync(Name);
             var realEstates = _context.RealEstates.Where(x => x.Owner == user);
             return realEstates;
         }
