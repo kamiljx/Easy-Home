@@ -41,6 +41,9 @@ export class AccountService {
   getCurrentUser(){
     return JSON.parse(localStorage.getItem('user')).username;
   }
+  getCurrentToken(){
+    return JSON.parse(localStorage.getItem('user')).token;
+  }
 
   setCurrentUser(user: User){
     this.currentUserSource.next(user)
@@ -49,16 +52,4 @@ export class AccountService {
     localStorage.removeItem('user')
     this.currentUserSource.next(null)
   }
-  // getRole(){
-  //   let jwt = localStorage.getItem('user');
-  //   let jwtData = jwt.split('.')[1];
-  //   let decodeJwtJsonData = window.atob(jwtData);
-  //   let decodeJwt = JSON.parse(decodeJwtJsonData)
-
-  //   let isRentier = decodeJwt.rentier
-  //   let isOwner = decodeJwt.owner
-
-  //   console.log('Is rentier: ' + isRentier);
-  //   console.log('Is owner: ' + isOwner);
-  // }
 }

@@ -15,12 +15,12 @@
         </mat-card-header>
         <mat-card-content class="dashboard-card-content" >
           <div class="mat-elevation-z8" >
-            <table mat-table [dataSource]="dataSource">
+            <table mat-table [dataSource]="dataSource" >
           
               <!-- Position Column -->
               <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef> ID </th>
-                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                <td mat-cell *matCellDef="let element let i = index;"> {{i+1}} </td>
               </ng-container>
           
               <!-- Name Column -->
@@ -38,15 +38,15 @@
               <!-- Symbol Column -->
               <ng-container matColumnDef="zipcode">
                 <th mat-header-cell *matHeaderCellDef> zipcode </th>
-                <td mat-cell *matCellDef="let element"> {{element.zipcode}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.zipCode}} </td>
               </ng-container>
               <ng-container matColumnDef="address">
                 <th mat-header-cell *matHeaderCellDef> Address </th>
-                <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.address}} </td>
               </ng-container>
               <ng-container matColumnDef="country">
                 <th mat-header-cell *matHeaderCellDef> Country </th>
-                <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.country}} </td>
               </ng-container> 
           
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -2,7 +2,8 @@
     "default":{
     "register": "Rejestracja",
     "cancel": "Anuluj",
-    "confirm": "Potwierdź"
+    "confirm": "Potwierdź",
+    "name": "nazwa"
     },
     "user":{
         "email": "E-mail",

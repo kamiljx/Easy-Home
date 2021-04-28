@@ -6,7 +6,8 @@ import { ThemeService } from 'src/app/services/theme.service';
 import { AccountService } from 'src/app/services/account.service';
 import { User } from '../../models/user';
 import { MatDialog } from '@angular/material/dialog';
-import { AddRentierComponent } from './add-rentier/add-rentier.component';
+import { AddRealEstateComponent } from './add-realestate/add-realestate.component';
+
 
 
 @Component({
@@ -35,11 +36,13 @@ export class RealestateComponent implements OnInit{
   ngOnInit(): void {
   this.getAllRealEstates()
     console.log(this.accountService.getCurrentUser())
+    console.log(this.accountService.getCurrentToken())
     this.storedDarkTheme = this.themeService.darkThemeValue;
     this.storedTheme = this.themeService.storedTheme;
+    console.log(this.dataSource)
 }
 openDialog() {
-  const dialogRef = this.dialog.open(AddRentierComponent);
+  const dialogRef = this.dialog.open(AddRealEstateComponent);
 
   dialogRef.afterClosed().subscribe(result => {
     console.log(`Dialog result: ${result}`);

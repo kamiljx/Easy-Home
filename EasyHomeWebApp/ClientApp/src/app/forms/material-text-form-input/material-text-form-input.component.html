@@ -1,25 +1,11 @@
 <div class="form-group">
-
-
-
-
-
           <mat-form-field class="example-full-width">
             <mat-label>{{label}}</mat-label>
             <input type="email" matInput [errorStateMatcher]="matcher"
                    placeholder="{{placeholder}}"
-                   >
+                   [formControl]="ngControl.control">
             <mat-error *ngIf="validate.invalid && validate.touched">COS</mat-error>
+            <mat-icon matSuffix>{{icon}}</mat-icon>
             <mat-hint>{{hint}}</mat-hint>
-            <!-- <mat-error *ngIf="validate">COS</mat-error> -->
           </mat-form-field>
-
-
-
-
-
-        <!-- <div *ngIf="ngControl.control.errors?.required" class="invalid-feedback">{{'validation.pleaseToInput' | translate}} {{label | lowercase}}</div>
-        <div *ngIf="ngControl.control.errors?.minlength" class="invalid-feedback">{{label}} {{'validation.minLength' | translate}} {{ngControl.control.errors.minlength['requiredLength']}} {{'validation.signs' | translate}}</div>
-        <div *ngIf="ngControl.control.errors?.maxlength" class="invalid-feedback">{{label}} {{'validation.maxLength' | translate}} {{ngControl.control.errors.maxlength['requiredLength']}} {{'validation.signs' | translate}}</div>
-        <div *ngIf="ngControl.control.errors?.isMatching" class="invalid-feedback">{{'validation.notMatch' | translate}}</div> -->
 </div>

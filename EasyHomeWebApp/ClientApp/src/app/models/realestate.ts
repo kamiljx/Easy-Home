@@ -1,11 +1,11 @@
 export interface Realestate{
     ownerName: string;
     id: number;
-    name: string;
-    city: string;
-    zipcode: string;
-    address: string;
-    country: string;
+    Name: string;
+    City: string;
+    ZipCode: string;
+    Address: string;
+    Country: string;
 
     // constructor(id, name, city, zipcode, address, country ){
     //     this.id = id;

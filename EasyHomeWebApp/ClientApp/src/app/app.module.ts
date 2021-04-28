@@ -28,8 +28,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { LayoutModule } from '@angular/cdk/layout';
 import { RealestateComponent } from './dashboard/realestate/realestate.component';
 import { OptionsComponent } from './dashboard/options/options.component';
-import { AddRentierComponent } from './dashboard/realestate/add-rentier/add-rentier.component';
 import { MaterialTextFormInputComponent } from './forms/material-text-form-input/material-text-form-input.component';
+import { AddRealEstateComponent } from './dashboard/realestate/add-realestate/add-realestate.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -49,12 +49,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     HomeLoginComponent,
     OptionsComponent,
     RealestateComponent,
-    AddRentierComponent,
+    AddRealEstateComponent,
     MaterialTextFormInputComponent,
 
   ],
   entryComponents:[
-    AddRentierComponent,
+    AddRealEstateComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

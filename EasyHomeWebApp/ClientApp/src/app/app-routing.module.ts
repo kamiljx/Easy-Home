@@ -10,7 +10,8 @@ import { AuthGuard } from './guard/auth.guard';
 import { MaterialNavComponent } from './dashboard/material-nav/material-nav.component';
 import { OptionsComponent } from './dashboard/options/options.component';
 import { RealestateComponent } from './dashboard/realestate/realestate.component';
-import { AddRentierComponent } from './dashboard/realestate/add-rentier/add-rentier.component';
+
+
 
 const routes: Routes = [
   //{path: '', component: AppComponent},
@@ -18,7 +19,7 @@ const routes: Routes = [
     children:[
     {path: 'realestate', component: RealestateComponent },
     {path: 'settings', component: OptionsComponent},
-    {path: 'cos', component: AddRentierComponent},
+    {path: 'add-real-estate', component: RealestateComponent},
 
 ]},
   {path: 'nav', component: NavComponent},

@@ -1,24 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemeService } from 'src/app/services/theme.service';
-import {OverlayContainer} from '@angular/cdk/overlay';
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { RealestateService } from 'src/app/services/realestate.service';
 import { ToastrService } from 'ngx-toastr';
+import { AccountService } from 'src/app/services/account.service';
 
 
 @Component({
-  selector: 'app-add-rentier',
-  templateUrl: './add-rentier.component.html',
-  styleUrls: ['./add-rentier.component.css']
+  selector: 'app-add-realestate',
+  templateUrl: './add-realestate.component.html',
+  styleUrls: ['./add-realestate.component.css']
 })
-export class AddRentierComponent implements OnInit {
+export class AddRealEstateComponent implements OnInit {
   storedTheme: string
   validationErrors: string[] =[];
   storedDarkTheme: boolean
   addRealEstateForm: FormGroup;
 
-  constructor(private themeService: ThemeService, overlayContainer: OverlayContainer, private fb: FormBuilder, private realestateService: RealestateService, private toastr: ToastrService) { }
+  constructor(private themeService: ThemeService,  private fb: FormBuilder,
+     private realestateService: RealestateService, private toastr: ToastrService, private accountService: AccountService) { }
   ngOnInit(): void {
     this.storedDarkTheme = this.themeService.darkThemeValue;
     this.storedTheme = this.themeService.storedTheme;
@@ -29,10 +30,10 @@ export class AddRentierComponent implements OnInit {
 
   initializeForm(){
     this.addRealEstateForm = this.fb.group({
-      email: ['',[Validators.required, Validators.email]],
+      ownerName: [this.accountService.getCurrentUser()],
       name: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(35)]],
       city: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(45)]],
-      zipCode: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(11)]],
+      zipCode: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(6)]],
       address: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(95)]],
       country: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(35)]],
     })
