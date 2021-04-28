@@ -1,10 +1,9 @@
-import { Component, OnInit, Input, Output, ViewChild, ChangeDetectorRef} from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild, } from '@angular/core';
 import { Realestate } from 'src/app/models/realestate';
 import { RealestateService } from 'src/app/services/realestate.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { ThemeService } from 'src/app/services/theme.service';
 import { AccountService } from 'src/app/services/account.service';
-import { User } from '../../models/user';
 import { MatDialog } from '@angular/material/dialog';
 import { AddRealEstateComponent } from './add-realestate/add-realestate.component';
 import { AssignRentierToRealestateComponent } from './assign-rentier-to-realestate/assign-rentier-to-realestate.component';
@@ -31,7 +30,7 @@ export class RealestateComponent implements OnInit{
 
   
   constructor(private realestateService: RealestateService, private themeService: ThemeService, private accountService: AccountService,
-    private dialog: MatDialog, private cf: ChangeDetectorRef) {
+    private dialog: MatDialog) {
 
   }
 
@@ -65,7 +64,6 @@ getAllRealEstates(){
   resp.subscribe(realestate =>{
     this.dataSource.data=realestate as Realestate[]
   })
-  this.cf.detectChanges()
 }
 
 
