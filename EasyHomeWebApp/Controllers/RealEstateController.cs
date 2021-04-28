@@ -41,7 +41,7 @@ namespace EasyHomeWebApp.Controllers
                 ZipCode = realEstateDto.ZipCode,
                 Address = realEstateDto.Address,
                 Country = realEstateDto.Country,
-                AccessCode = new Guid()
+                AccessCode = Guid.NewGuid()
 
             };
 
