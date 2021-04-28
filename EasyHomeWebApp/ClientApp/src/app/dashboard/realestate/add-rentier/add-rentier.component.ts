@@ -3,6 +3,8 @@ import { ThemeService } from 'src/app/services/theme.service';
 import {OverlayContainer} from '@angular/cdk/overlay';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { RealestateService } from 'src/app/services/realestate.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -12,10 +14,11 @@ import { ErrorStateMatcher } from '@angular/material/core';
 })
 export class AddRentierComponent implements OnInit {
   storedTheme: string
+  validationErrors: string[] =[];
   storedDarkTheme: boolean
   addRealEstateForm: FormGroup;
 
-  constructor(private themeService: ThemeService, overlayContainer: OverlayContainer, private fb: FormBuilder) { }
+  constructor(private themeService: ThemeService, overlayContainer: OverlayContainer, private fb: FormBuilder, private realestateService: RealestateService, private toastr: ToastrService) { }
   ngOnInit(): void {
     this.storedDarkTheme = this.themeService.darkThemeValue;
     this.storedTheme = this.themeService.storedTheme;
@@ -43,10 +46,14 @@ export class AddRentierComponent implements OnInit {
     return this.addRealEstateForm.get('name')
 }
 
+  addRealEstate(){
+    console.log(this.addRealEstateForm)
+    this.realestateService.addRealEstate(this.addRealEstateForm.value).subscribe(response =>{
+      console.log(response)
+       this.toastr.success('Dodano')
+    }, error =>{
+      this.validationErrors = error;
+      this.toastr.error(error.error)
+    })
 }
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
 }

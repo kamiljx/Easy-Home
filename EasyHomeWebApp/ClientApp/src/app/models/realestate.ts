@@ -1,4 +1,5 @@
 export interface Realestate{
+    ownerName: string;
     id: number;
     name: string;
     city: string;

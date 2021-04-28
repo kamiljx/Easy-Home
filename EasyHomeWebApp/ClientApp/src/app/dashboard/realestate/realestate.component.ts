@@ -27,13 +27,13 @@ export class RealestateComponent implements OnInit{
 
   
   constructor(private realestateService: RealestateService, private themeService: ThemeService, private accountService: AccountService,
-    private dialog: MatDialog) {
+    private dialog: MatDialog, ) {
 
   }
 
 
   ngOnInit(): void {
-//  this.getAllRealEstates()
+  this.getAllRealEstates()
     console.log(this.accountService.getCurrentUser())
     this.storedDarkTheme = this.themeService.darkThemeValue;
     this.storedTheme = this.themeService.storedTheme;
@@ -47,12 +47,15 @@ openDialog() {
   });
 }
 
+
   
-  // getAllRealEstates(){
-    //   let resp = this.realestateService.getRealestate();
-    //   resp.subscribe(realestate =>{
-      //     this.dataSource.data=realestate as Realestate[]
-      //   })
-      // }
+   getAllRealEstates(){
+       let resp = this.realestateService.getRealestate();
+       resp.subscribe(realestate =>{
+           this.dataSource.data=realestate as Realestate[]
+         })
+       }
   
+
+       
 }
