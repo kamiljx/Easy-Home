@@ -18,5 +18,6 @@ namespace Models.DataSource
         public string Address { get; set; }
 
         public ICollection<AppUserRole> UserRoles { get; set; }
+
     }
 }
