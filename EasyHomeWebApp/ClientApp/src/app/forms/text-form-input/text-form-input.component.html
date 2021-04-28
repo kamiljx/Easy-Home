@@ -1,13 +1,13 @@
 <div class="form-group">
     <label>{{label}}</label>
-    <input 
+    <input
         [class.is-invalid]="ngControl.touched && ngControl.invalid"
         type={{type}} 
-        class="form-control" 
+        class="form-control mr-sm-2 formInput"
         [formControl]="ngControl.control"
         placeholder={{label}}>
         <div *ngIf="ngControl.control.errors?.required" class="invalid-feedback">{{'validation.pleaseToInput' | translate}} {{label | lowercase}}</div>
-        <div *ngIf="ngControl.control.errors?.minlength" class="invalid-feedback">{{label | lowercase}} {{'validation.minLength' | translate}} {{ngControl.control.errors.minlength['requiredLength']}} {{'validation.signs' | translate}}</div>
-        <div *ngIf="ngControl.control.errors?.maxlength" class="invalid-feedback">{{label | lowercase}} {{'validation.maxLength' | translate}} {{ngControl.control.errors.maxlength['requiredLength']}} {{'validation.signs' | translate}}</div>
+        <div *ngIf="ngControl.control.errors?.minlength" class="invalid-feedback">{{label}} {{'validation.minLength' | translate}} {{ngControl.control.errors.minlength['requiredLength']}} {{'validation.signs' | translate}}</div>
+        <div *ngIf="ngControl.control.errors?.maxlength" class="invalid-feedback">{{label}} {{'validation.maxLength' | translate}} {{ngControl.control.errors.maxlength['requiredLength']}} {{'validation.signs' | translate}}</div>
         <div *ngIf="ngControl.control.errors?.isMatching" class="invalid-feedback">{{'validation.notMatch' | translate}}</div>
 </div>

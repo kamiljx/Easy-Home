@@ -2,7 +2,8 @@
     "default":{
     "register": "Rejestracja",
     "cancel": "Anuluj",
-    "confirm": "Potwierdź"
+    "confirm": "Potwierdź",
+    "name": "nazwa"
     },
     "user":{
         "email": "E-mail",
@@ -15,7 +16,9 @@
         "state": "Województwo",
         "zipCode": "Kod pocztowy",
         "city": "Miasto",
-        "address": "Adres"
+        "address": "Adres",
+        "country": "Kraj"
+
     },
     "role":{
         "owner": "Właściciel",
@@ -24,9 +27,17 @@
     },
     "validation":{
         "pleaseToInput": "Proszę wprowadzić",
-        "hasMin": "musi mieć przynajmniej",
-        "hasMax": "musi mieć maksymalnie",
+        "minLength": "musi mieć przynajmniej",
+        "maxLength": "musi mieć maksymalnie",
         "signs": "znaków",
         "notMatch": "Nie pasują"
+    },
+    "home":{
+        "noAccount": "Hmm... wygląda na to, że nie masz jeszcze konta",
+        "dwtl": "Nie zwlekaj",
+        "lm": "Dowiedz się więcej"
+    },
+    "realEstate":{
+        "required": "Pole wymagane"
     }
 }

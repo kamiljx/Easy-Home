@@ -5,33 +5,34 @@
     </button>
   
     <div class="collapse navbar-collapse" id="navbarColor03">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav mr-auto" *ngIf="!loggedIn">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home
+          <a class="nav-link" routerLink="." routerLinkActive="active">Home
             <span class="sr-only">(current)</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
+          <a class="nav-link" routerLink="login" routerLinkActive="active">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
+          <a class="nav-link" routerLink="register"routerLinkActive="active">Register</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
-          </div>
+          <a class="nav-link" routerLink="/dashboard/realestate">Dashboard</a>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
+
+      <div class="dropdown onRight" *ngIf="accountService.currentUser$ | async" dropdown>
+        <a class="dropdown-toggle" dropdownToggle>{{email}}</a>
+        <div class="dropdown-menu" *dropdownMenu>
+          <a class="dropdown-item">Edit</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="logout()">Logout</a>
+        </div>
+      </div>
+
+
+      <form class="form-inline my-2 my-lg-0 onRight">
         <!-- <span class="flag-icon flag-icon-{{lang}}"></span> -->
         <select class="custom-select" (change)="changeLang($event.target.value)">
           <option value="pl" [selected]="lang == 'pl'">🇵🇱</option>

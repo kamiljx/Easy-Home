@@ -12,6 +12,7 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 export class DateFormInputComponent implements ControlValueAccessor, OnInit {
   @Input() label: string;
   @Input() maxDate: Date;
+  @Input() translatedFrom: string;
   bsConfig: Partial<BsDatepickerConfig>;
 
 
@@ -24,7 +25,7 @@ export class DateFormInputComponent implements ControlValueAccessor, OnInit {
     }
   }
   ngOnInit(): void {
-    this.translateService.get('user.' + this.label).subscribe((data:any)=> {
+    this.translateService.get(this.translatedFrom + '.' + this.label).subscribe((data:any)=> {
       this.label = data
       JSON.parse(JSON.stringify(this.label))
     });

@@ -2,7 +2,8 @@
     "default":{
         "register": "Register",
         "cancel": "Cancel",
-        "confirm": "Confirm"
+        "confirm": "Confirm",
+        "name": "nazwa"
     },
     "user":{
         "email": "E-mail",
@@ -15,7 +16,8 @@
         "state": "State",
         "zipCode": "ZIP Code",
         "city": "City",
-        "address": "Address"
+        "address": "Address",
+        "country": "Country"
     },
     "role":{
         "owner": "Owner",
@@ -29,5 +31,14 @@
         "signs": "signs",
         "notMatch": "doesn't match",
         "required": "is required"
+    },
+    "home":{
+        "noAccount": "Hmm... it seems you don't have an account",
+        "dwtl": "Don't wait too long",
+        "lm": "Learn more"
+    },
+    "realEstate":{
+        "required": "Field required"
     }
+
 }

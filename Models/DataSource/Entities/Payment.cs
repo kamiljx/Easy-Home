@@ -7,7 +7,11 @@ namespace Models.DataSource.Entities
     public class Payment
     {
         public int Id { get; set; }
-        public int RealEstateId { get; set; }
+        public string Name { get; set; }
+        public string BankAccountNumber { get; set; }
+        public string Description { get; set; }
+        public ApplicationUser Payer { get; set; }
+
         // TODO
     }
 }
