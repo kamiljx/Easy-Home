@@ -30,6 +30,7 @@ import { RealestateComponent } from './dashboard/realestate/realestate.component
 import { OptionsComponent } from './dashboard/options/options.component';
 import { MaterialTextFormInputComponent } from './forms/material-text-form-input/material-text-form-input.component';
 import { AddRealEstateComponent } from './dashboard/realestate/add-realestate/add-realestate.component';
+import { AssignRentierToRealestateComponent } from './dashboard/realestate/assign-rentier-to-realestate/assign-rentier-to-realestate.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -51,10 +52,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     RealestateComponent,
     AddRealEstateComponent,
     MaterialTextFormInputComponent,
+    AssignRentierToRealestateComponent,
 
   ],
   entryComponents:[
     AddRealEstateComponent,
+    AssignRentierToRealestateComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

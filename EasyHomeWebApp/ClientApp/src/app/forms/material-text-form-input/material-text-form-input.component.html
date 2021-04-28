@@ -4,7 +4,7 @@
             <input type="email" matInput [errorStateMatcher]="matcher"
                    placeholder="{{placeholder}}"
                    [formControl]="ngControl.control">
-            <mat-error *ngIf="validate.invalid && validate.touched">COS</mat-error>
+            <mat-error *ngIf="validate.invalid && validate.touched">error</mat-error>
             <mat-icon matSuffix>{{icon}}</mat-icon>
             <mat-hint>{{hint}}</mat-hint>
           </mat-form-field>
