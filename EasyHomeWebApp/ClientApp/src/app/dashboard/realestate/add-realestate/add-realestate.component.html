@@ -1,0 +1,35 @@
+<div class="container mat-app-background {{storedTheme}}"  [ngClass] = "{'dark-theme-mode' : storedDarkTheme}">
+<h2 mat-dialog-title >Add real estate</h2>
+
+<mat-dialog-content class="mat-typography">
+  
+  <form [formGroup]='addRealEstateForm' (ngSubmit)="addRealEstate()" autocomplete="off">
+  <div class="row examplecontainer" >
+    <!-- <app-material-text-form-input [formControl]='addRealEstateForm.controls["email"]' [validate]="'email'" [label]='"email"' [placeholder]="'email'" [icon]="'airplay'" [hint]="'realEstate'" [translatedFrom]="'user'"></app-material-text-form-input> -->
+    <app-material-text-form-input [formControl]='addRealEstateForm.controls["name"]' [validate]="'name'" [label]='"name"' [placeholder]="'name'" [icon]="'mode_edit'" [hint]="'realEstate'" [translatedFrom]="'default'"></app-material-text-form-input>
+    
+  </div>
+  <div class="row examplecontainer" >
+    <app-material-text-form-input [formControl]='addRealEstateForm.controls["city"]' [validate]="'city'" [label]='"city"' [placeholder]="'city'" [icon]="'location_city'" [hint]="'realEstate'" [translatedFrom]="'user'"></app-material-text-form-input>
+    <app-material-text-form-input [formControl]='addRealEstateForm.controls["zipCode"]' [validate]="'zipCode'" [label]='"zipCode"' [placeholder]="'zipCode'" [icon]="'local_post_office'" [hint]="'realEstate'" [translatedFrom]="'user'"></app-material-text-form-input>
+    <!-- <app-material-text-form-input [formControl]='addRealEstateForm.controls["zipcode"]' [validate]="'zipCode'" [label]='"zipCode"' [placeholder]="'zipCode'" [icon]="'local_post_office'" [hint]="'realEstate'" [translatedFrom]="'user'"></app-material-text-form-input> -->
+  </div>
+
+  <div class="row examplecontainer" >
+    <app-material-text-form-input [formControl]='addRealEstateForm.controls["address"]' [validate]="'address'" [label]='"address"' [placeholder]="'address'" [icon]="'streetview'" [hint]="'realEstate'" [translatedFrom]="'user'"></app-material-text-form-input>
+    <app-material-text-form-input [formControl]='addRealEstateForm.controls["country"]' [validate]="'country'" [label]='"country"' [placeholder]="'country'" [icon]="'outlined_flag'" [hint]="'realEstate'" [translatedFrom]="'user'"></app-material-text-form-input>
+  </div>
+  <div class="row examplecontainer" >
+  </div>
+</form>
+</mat-dialog-content>
+<div class="button-row">
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" 
+    mat-dialog-close 
+    [disabled]="!addRealEstateForm.valid" 
+    (click)="addRealEstate()"
+    type="submit">Submit</button>
+  </mat-dialog-actions>
+</div>  
+</div>

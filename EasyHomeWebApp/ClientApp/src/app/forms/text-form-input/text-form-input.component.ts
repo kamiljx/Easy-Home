@@ -8,15 +8,15 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./text-form-input.component.css']
 })
 export class TextFormInputComponent implements ControlValueAccessor,OnInit {
-  @Input() label: any;
+  @Input() label: string;
   @Input() type = 'text'
-
+  @Input() translatedFrom : string
 
   constructor(@Self() public ngControl: NgControl, private translateService: TranslateService) {
     this.ngControl.valueAccessor = this;
   }
   ngOnInit(): void {
-    this.translateService.get('user.'+ this.label).subscribe((data:any)=> {
+    this.translateService.get(this.translatedFrom + '.'+ this.label).subscribe((data:any)=> {
       this.label = data
       JSON.parse(JSON.stringify(this.label))
      });

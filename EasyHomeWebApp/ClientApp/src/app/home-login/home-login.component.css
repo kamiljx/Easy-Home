@@ -1,0 +1,48 @@
+.row {
+  font-family: "MuseoSans";
+  /* margin-top: 5%; */
+  height: 100vh;
+  /* padding: 0%; */
+}
+.inner h1,
+h2,
+btn {
+  margin-bottom: 10vh;
+}
+.leftbox {
+  background: radial-gradient(
+    ellipse at right top,
+    rgb(100, 186, 223),
+    rgb(4, 94, 185) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: whitesmoke;
+}
+
+.btn-outline-light:hover {
+  box-shadow: 0 0 40px rgba(220, 211, 213, 0.381);
+}
+
+.rightbox {
+  font-size: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+@font-face {
+  font-family: "MuseoSans";
+  src: url("../../assets/fonts/museo_sans_ssv/MuseoSans100/MuseoSans-100.otf");
+  font-style: normal;
+  font-weight: bold;
+}
+.formInput {
+  margin-bottom: 5vh;
+  height: 8vh;
+}

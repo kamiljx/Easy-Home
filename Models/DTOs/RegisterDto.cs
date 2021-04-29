@@ -34,5 +34,8 @@ namespace Models.DTOs
         [Required]
         public string Address { get; set; }
 
+        [Required]
+        public string Role { get; set; }
+
     }
 }

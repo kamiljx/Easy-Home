@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataSource.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210412204710_Identity")]
+    [Migration("20210426200420_Identity")]
     partial class Identity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -166,6 +166,9 @@ namespace DataSource.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("RealEstateId")
+                        .HasColumnType("int");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -191,6 +194,8 @@ namespace DataSource.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("RealEstateId");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -239,6 +244,77 @@ namespace DataSource.Migrations
                     b.ToTable("AspNetUserRoles");
                 });
 
+            modelBuilder.Entity("Models.DataSource.Entities.Payment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("BankAccountNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PayerId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("realEstateId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PayerId");
+
+                    b.HasIndex("realEstateId");
+
+                    b.ToTable("Payments");
+                });
+
+            modelBuilder.Entity("Models.DataSource.Entities.RealEstate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<Guid>("AccessCode")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("OwnerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
+
+                    b.ToTable("RealEstates");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("Models.DataSource.Entities.AppRole", null)
@@ -275,6 +351,13 @@ namespace DataSource.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Models.DataSource.ApplicationUser", b =>
+                {
+                    b.HasOne("Models.DataSource.Entities.RealEstate", null)
+                        .WithMany("Rentiers")
+                        .HasForeignKey("RealEstateId");
+                });
+
             modelBuilder.Entity("Models.DataSource.Entities.AppUserRole", b =>
                 {
                     b.HasOne("Models.DataSource.Entities.AppRole", "Role")
@@ -294,6 +377,30 @@ namespace DataSource.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Models.DataSource.Entities.Payment", b =>
+                {
+                    b.HasOne("Models.DataSource.ApplicationUser", "Payer")
+                        .WithMany()
+                        .HasForeignKey("PayerId");
+
+                    b.HasOne("Models.DataSource.Entities.RealEstate", "realEstate")
+                        .WithMany("Payments")
+                        .HasForeignKey("realEstateId");
+
+                    b.Navigation("Payer");
+
+                    b.Navigation("realEstate");
+                });
+
+            modelBuilder.Entity("Models.DataSource.Entities.RealEstate", b =>
+                {
+                    b.HasOne("Models.DataSource.ApplicationUser", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId");
+
+                    b.Navigation("Owner");
+                });
+
             modelBuilder.Entity("Models.DataSource.ApplicationUser", b =>
                 {
                     b.Navigation("UserRoles");
@@ -302,6 +409,13 @@ namespace DataSource.Migrations
             modelBuilder.Entity("Models.DataSource.Entities.AppRole", b =>
                 {
                     b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("Models.DataSource.Entities.RealEstate", b =>
+                {
+                    b.Navigation("Payments");
+
+                    b.Navigation("Rentiers");
                 });
 #pragma warning restore 612, 618
         }
