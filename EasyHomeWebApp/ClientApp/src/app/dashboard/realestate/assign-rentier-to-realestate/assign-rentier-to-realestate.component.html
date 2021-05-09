@@ -1,0 +1,18 @@
+<div class="container mat-app-background {{storedTheme}}"  [ngClass] = "{'dark-theme-mode' : storedDarkTheme}">
+    <h2 mat-dialog-title >Add rentier to real estate</h2>
+    
+    <mat-dialog-content class="mat-typography">
+      
+      <form [formGroup]='assignRentierToRealestate' (ngSubmit)="addRentierToEstate()" autocomplete="off">
+      <app-material-text-form-input [formControl]='assignRentierToRealestate.controls["userName"]' [validate]="'email'" [label]="'email'" [icon]="'email'" [hint]="'realEstate'" [translatedFrom]="'user'" ></app-material-text-form-input>
+    </form>
+    </mat-dialog-content>
+    <div class="button-row">
+      <mat-dialog-actions align="end">
+        <button mat-raised-button color="primary" 
+        mat-dialog-close 
+        [disabled]="!assignRentierToRealestate.valid" 
+        (click)="addRentierToEstate()"
+        type="submit">Submit</button>
+      </mat-dialog-actions>
+    </div>

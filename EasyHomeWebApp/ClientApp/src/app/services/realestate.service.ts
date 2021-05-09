@@ -22,4 +22,8 @@ export class RealestateService {
   addRealEstate(model:any){
     return this.http.post(ApiUrls.baseUrl + 'realestate/create', model)
   }
+
+  addRentierToRealestate(model:any){
+     return this.http.post(ApiUrls.baseUrl + 'realestate/addrentier', model)
+  }
 }

@@ -9,21 +9,17 @@ import { ThemeService } from 'src/app/services/theme.service';
   styleUrls: ['./options.component.css']
 })
 export class OptionsComponent implements OnInit{
-
   themeDark: boolean;
   themes: [] 
   constructor(private breakpointObserver: BreakpointObserver, private themeService: ThemeService) {
     this.themes = this.themeService.theme
   }
-
   ngOnInit(): void {
     this.themeDark = this.themeService.darkThemeValue
   }
   isDarkTheme(){
     this.themeDark = this.themeService.isDarkTheme()
   }  
-
-  
   themeColor(event){
     return this.themeService.setThemeColor(event)
   }
