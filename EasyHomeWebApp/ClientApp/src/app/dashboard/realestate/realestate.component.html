@@ -53,7 +53,12 @@
                 <td mat-cell *matCellDef="let element"> 
                   <button mat-button (click)="addRentierToRealEstate(element.id)" >
                     <i class="material-icons">group_add</i>
-                  </button> </td>
+                  </button>
+                  <button mat-button (click)="toDetail(element)" >
+                    <a></a>
+                    <i class="material-icons">launch</i>
+                  </button>
+                </td>
               </ng-container> 
           
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
