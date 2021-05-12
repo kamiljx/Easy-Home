@@ -261,14 +261,14 @@ namespace DataSource.Migrations
                     b.Property<int?>("PayerId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("realEstateId")
+                    b.Property<int?>("RealEstateId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PayerId");
 
-                    b.HasIndex("realEstateId");
+                    b.HasIndex("RealEstateId");
 
                     b.ToTable("Payments");
                 });
@@ -284,26 +284,21 @@ namespace DataSource.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("OwnerId")
                         .HasColumnType("int");
 
                     b.Property<string>("ZipCode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -351,9 +346,11 @@ namespace DataSource.Migrations
 
             modelBuilder.Entity("Models.DataSource.ApplicationUser", b =>
                 {
-                    b.HasOne("Models.DataSource.Entities.RealEstate", null)
+                    b.HasOne("Models.DataSource.Entities.RealEstate", "realEstate")
                         .WithMany("Rentiers")
                         .HasForeignKey("RealEstateId");
+
+                    b.Navigation("realEstate");
                 });
 
             modelBuilder.Entity("Models.DataSource.Entities.AppUserRole", b =>
@@ -381,19 +378,17 @@ namespace DataSource.Migrations
                         .WithMany()
                         .HasForeignKey("PayerId");
 
-                    b.HasOne("Models.DataSource.Entities.RealEstate", "realEstate")
+                    b.HasOne("Models.DataSource.Entities.RealEstate", null)
                         .WithMany("Payments")
-                        .HasForeignKey("realEstateId");
+                        .HasForeignKey("RealEstateId");
 
                     b.Navigation("Payer");
-
-                    b.Navigation("realEstate");
                 });
 
             modelBuilder.Entity("Models.DataSource.Entities.RealEstate", b =>
                 {
                     b.HasOne("Models.DataSource.ApplicationUser", "Owner")
-                        .WithMany()
+                        .WithMany("OwnEstates")
                         .HasForeignKey("OwnerId");
 
                     b.Navigation("Owner");
@@ -401,6 +396,8 @@ namespace DataSource.Migrations
 
             modelBuilder.Entity("Models.DataSource.ApplicationUser", b =>
                 {
+                    b.Navigation("OwnEstates");
+
                     b.Navigation("UserRoles");
                 });
 

@@ -27,8 +27,8 @@ namespace Models.DataSource.Entities
         // Tu powinna być relacja one-to-many (jedna nieruchomość - wiele płatności). Sprawdzić czy napewno to się tak definiuje
         public ICollection<Payment> Payments { get; set; }
 
-        public ICollection<ApplicationUser> Rentiers { get; set; }
         
+        public ICollection<ApplicationUser> Rentiers { get; set; }
         
                
     }
