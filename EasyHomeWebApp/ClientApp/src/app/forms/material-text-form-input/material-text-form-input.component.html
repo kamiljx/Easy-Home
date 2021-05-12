@@ -1,11 +1,11 @@
 <div class="form-group">
-          <mat-form-field class="example-full-width">
-            <mat-label>{{label}}</mat-label>
-            <input type="email" matInput [errorStateMatcher]="matcher"
-                   placeholder="{{placeholder}}"
-                   [formControl]="ngControl.control">
-            <mat-error *ngIf="validate.invalid && validate.touched">COS</mat-error>
-            <mat-icon matSuffix>{{icon}}</mat-icon>
-            <mat-hint>{{hint}}</mat-hint>
-          </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>{{label}}</mat-label>
+      <input type="email" matInput [errorStateMatcher]="matcher"
+        placeholder="{{placeholder}}"
+        [formControl]="ngControl.control">
+      <mat-error *ngIf="validate.invalid && validate.touched">error</mat-error>
+      <mat-icon matSuffix>{{icon}}</mat-icon>
+      <mat-hint>{{hint}}</mat-hint>
+  </mat-form-field>
 </div>

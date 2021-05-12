@@ -30,6 +30,11 @@ import { RealestateComponent } from './dashboard/realestate/realestate.component
 import { OptionsComponent } from './dashboard/options/options.component';
 import { MaterialTextFormInputComponent } from './forms/material-text-form-input/material-text-form-input.component';
 import { AddRealEstateComponent } from './dashboard/realestate/add-realestate/add-realestate.component';
+import { AssignRentierToRealestateComponent } from './dashboard/realestate/assign-rentier-to-realestate/assign-rentier-to-realestate.component';
+import { RealEstateDetailComponent } from './dashboard/realestate/real-estate-detail/real-estate-detail.component';
+import { AddRealestateDetailAnnouncementComponent } from './dashboard/realestate/real-estate-detail/add-realestate-detail-announcement/add-realestate-detail-announcement.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSelectModule } from '@angular/material/select';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -51,10 +56,15 @@ export function HttpLoaderFactory(http: HttpClient) {
     RealestateComponent,
     AddRealEstateComponent,
     MaterialTextFormInputComponent,
+    AssignRentierToRealestateComponent,
+    RealEstateDetailComponent,
+    AddRealestateDetailAnnouncementComponent,
 
   ],
   entryComponents:[
     AddRealEstateComponent,
+    AssignRentierToRealestateComponent,
+    AddRealestateDetailAnnouncementComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -62,6 +72,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     ReactiveFormsModule,
     MaterialModule,
+    BrowserAnimationsModule,
+    MatSelectModule,
     SharedModule,
     BsDropdownModule.forRoot(),
     RouterModule.forRoot([

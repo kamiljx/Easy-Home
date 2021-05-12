@@ -27,12 +27,17 @@ export class HomeLoginComponent implements OnInit {
     this.router.navigate([page])
   }
 
+  redirect(){
+    setTimeout(() => {
+      this.router.navigate(['/dashboard/realestate']);
+  }, 1200);
+  }
   
 login(){
-  console.log(this.model)
   this.accountService.login(this.model).subscribe(response=>{
-    console.log(response)
     this.accountService.loggedIn = true;
+    this.toastr.success("zalogowano")
+    this.redirect()
   }, error =>{
     console.log(error)
     this.toastr.error(error.error)

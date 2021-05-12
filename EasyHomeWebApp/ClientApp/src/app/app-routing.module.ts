@@ -10,6 +10,7 @@ import { AuthGuard } from './guard/auth.guard';
 import { MaterialNavComponent } from './dashboard/material-nav/material-nav.component';
 import { OptionsComponent } from './dashboard/options/options.component';
 import { RealestateComponent } from './dashboard/realestate/realestate.component';
+import { RealEstateDetailComponent } from './dashboard/realestate/real-estate-detail/real-estate-detail.component';
 
 
 
@@ -17,7 +18,8 @@ const routes: Routes = [
   //{path: '', component: AppComponent},
   {path: 'dashboard', component: MaterialNavComponent,canActivate: [AuthGuard],
     children:[
-    {path: 'realestate', component: RealestateComponent },
+    {path: 'realestate', component: RealestateComponent},
+    {path: 'realestate/details/:id',component: RealEstateDetailComponent},
     {path: 'settings', component: OptionsComponent},
     {path: 'add-real-estate', component: RealestateComponent},
 

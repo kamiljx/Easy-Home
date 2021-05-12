@@ -13,8 +13,8 @@ import { AccountService } from 'src/app/services/account.service';
   styleUrls: ['./add-realestate.component.css']
 })
 export class AddRealEstateComponent implements OnInit {
-  storedTheme: string
   validationErrors: string[] =[];
+  storedTheme: string
   storedDarkTheme: boolean
   addRealEstateForm: FormGroup;
 
@@ -49,8 +49,8 @@ export class AddRealEstateComponent implements OnInit {
 
   addRealEstate(){
     console.log(this.addRealEstateForm)
-    this.realestateService.addRealEstate(this.addRealEstateForm.value).subscribe(response =>{
-      console.log(response)
+    this.realestateService.addRealEstate(this.addRealEstateForm.value).subscribe(
+      response =>{
        this.toastr.success('Dodano')
     }, error =>{
       this.validationErrors = error;

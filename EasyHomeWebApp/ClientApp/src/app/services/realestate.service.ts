@@ -11,6 +11,7 @@ import { map } from 'rxjs/operators';
 })
 export class RealestateService {
   baseUrl = ApiUrls.baseUrl
+  specificRealEstate: any;
   constructor(private http: HttpClient, private accountService: AccountService) { }
   currentUser = this.accountService.getCurrentUser()
 
@@ -22,4 +23,9 @@ export class RealestateService {
   addRealEstate(model:any){
     return this.http.post(ApiUrls.baseUrl + 'realestate/create', model)
   }
+
+  addRentierToRealestate(model:any){
+     return this.http.post(ApiUrls.baseUrl + 'realestate/addrentier', model)
+  }
+
 }

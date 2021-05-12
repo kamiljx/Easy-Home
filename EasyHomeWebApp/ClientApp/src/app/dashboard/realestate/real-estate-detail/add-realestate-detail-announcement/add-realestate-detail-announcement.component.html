@@ -1,0 +1,50 @@
+<div class="container mat-app-background {{storedTheme}}"  [ngClass] = "{'dark-theme-mode' : storedDarkTheme}">
+    <h2 mat-dialog-title >Add new announcement :]</h2>
+    
+    <mat-dialog-content class="mat-typography">
+      <form [formGroup]='addNewAnnouncement' (ngSubmit)="addRealEstateAnnouncement()" autocomplete="off">
+      <div class="row examplecontainer" >
+        <div class="col-md-6">
+
+          <app-material-text-form-input [formControl]='addNewAnnouncement.controls["title"]' [validate]="'title'" [label]='"title"' [placeholder]="'title'" [icon]="'location_city'" [hint]="'Title'" [translatedFrom]="'user'"></app-material-text-form-input>
+          
+          
+          <div class="form-group">
+            <mat-form-field appearance="fill" >
+              <mat-label>{{'user.annoncementLabel' | translate}}</mat-label>
+              <mat-select formControlName="label">
+                <mat-option *ngFor="let label of announcementLabel" [value]="label.value"> {{label.value}} </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+
+
+        <div class="col-md-5">
+          <div class="form-group">
+            <mat-form-field class="example-full-width" [style.width.vh]=50 >
+              <mat-label>Leave a comment</mat-label>
+              <textarea matInput matTextareaAutosize formControlName="description" [errorStateMatcher]="matcher"
+              placeholder="Desc"></textarea>
+              <mat-hint>Announcement description</mat-hint>
+              <mat-error *ngIf="addNewAnnouncement.invalid && addNewAnnouncement.touched">error</mat-error>
+
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      </form>
+      <p> {{addNewAnnouncement.value | json}}</p>
+    </mat-dialog-content>
+    
+    <div class="button-row">
+      <mat-dialog-actions align="end">
+        <button mat-raised-button color="primary" 
+        mat-dialog-close 
+        [disabled]="!addNewAnnouncement.valid" 
+        (click)="addRealEstateAnnouncement()"
+        type="submit">Submit</button>
+      </mat-dialog-actions>
+    </div>  
+    </div>
