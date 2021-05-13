@@ -39,7 +39,7 @@ namespace EasyHomeWebApp
             });
 
             services.AddApplicationServices(Configuration);
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddCors();
             services.AddIdentityServices(Configuration);
             
