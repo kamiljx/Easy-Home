@@ -4,14 +4,16 @@ using DataSource;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataSource.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210512205328_Annoucements")]
+    partial class Annoucements
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -384,11 +386,9 @@ namespace DataSource.Migrations
 
             modelBuilder.Entity("Models.DataSource.Entities.Announcement", b =>
                 {
-                    b.HasOne("Models.DataSource.Entities.RealEstate", "RealEstate")
+                    b.HasOne("Models.DataSource.Entities.RealEstate", null)
                         .WithMany("Announcements")
                         .HasForeignKey("RealEstateId");
-
-                    b.Navigation("RealEstate");
                 });
 
             modelBuilder.Entity("Models.DataSource.Entities.AppUserRole", b =>
