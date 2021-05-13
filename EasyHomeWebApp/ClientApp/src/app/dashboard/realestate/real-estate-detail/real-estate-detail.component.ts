@@ -24,6 +24,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class RealEstateDetailComponent implements OnInit {
   realEstateId: number;
   specificRealEstate: any;
+  label = 'danger';
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private realestateService: RealestateService, private dialog: MatDialog ) { }
 
   ngOnInit(): void { 
