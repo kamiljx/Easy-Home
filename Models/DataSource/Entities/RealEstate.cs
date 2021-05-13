@@ -29,6 +29,8 @@ namespace Models.DataSource.Entities
 
         
         public ICollection<ApplicationUser> Rentiers { get; set; }
+
+        public ICollection<Announcement> Announcements { get; set; }
         
                
     }

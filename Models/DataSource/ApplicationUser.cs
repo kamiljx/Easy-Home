@@ -19,7 +19,7 @@ namespace Models.DataSource
         public string City { get; set; }
         public string Address { get; set; }
         public ICollection<RealEstate> OwnEstates { get; set; }
-
+        
         public ICollection<AppUserRole> UserRoles { get; set; }
 
 

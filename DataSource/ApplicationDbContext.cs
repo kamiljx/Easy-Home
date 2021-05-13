@@ -49,18 +49,22 @@ namespace DataSource
                 .WithOne(u => u.Role)
                 .HasForeignKey(ur => ur.RoleId)
                 .IsRequired();
-            //builder.Entity<ApplicationUser>().HasOne(x => x.realEstate);
+            
 
             builder.Entity<RealEstate>()
                  .HasMany(u => u.Rentiers)
                  .WithOne(x => x.realEstate)
                  .HasForeignKey(k => k.RealEstateId).IsRequired(false);
 
-            builder.Entity<RealEstate>().HasOne(o => o.Owner).WithMany(ow => ow.OwnEstates);
+            builder.Entity<RealEstate>()
+                .HasOne(o => o.Owner)
+                .WithMany(ow => ow.OwnEstates);
+
         }
 
         public DbSet<RealEstate> RealEstates { get; set; }
         public DbSet<Payment> Payments { get; set; }
+        public DbSet<Announcement> Announcements { get; set; }
 
 
         
