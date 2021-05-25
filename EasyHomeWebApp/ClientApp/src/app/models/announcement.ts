@@ -3,5 +3,7 @@ export interface Announcement{
     realEstateId: number;
     title: string;
     description: string;
-    label: string; // warning, success, info, primary, danger
+    type: string; // warning, success, info, primary, danger
+    date: string;
+
 }

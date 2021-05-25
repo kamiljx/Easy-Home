@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -7,6 +7,9 @@ import { OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AddRealestateDetailAnnouncementComponent } from './add-realestate-detail-announcement/add-realestate-detail-announcement.component';
 import { MatDialog } from '@angular/material/dialog';
+import { AnnouncementService } from 'src/app/services/announcement.service';
+import { Announcement } from 'src/app/models/announcement';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-real-estate-detail',
@@ -24,13 +27,23 @@ import { MatDialog } from '@angular/material/dialog';
 export class RealEstateDetailComponent implements OnInit {
   realEstateId: number;
   specificRealEstate: any;
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private realestateService: RealestateService, private dialog: MatDialog ) { }
+  label = 'danger';
+  emptyArray: [];
+  @Input('ELEMENT_DATA')  ELEMENT_DATA!:  Announcement[];
+  dataSource:any [];
+
+
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private realestateService: RealestateService, private dialog: MatDialog, private announcementService: AnnouncementService ) { }
 
   ngOnInit(): void { 
     this.realEstateId = this.activatedRoute.snapshot.params['id']
-    console.log(this.realEstateId)
     this.specificRealEstate = this.realestateService.specificRealEstate
-    console.log(this.specificRealEstate)
+    
+    this.announcementService.realEstateId = this.realEstateId;
+    this.getAllAnnouncements()
+    // this.proba()
+    console.log(this.dataSource)
+
   }
   addAnnouncement(){
     const dialogRef = this.dialog.open(AddRealestateDetailAnnouncementComponent, {
@@ -42,4 +55,14 @@ export class RealEstateDetailComponent implements OnInit {
       autoFocus: false
     });}
   
+  getAllAnnouncements(){
+   this.announcementService.getRealEstateAnnouncement()
+      .subscribe(announcement =>{
+      this.dataSource = announcement 
+        console.log(this.dataSource)
+   })
   }
+
+
+ 
+}

@@ -12,8 +12,8 @@ import { map } from 'rxjs/operators';
 export class RealestateService {
   baseUrl = ApiUrls.baseUrl
   specificRealEstate: any;
-  constructor(private http: HttpClient, private accountService: AccountService) { }
   currentUser = this.accountService.getCurrentUser()
+  constructor(private http: HttpClient, private accountService: AccountService) { }
 
   getRealestate(){
     let params = new HttpParams().set('Name', this.currentUser)
@@ -27,5 +27,8 @@ export class RealestateService {
   addRentierToRealestate(model:any){
      return this.http.post(ApiUrls.baseUrl + 'realestate/addrentier', model)
   }
-
+  getRealestates(){
+    let params = new HttpParams().set('Name', this.currentUser)
+     console.log( this.http.get<Realestate[]>(this.baseUrl + 'realestate/name',{params: params}))
+  }
 }
