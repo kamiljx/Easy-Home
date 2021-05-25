@@ -1,5 +1,5 @@
-<div class="grid-container">
-  <h1 class="mat-h1"> nazwa mieszkania, teraz jako ZIPCODE bo nazwa w DB to nazwa {{specificRealEstate.zipCode}}</h1>
+<div class="grid-container" >
+  <h1 class="mat-h1"> {{specificRealEstate.name}}</h1>
   <mat-grid-list cols="2" rowHeight="350px">
     <mat-grid-tile >
       <mat-card class="dashboard-card" fxLayoutAlign="layout-align">
@@ -13,10 +13,10 @@
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
            
-          <mat-card class="cardWithLabel {{label}}" >
+          <mat-card  class="cardWithLabel " >
             <mat-card-header color="red">
               <mat-card-title>
-                Ogloszenie 1
+ANNOUNCEMENT NAME //TODO
                 <button mat-icon-button class="more-button" color="primary" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
                   <mat-icon>more_vert</mat-icon>
                 </button>
@@ -26,13 +26,13 @@
                 </mat-menu>
               </mat-card-title>
             </mat-card-header>
-            <mat-card-content class="dashboard-card-content">
+            <mat-card-content *ngFor="let element of dataSource" class="dashboard-card-content">
                
-              CARD CONTENT HERE
+             {{element.label | async}}
               
             </mat-card-content>
           </mat-card>
-          
+          <div *ngFor="let element">{{element.type}}</div>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
