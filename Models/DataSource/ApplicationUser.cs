@@ -22,6 +22,8 @@ namespace Models.DataSource
         
         public ICollection<AppUserRole> UserRoles { get; set; }
 
+        public ICollection<Message> MessagesSend { get; set; }
 
+        public ICollection<Message> MessagesRecieved { get; set; }
     }
 }
