@@ -8,9 +8,8 @@ namespace Models.DataSource
 {
     public class ApplicationUser : IdentityUser<int>
     {
-        public RealEstate realEstate { get; set; }
+        public RealEstate RealEstate { get; set; }
         public int? RealEstateId { get; set; }
-        
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
@@ -18,10 +17,8 @@ namespace Models.DataSource
         public string ZipCode { get; set; }
         public string City { get; set; }
         public string Address { get; set; }
-        public ICollection<RealEstate> OwnEstates { get; set; }
-        
+        public ICollection<RealEstate> OwnEstates { get; set; }    
         public ICollection<AppUserRole> UserRoles { get; set; }
-
-
+        
     }
 }
