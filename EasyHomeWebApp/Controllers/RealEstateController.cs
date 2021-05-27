@@ -28,6 +28,7 @@ namespace EasyHomeWebApp.Controllers
         {
             var user = await _userManager.FindByNameAsync(Name);
             var realEstates = _context.RealEstates.Where(x => x.Owner == user);
+
             return realEstates;
         }
 
@@ -48,14 +49,13 @@ namespace EasyHomeWebApp.Controllers
 
             var result = await _context.RealEstates.AddAsync(realEstate);
             _context.SaveChanges();
+
             return Ok(realEstate);
         }
 
         [HttpPost("addrentier")]
         public async Task<IActionResult> AddRentier(AddRentiersDto addRentiersDto)
         {
-
-            //var user = _context.Users.Where(x => x.UserName == addRentiersDto.userName).FirstOrDefault();
             var user = await _userManager.Users.SingleOrDefaultAsync(u => u.UserName == addRentiersDto.userName);
             if (user == null) return BadRequest("There is no user with this email.");
             var realEstate = _context.RealEstates.Where(e => e.Id == addRentiersDto.realEstateId).FirstOrDefault();
@@ -63,14 +63,9 @@ namespace EasyHomeWebApp.Controllers
             realEstate.Rentiers = new List<ApplicationUser>();
             realEstate.Rentiers.Add(user);
 
-
             _context.SaveChanges();
-            //realEstate.Rentiers.Add(user);
+
             return Ok(realEstate);
-
-
-
-
         }
 
         [HttpGet("rentiers")]
@@ -79,38 +74,9 @@ namespace EasyHomeWebApp.Controllers
             var realEstate = await  _context.RealEstates.Where(e => e.Id == realEstateId).FirstOrDefaultAsync();
             if (realEstate == null) return BadRequest("There is no real estate with this id");
             var rentiers = _userManager.Users.Where(u => u.RealEstateId == realEstateId);
+            
             return Ok(rentiers);
-
-
         }
-
-        //[HttpPost("addrentier")]
-        //public async Task<IActionResult> AddRentier(AddRentiersDto addRentiersDto)
-        //{
-
-        //    //var user = _context.Users.Where(x => x.UserName == addRentiersDto.userName).FirstOrDefault();
-        //    var user = await _userManager.Users.SingleOrDefaultAsync(u => u.UserName == addRentiersDto.userName);
-        //    if (user == null) return BadRequest("There is no user with this email.");
-
-        //    user.Estate = addRentiersDto.realEstateId;
-
-
-        //    _context.SaveChanges();
-        //    //realEstate.Rentiers.Add(user);
-        //    return Ok();
-
-
-
-
-        //}
-
-        //[HttpGet("rentiers")]
-        //public async Task<IActionResult> GetAllRentiersById(int realEstateId)
-        //{
-        //    var rentiers = _userManager.Users.Where(x => x.Estate == realEstateId);
-        //    return Ok(rentiers);
-        //}
-
     }
 
 }
