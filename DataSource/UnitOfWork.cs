@@ -1,7 +1,7 @@
-﻿using Models.DataSource;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using DataSource.Repository;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Models.DataSource;
 
 namespace DataSource
 {
@@ -9,9 +9,38 @@ namespace DataSource
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public UnitOfWork(ApplicationDbContext dbcontext)
+        private IPaymentRepository paymentRepository;
+        private IIdentityRepository identityRepository;
+
+        public UnitOfWork()
         {
-            _dbContext = dbcontext;
+            _dbContext = new ApplicationDbContext();
+        }
+
+        public IIdentityRepository IdentityRepository
+        {
+            get
+            {
+                if(identityRepository == null)
+                {
+                    identityRepository = new IdentityRepository(_dbContext);
+                }
+
+                return identityRepository;
+            }
+        }
+
+        public IPaymentRepository PaymentRepository
+        {
+            get
+            {
+                if(paymentRepository == null)
+                {
+                    paymentRepository = new PaymentRepository(_dbContext);
+                }
+
+                return paymentRepository;
+            }
         }
 
         public void Commit()

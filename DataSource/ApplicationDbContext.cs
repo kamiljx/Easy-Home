@@ -15,22 +15,13 @@ namespace DataSource
     {
         
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        {
-            
+        {    
         }
 
-
-        //private readonly string _connectionString;
-
-        //public ApplicationDbContext(string connectionString)
-        //{
-        //    _connectionString = connectionString;
-        //}
-
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer(_connectionString);
-        //}
+        public ApplicationDbContext() : base()
+        {
+        }
+        
 
         // PONIŻEJ DbEntity<> dodawać
         protected override void OnModelCreating(ModelBuilder builder)
@@ -53,21 +44,16 @@ namespace DataSource
 
             builder.Entity<RealEstate>()
                  .HasMany(u => u.Rentiers)
-                 .WithOne(x => x.realEstate)
+                 .WithOne(x => x.RealEstate)
                  .HasForeignKey(k => k.RealEstateId).IsRequired(false);
 
             builder.Entity<RealEstate>()
                 .HasOne(o => o.Owner)
                 .WithMany(ow => ow.OwnEstates);
-
         }
 
         public DbSet<RealEstate> RealEstates { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Announcement> Announcements { get; set; }
-
-
-        
-
     }
 }
