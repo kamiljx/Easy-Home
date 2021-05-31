@@ -41,11 +41,8 @@ export class RealEstateDetailComponent implements OnInit {
   ngOnInit(): void { 
     this.realEstateId = this.activatedRoute.snapshot.params['id']
     this.specificRealEstate = this.realestateService.specificRealEstate
-    
     this.announcementService.realEstateId = this.realEstateId;
     this.getAllAnnouncements()
-    // this.proba()
-    console.log(this.announcementsArr)
 
   }
   addAnnouncement(){
@@ -62,7 +59,6 @@ export class RealEstateDetailComponent implements OnInit {
    this.announcementService.getRealEstateAnnouncement()
       .subscribe(announcement =>{
       this.announcementsArr = announcement
-        console.log(this.announcementsArr)
    })
   }
   deleteAnnouncement(id){
