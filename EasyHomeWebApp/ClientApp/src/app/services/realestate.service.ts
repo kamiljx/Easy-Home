@@ -4,13 +4,14 @@ import { ApiUrls } from 'src/api';
 import { Realestate } from '../models/realestate';
 import { AccountService } from './account.service';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class RealestateService {
-  baseUrl = ApiUrls.baseUrl
+  baseUrl = environment.apiUrl
   specificRealEstate: any;
   currentUser = this.accountService.getCurrentUser()
   constructor(private http: HttpClient, private accountService: AccountService) { }
@@ -21,11 +22,11 @@ export class RealestateService {
   }
 
   addRealEstate(model:any){
-    return this.http.post(ApiUrls.baseUrl + 'realestate/create', model)
+    return this.http.post(this.baseUrl + 'realestate/create', model)
   }
 
   addRentierToRealestate(model:any){
-     return this.http.post(ApiUrls.baseUrl + 'realestate/addrentier', model)
+     return this.http.post(this.baseUrl + 'realestate/addrentier', model)
   }
   getRealestates(){
     let params = new HttpParams().set('Name', this.currentUser)
