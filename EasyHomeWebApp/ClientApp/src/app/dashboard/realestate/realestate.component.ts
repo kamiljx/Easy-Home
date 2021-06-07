@@ -41,7 +41,6 @@ export class RealestateComponent implements OnInit{
   this.getAllRealEstates()
     this.storedDarkTheme = this.themeService.darkThemeValue;
     this.storedTheme = this.themeService.storedTheme;
-    console.log(this.dataSource.data)
 }
 openDialog() {
   const dialogRef = this.dialog.open(AddRealEstateComponent);

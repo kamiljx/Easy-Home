@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AnnouncementService } from 'src/app/services/announcement.service';
 import { Announcement } from 'src/app/models/announcement';
 import { MatTableDataSource } from '@angular/material/table';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-real-estate-detail',
@@ -26,23 +27,22 @@ import { MatTableDataSource } from '@angular/material/table';
 
 export class RealEstateDetailComponent implements OnInit {
   realEstateId: number;
+  validationErrors: string[] =[];
   specificRealEstate: any;
   label = 'danger';
   emptyArray: [];
   @Input('ELEMENT_DATA')  ELEMENT_DATA!:  Announcement[];
-  dataSource:any [];
+  announcementsArr: Announcement[]
 
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private realestateService: RealestateService, private dialog: MatDialog, private announcementService: AnnouncementService ) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private realestateService: RealestateService,
+     private dialog: MatDialog, private announcementService: AnnouncementService, private toastr: ToastrService) { }
 
   ngOnInit(): void { 
     this.realEstateId = this.activatedRoute.snapshot.params['id']
     this.specificRealEstate = this.realestateService.specificRealEstate
-    
     this.announcementService.realEstateId = this.realEstateId;
     this.getAllAnnouncements()
-    // this.proba()
-    console.log(this.dataSource)
 
   }
   addAnnouncement(){
@@ -58,11 +58,17 @@ export class RealEstateDetailComponent implements OnInit {
   getAllAnnouncements(){
    this.announcementService.getRealEstateAnnouncement()
       .subscribe(announcement =>{
-      this.dataSource = announcement 
-        console.log(this.dataSource)
+      this.announcementsArr = announcement
    })
   }
-
+  deleteAnnouncement(id){
+    this.announcementService.deleteRealEstateAnnouncement(id).subscribe( response =>{
+      this.toastr.success('Usunięto')
+    }, error =>{
+      this.validationErrors = error;
+      this.toastr.error(error.error)
+     })
+  }
 
  
 }

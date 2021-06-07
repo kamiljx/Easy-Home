@@ -1,6 +1,6 @@
 <div class="grid-container" >
   <h1 class="mat-h1"> {{specificRealEstate.name}}</h1>
-  <mat-grid-list cols="2" rowHeight="350px">
+  <mat-grid-list cols="2" fxFlexAlign="stretch">
     <mat-grid-tile >
       <mat-card class="dashboard-card" fxLayoutAlign="layout-align">
         <mat-card-header>
@@ -11,28 +11,24 @@
             </button>
           </mat-card-title>
         </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
+        <mat-card-content class="dashboard-card-content" *ngFor="let element of announcementsArr" >
            
-          <mat-card  class="cardWithLabel " >
+          <mat-card  class="cardWithLabel {{element.type}}">
             <mat-card-header color="red">
               <mat-card-title>
-ANNOUNCEMENT NAME //TODO
+                {{element.title}}
                 <button mat-icon-button class="more-button" color="primary" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
                   <mat-icon>more_vert</mat-icon>
                 </button>
                 <mat-menu #menu="matMenu" xPosition="before">
-                  <button mat-menu-item>Remove</button>
-                  <button mat-menu-item (click)="addAnnouncement()">Add</button>
+                  <button mat-menu-item (click)="deleteAnnouncement(element.id)">Remove</button>
                 </mat-menu>
               </mat-card-title>
             </mat-card-header>
-            <mat-card-content *ngFor="let element of dataSource" class="dashboard-card-content">
-               
-             {{element.label | async}}
-              
+            <mat-card-content  class="dashboard-card-content">
+             {{element.description }}
             </mat-card-content>
           </mat-card>
-          <div *ngFor="let element">{{element.type}}</div>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
