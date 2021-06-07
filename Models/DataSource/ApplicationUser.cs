@@ -8,6 +8,7 @@ namespace Models.DataSource
 {
     public class ApplicationUser : IdentityUser<int>
     {
+        public int Id { get; set; }
         public RealEstate realEstate { get; set; }
         public int? RealEstateId { get; set; }
         

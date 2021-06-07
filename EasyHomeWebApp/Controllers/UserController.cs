@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Models.DataSource;
+using Models.DTOs;
 using Models.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -18,15 +19,39 @@ namespace EasyHomeWebApp.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ApplicationUser>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
         {
-            return Ok(await _userRepository.GetUsersAsync());
+            var users = await _userRepository.GetUsersAsync();
+            var members = users.Select(u => new MemberDto
+            {
+                Id = u.Id,
+                FirstName = u.FirstName,
+                LastName = u.LastName,
+                DateOfBirth = u.DateOfBirth,
+                State = u.State,
+                ZipCode = u.ZipCode,
+                Address = u.Address,
+                City = u.City
+            });
+            return Ok(members);
         }
 
         [HttpGet("{username}")]
-        public async Task<ActionResult<ApplicationUser>> GetUser(string username)
+        public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
-            return await _userRepository.GerUserByUserNameAsync(username);
+            var u = await _userRepository.GerUserByUserNameAsync(username);
+            var member = new MemberDto
+            {
+                Id = u.Id,
+                FirstName = u.FirstName,
+                LastName = u.LastName,
+                DateOfBirth = u.DateOfBirth,
+                State = u.State,
+                ZipCode = u.ZipCode,
+                Address = u.Address,
+                City = u.City
+            };
+            return member;
         }
 
     }
