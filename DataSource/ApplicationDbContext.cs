@@ -60,12 +60,24 @@ namespace DataSource
                 .HasOne(o => o.Owner)
                 .WithMany(ow => ow.OwnEstates);
 
+
+            builder.Entity<Message>()
+                .HasOne(u => u.Recipient)
+                .WithMany(m => m.MessagesRecieved)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
+            builder.Entity<Message>()
+                .HasOne(u => u.Sender)
+                .WithMany(m => m.MessagesSend)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
         public DbSet<RealEstate> RealEstates { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Announcement> Announcements { get; set; }
-
+        public DbSet<Message> Messages { get; set; }
+        
 
         
 

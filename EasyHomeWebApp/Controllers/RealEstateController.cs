@@ -73,10 +73,10 @@ namespace EasyHomeWebApp.Controllers
 
         }
 
-        [HttpGet("rentiers")]
+        [HttpGet("rentiers/{realEstateId}")]
         public async Task<IActionResult> GetAllRentiersById(int realEstateId)
         {
-            var realEstate = await  _context.RealEstates.Where(e => e.Id == realEstateId).FirstOrDefaultAsync();
+            var realEstate =  _context.RealEstates.Where(e => e.Id == realEstateId).FirstOrDefault();
             if (realEstate == null) return BadRequest("There is no real estate with this id");
             var rentiers = _userManager.Users.Where(u => u.RealEstateId == realEstateId);
             return Ok(rentiers);
@@ -107,7 +107,7 @@ namespace EasyHomeWebApp.Controllers
         //[HttpGet("rentiers")]
         //public async Task<IActionResult> GetAllRentiersById(int realEstateId)
         //{
-        //    var rentiers = _userManager.Users.Where(x => x.Estate == realEstateId);
+        //    var rentiers = _userManager.Users.Where(x => x.RealEstateId == realEstateId);
         //    return Ok(rentiers);
         //}
 
