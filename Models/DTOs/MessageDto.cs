@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Models.DTOs
 {
-    class MessageDto
+    public class MessageDto
     {
         public int Id { get; set; }
         public int SenderId { get; set; }

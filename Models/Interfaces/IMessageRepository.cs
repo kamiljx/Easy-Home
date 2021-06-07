@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Models.Interfaces
 {
-    interface IMessageRepository
+    public interface IMessageRepository
     {
         void AddMessage(Message message);
         void DeleteMessage(Message message);
