@@ -22,13 +22,13 @@ const routes: Routes = [
     {path: 'realestate/details/:id',component: RealEstateDetailComponent},
     {path: 'settings', component: OptionsComponent},
     {path: 'add-real-estate', component: RealestateComponent},
+    {path: 'members/:username', component: MemberDetailComponent},
+    {path: 'members', component: MemberDetailComponent , canActivate: [AuthGuard]}, 
 
 ]},
   {path: 'nav', component: NavComponent},
   {path: 'login', component: HomeLoginComponent },
   {path: 'register', component: RegisterComponent},
-  {path: 'members/:username', component: MemberDetailComponent},
-  {path: 'members', component: MemberDetailComponent , canActivate: [AuthGuard]}, 
   {path: '**', component: HomeComponent }
   
 ]

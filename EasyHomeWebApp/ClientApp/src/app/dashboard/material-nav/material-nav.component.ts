@@ -7,6 +7,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { ThemeService } from 'src/app/services/theme.service';
 import { OptionsComponent } from '../options/options.component';
 import { AccountService } from 'src/app/services/account.service';
+import { Member } from 'src/app/models/member';
+import { MembersService } from 'src/app/services/members.service';
 
 @Component({
   selector: 'app-material-nav',
@@ -15,15 +17,17 @@ import { AccountService } from 'src/app/services/account.service';
 })
 export class MaterialNavComponent implements OnInit {
   @Input() loggedIn: boolean;
+  member: string;
   storedTheme: string
   storedDarkTheme: boolean
   constructor(private breakpointObserver: BreakpointObserver, private router: Router, private translateService: TranslateService,
-    private themeService: ThemeService, private accountService: AccountService) {
+    private themeService: ThemeService, private accountService: AccountService, private memberService: MembersService) {
 
     }
     ngOnInit(): void {
       this.storedDarkTheme = this.themeService.darkThemeValue;
       this.storedTheme = this.themeService.storedTheme;
+      this.loadMember()
     }
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -34,6 +38,9 @@ export class MaterialNavComponent implements OnInit {
       this.loggedIn = false;
       this.accountService.logout()
       window.location.reload()
+    }
+    loadMember(){
+      this.member = this.accountService.getCurrentUser()
     }
 }
 
