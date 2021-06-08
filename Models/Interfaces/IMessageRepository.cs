@@ -14,8 +14,8 @@ namespace Models.Interfaces
         void DeleteMessage(Message message);
 
         Task<Message> GetMessage(int id);
-        Task<PagedList<MessageDto>> GetMessagesForUser();
-        Task<IEnumerable<MessageDto>> GetMessageThreat(int currentUserId, int recipientId);
+        Task<PagedList<MessageDto>> GetMessagesForUser(MessageParams messageParams);
+        Task<IEnumerable<MessageDto>> GetMessageThreat(string currentUsername, string recipientUsername);
         Task<bool> SaveAllAsync();
     }
 }
