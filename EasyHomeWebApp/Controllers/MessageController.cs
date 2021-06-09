@@ -25,11 +25,11 @@ namespace EasyHomeWebApp.Controllers
         [HttpPost]
         public async Task<ActionResult<MessageDto>> createMessage(CreateMessageDto createMessageDto)
         {
-            // var username = User.GetUsername();
+            var username = User.GetUsername();
 
             //if (username == createMessageDto.RecipentUsername.ToLower())
             //   return BadRequest("Nie możesz wysłać do siebie wiadomości.");
-            var sender = await _userRepository.GerUserByUserNameAsync(createMessageDto.SenderUsername);
+            var sender = await _userRepository.GerUserByUserNameAsync(username);
             var recipent = await _userRepository.GerUserByUserNameAsync(createMessageDto.RecipentUsername);
 
             if (recipent == null) return NotFound();
@@ -62,10 +62,10 @@ namespace EasyHomeWebApp.Controllers
 
             return BadRequest("Nie udało się wysłać wiadomości");
         }
-        [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<MessageDto>>> GetMessagesForUser([FromQuery] MessageParams messageParams, string id)
+        [HttpGet("{username}")]
+        public async Task<ActionResult<IEnumerable<MessageDto>>> GetMessagesForUser([FromQuery] MessageParams messageParams, string username)
         {
-            var user = await _userRepository.GetUserByIdAsync(id);
+            var user = await _userRepository.GerUserByUserNameAsync(username);
             messageParams.Username = user.UserName;
 
             var messages = await _messageRepository.GetMessagesForUser(messageParams);
