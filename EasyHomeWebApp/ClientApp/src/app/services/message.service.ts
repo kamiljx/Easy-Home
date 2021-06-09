@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment'
 import { Message } from '../models/message';
+import { AccountService } from './account.service';
 import { getPaginatedResult, getPaginationHeaders } from './paginatorHelper';
 
 @Injectable({
@@ -10,11 +11,12 @@ import { getPaginatedResult, getPaginationHeaders } from './paginatorHelper';
 export class MessageService {
 
   baseUrl = environment.apiUrl
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private accountService: AccountService) { }
 
   getMessages(pageNumber, pageSize, container) {
     let params = getPaginationHeaders(pageNumber, pageSize);
     params = params.append('Container', container);
-    return getPaginatedResult<Message[]>(this.baseUrl + 'messages', params, this.http);
+    let currentUser$ = this.accountService.getCurrentUser()
+    return getPaginatedResult<Message[]>(this.baseUrl + 'message/' + currentUser$ , params, this.http);
   }
 }

@@ -11,7 +11,7 @@ import { MessageService } from 'src/app/services/message.service';
 export class MessagesComponent implements OnInit {
   messages: Message[];
   pagination: Pagination;
-  container = "Unread";
+  container = "Inbox";
   pageNumber = 1;
   pageSize = 5;
   constructor(private messageService: MessageService) { }
@@ -26,5 +26,9 @@ export class MessagesComponent implements OnInit {
       this.pagination = response.pagination;
 
     })
+  }
+  pageChanged(event: any) {
+    this.pageNumber = event.page;
+    this.loadMessages();
   }
 }
