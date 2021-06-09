@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Models.DataSource;
 using Models.Interfaces;
 using System;
@@ -11,20 +12,22 @@ namespace DataSource.Repositories
     public class UserRepository : IUserRepository
     {
         private ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public UserRepository(ApplicationDbContext context)
+        public UserRepository(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
+            _userManager = userManager;
             _context = context;
         }
 
         public async Task<ApplicationUser> GerUserByUserNameAsync(string username)
         {
-            return await _context.Users.SingleOrDefaultAsync(x => x.UserName == username);
+            return await _userManager.FindByNameAsync(username);
         }
 
-        public async Task<ApplicationUser> GetUserByIdAsync(int id)
+        public async Task<ApplicationUser> GetUserByIdAsync(string id)
         {
-            return await _context.Users.FindAsync(id);
+            return await _userManager.FindByIdAsync(id);
         }
 
         public async Task<IEnumerable<ApplicationUser>> GetUsersAsync()

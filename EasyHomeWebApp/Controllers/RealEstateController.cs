@@ -76,7 +76,7 @@ namespace EasyHomeWebApp.Controllers
         [HttpGet("rentiers/{realEstateId}")]
         public async Task<IActionResult> GetAllRentiersById(int realEstateId)
         {
-            var realEstate =  _context.RealEstates.Where(e => e.Id == realEstateId).FirstOrDefault();
+            var realEstate = await _context.RealEstates.Where(e => e.Id == realEstateId).FirstOrDefaultAsync();
             if (realEstate == null) return BadRequest("There is no real estate with this id");
             var rentiers = _userManager.Users.Where(u => u.RealEstateId == realEstateId);
             return Ok(rentiers);
