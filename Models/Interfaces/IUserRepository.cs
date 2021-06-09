@@ -11,7 +11,7 @@ namespace Models.Interfaces
         void Update(ApplicationUser user);
         Task<bool> SaveAllAsync();
         Task<IEnumerable<ApplicationUser>> GetUsersAsync();
-        Task<ApplicationUser> GetUserByIdAsync(int id);
+        Task<ApplicationUser> GetUserByIdAsync(string id);
         Task<ApplicationUser> GerUserByUserNameAsync(string username);
 
     }
