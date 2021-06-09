@@ -11,6 +11,7 @@ import { MaterialNavComponent } from './dashboard/material-nav/material-nav.comp
 import { OptionsComponent } from './dashboard/options/options.component';
 import { RealestateComponent } from './dashboard/realestate/realestate.component';
 import { RealEstateDetailComponent } from './dashboard/realestate/real-estate-detail/real-estate-detail.component';
+import { MessagesComponent } from './dashboard/messages/messages.component';
 
 
 
@@ -21,6 +22,7 @@ const routes: Routes = [
     {path: 'realestate', component: RealestateComponent},
     {path: 'realestate/details/:id',component: RealEstateDetailComponent},
     {path: 'settings', component: OptionsComponent},
+    {path: 'messages', component: MessagesComponent},
     {path: 'add-real-estate', component: RealestateComponent},
     {path: 'members/:username', component: MemberDetailComponent},
     {path: 'members', component: MemberDetailComponent , canActivate: [AuthGuard]}, 

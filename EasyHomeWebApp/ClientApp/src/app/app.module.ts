@@ -37,6 +37,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
 import { MemberListComponent } from './member/member-list/member-list.component';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { MessagesComponent } from './dashboard/messages/messages.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -62,6 +63,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     RealEstateDetailComponent,
     AddRealestateDetailAnnouncementComponent,
     MemberListComponent,
+    MessagesComponent,
 
   ],
   entryComponents:[
