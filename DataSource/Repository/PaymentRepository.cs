@@ -21,11 +21,25 @@ namespace DataSource.Repository
             dbContext.SaveChanges();
         }
 
-        public Payment GetPaymentForRealEstate(int realEstateId)
+        public Payment GetPayment(int paymentId)
         {
-            Payment payment = dbContext.Payments.FirstOrDefault(p => p.RealEstateId == realEstateId);
+            Payment payment = dbContext.Payments.FirstOrDefault(p => p.Id == paymentId);
 
             return payment;
+        }
+
+        public IEnumerable<Payment> GetPaymentsForRealEstate(int realEstateId)
+        {
+            IEnumerable<Payment> payments = dbContext.Payments.AsEnumerable().Where(p => p.RealEstate.Id == realEstateId);
+
+            return payments;
+        }
+
+        public IEnumerable<Payment> GetNotPaidPayments()
+        {
+            IEnumerable<Payment> payments = dbContext.Payments.AsEnumerable().Where(p => p.Status == PaymentStatus.ToPay || p.Status == PaymentStatus.Overdue);
+
+            return payments;
         }
 
         public void ModifyPayment(Payment payment)

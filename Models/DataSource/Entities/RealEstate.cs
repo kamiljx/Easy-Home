@@ -20,9 +20,7 @@ namespace Models.DataSource.Entities
         public string Address { get; set; }
         
         public string Country { get; set; }
-        // Access code will be generated on creation of real estate
         public Guid AccessCode { get; set; }
-        // Tu powinna być relacja one-to-many (jedna nieruchomość - wiele płatności). Sprawdzić czy napewno to się tak definiuje
         public ICollection<Payment> Payments { get; set; }
    
         public ICollection<ApplicationUser> Rentiers { get; set; }

@@ -1,6 +1,8 @@
 ﻿using DataSource;
+using Models.DataSource;
 using Models.DataSource.Entities;
 using Models.DTOs;
+using Models.Enums;
 using Models.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -17,8 +19,6 @@ namespace Services.Services
         }
         public bool AddPayment(PaymentDto paymentDto)
         {
-            bool result = false;
-
             try
             {
                 Payment newPayment = new Payment
@@ -30,21 +30,66 @@ namespace Services.Services
                     CreatedAt = paymentDto.CreatedAt,
                     PaymentDeadline = paymentDto.PaymentDeadline,
                     PayedAt = paymentDto.PayedAt,
-                    Status = (Models.Enums.PaymentStatus)paymentDto.PaymentStatus
+                    Status = (PaymentStatus)paymentDto.PaymentStatus
                 };
+
+                List<ApplicationUser> payers = new List<ApplicationUser>();
+                foreach(var u in paymentDto.Payers)
+                {
+                    ApplicationUser user = unitOfWork.IdentityRepository.GetUserById(u);
+                    payers.Add(user);
+                }
+
+                newPayment.Payers = payers;
 
                 unitOfWork.PaymentRepository.AddPaymentToRealEstate(newPayment);
             }
             catch (Exception)
             {
                 unitOfWork.Rollback();
-
                 throw;
             }
-
             unitOfWork.Commit();
 
-            return result;
+            return true;
+        }
+
+        public bool RealizePayment(int paymentId, int rentierId)
+        {
+            try
+            {
+                Payment payment = unitOfWork.PaymentRepository.GetPayment(paymentId);
+                payment.Status = PaymentStatus.Paid;
+
+                unitOfWork.PaymentRepository.ModifyPayment(payment);
+            }
+            catch (Exception)
+            {
+                unitOfWork.Rollback();
+                throw;
+            }
+            unitOfWork.Commit();
+
+            return true;
+        }
+
+        public bool ModifyPaymentStatus(int paymentId, int paymentStatus)
+        {
+            try
+            {
+                Payment payment = unitOfWork.PaymentRepository.GetPayment(paymentId);
+                payment.Status = (PaymentStatus)paymentStatus;
+
+                unitOfWork.PaymentRepository.ModifyPayment(payment);
+            }
+            catch(Exception)
+            {
+                unitOfWork.Rollback();
+                throw;
+            }
+            unitOfWork.Commit();
+
+            return true;
         }
     }
 }

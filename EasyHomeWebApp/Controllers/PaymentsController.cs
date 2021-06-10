@@ -19,6 +19,7 @@ namespace EasyHomeWebApp.Controllers
             this.paymentService = paymentService;
         }
 
+        [HttpPost("addpayment")]
         public IActionResult AddPayment([FromBody] PaymentDto paymentDto)
         {
             bool result = paymentService.AddPayment(paymentDto);
@@ -32,16 +33,29 @@ namespace EasyHomeWebApp.Controllers
                 return BadRequest(paymentDto);
             }
         }
+
+        [HttpPut("pay")]
         public IActionResult Pay(int paymentId, int rentierId)
         {
-            return Ok();
+            bool result = paymentService.RealizePayment(paymentId, rentierId);
+
+            if (result)
+            {
+                return Ok("Success");
+            }
+            else
+            {
+                return BadRequest(paymentId);
+            }
         }
 
-        public IActionResult PaymentStatus(int paymentId, int paymentStatus)
+        [HttpPut("modifystatus")]
+        public IActionResult ChangePaymentStatus(int paymentId, int paymentStatus)
         {
             return Ok();
         }
 
+        [HttpDelete("deletepayment")]
         public IActionResult DeletePayment(int paymentId)
         {
             return Ok();
