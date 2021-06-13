@@ -19,6 +19,10 @@ namespace Models.DataSource
         public string Address { get; set; }
         public ICollection<RealEstate> OwnEstates { get; set; }    
         public ICollection<AppUserRole> UserRoles { get; set; }
+
+        public ICollection<Message> MessagesSend { get; set; }
+
+        public ICollection<Message> MessagesRecieved { get; set; }
         public ICollection<Payment> Payments { get; set; }
     }
 }

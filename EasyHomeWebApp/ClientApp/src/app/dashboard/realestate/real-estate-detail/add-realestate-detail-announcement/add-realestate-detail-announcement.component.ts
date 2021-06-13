@@ -46,10 +46,11 @@ export class AddRealestateDetailAnnouncementComponent implements OnInit {
   }
    initializeForm(){
      this.addNewAnnouncement = this.fb.group({
-      id: [this.parseRealEstateId()],
+      RealEstateId: [this.parseRealEstateId()],
       title: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(1000)]],
-      label: ['default', this.selectedLabel]
+      type: ['default', this.selectedLabel],
+      date: [ '5/1/2008 8:30:52 AM']
      })
    }
    matcher = new ErrorStateMatcher()

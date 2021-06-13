@@ -35,6 +35,8 @@ import { RealEstateDetailComponent } from './dashboard/realestate/real-estate-de
 import { AddRealestateDetailAnnouncementComponent } from './dashboard/realestate/real-estate-detail/add-realestate-detail-announcement/add-realestate-detail-announcement.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
+import { MemberListComponent } from './member/member-list/member-list.component';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -59,6 +61,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AssignRentierToRealestateComponent,
     RealEstateDetailComponent,
     AddRealestateDetailAnnouncementComponent,
+    MemberListComponent,
 
   ],
   entryComponents:[
@@ -97,7 +100,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     LayoutModule,
   ],
   providers: [
-    HttpClient
+    HttpClient,
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
   ],
   bootstrap: [AppComponent],
 })

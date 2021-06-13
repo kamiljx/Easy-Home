@@ -30,7 +30,6 @@ export class ThemeService {
     let changed = this.themeDark = !this.themeDark
     localStorage.setItem("isDarkTheme", changed? "true" : "false")
     location.reload()
-    console.log(changed)
     return changed
   }
 

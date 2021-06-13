@@ -8,6 +8,7 @@
   left: 15px;
   right: 15px;
   bottom: 15px;
+  overflow: auto;
 }
 
 .more-button {
@@ -18,4 +19,22 @@
 
 .dashboard-card-content {
   text-align: center;
+}
+.cardWithLabel {
+  border-left-style: solid;
+}
+.warning {
+  border-left-color: yellow;
+}
+.success {
+  border-left-color: rgb(0, 208, 14);
+}
+.info {
+  border-left-color: rgb(47, 186, 156);
+}
+.primary {
+  border-left-color: blue;
+}
+.danger {
+  border-left-color: red;
 }

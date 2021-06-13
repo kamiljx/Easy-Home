@@ -12,7 +12,7 @@
           <div class="form-group">
             <mat-form-field appearance="fill" >
               <mat-label>{{'user.annoncementLabel' | translate}}</mat-label>
-              <mat-select formControlName="label">
+              <mat-select formControlName="type">
                 <mat-option *ngFor="let label of announcementLabel" [value]="label.value"> {{label.value}} </mat-option>
               </mat-select>
             </mat-form-field>

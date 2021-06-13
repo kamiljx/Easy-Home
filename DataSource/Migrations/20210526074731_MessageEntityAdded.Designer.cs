@@ -4,35 +4,22 @@ using DataSource;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataSource.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210526074731_MessageEntityAdded")]
+    partial class MessageEntityAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("ApplicationUserPayment", b =>
-                {
-                    b.Property<int>("PayersId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PaymentsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PayersId", "PaymentsId");
-
-                    b.HasIndex("PaymentsId");
-
-                    b.ToTable("ApplicationUserPayment");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
@@ -336,11 +323,8 @@ namespace DataSource.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("BankAccountNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -348,22 +332,15 @@ namespace DataSource.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("PayedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("PaymentDeadline")
-                        .HasColumnType("datetime2");
+                    b.Property<int?>("PayerId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("RealEstateId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ReceiverBankAccount")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("PayerId");
 
                     b.HasIndex("RealEstateId");
 
@@ -405,21 +382,6 @@ namespace DataSource.Migrations
                     b.ToTable("RealEstates");
                 });
 
-            modelBuilder.Entity("ApplicationUserPayment", b =>
-                {
-                    b.HasOne("Models.DataSource.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("PayersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Models.DataSource.Entities.Payment", null)
-                        .WithMany()
-                        .HasForeignKey("PaymentsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("Models.DataSource.Entities.AppRole", null)
@@ -458,11 +420,11 @@ namespace DataSource.Migrations
 
             modelBuilder.Entity("Models.DataSource.ApplicationUser", b =>
                 {
-                    b.HasOne("Models.DataSource.Entities.RealEstate", "RealEstate")
+                    b.HasOne("Models.DataSource.Entities.RealEstate", "realEstate")
                         .WithMany("Rentiers")
                         .HasForeignKey("RealEstateId");
 
-                    b.Navigation("RealEstate");
+                    b.Navigation("realEstate");
                 });
 
             modelBuilder.Entity("Models.DataSource.Entities.Announcement", b =>
@@ -514,11 +476,15 @@ namespace DataSource.Migrations
 
             modelBuilder.Entity("Models.DataSource.Entities.Payment", b =>
                 {
-                    b.HasOne("Models.DataSource.Entities.RealEstate", "RealEstate")
+                    b.HasOne("Models.DataSource.ApplicationUser", "Payer")
+                        .WithMany()
+                        .HasForeignKey("PayerId");
+
+                    b.HasOne("Models.DataSource.Entities.RealEstate", null)
                         .WithMany("Payments")
                         .HasForeignKey("RealEstateId");
 
-                    b.Navigation("RealEstate");
+                    b.Navigation("Payer");
                 });
 
             modelBuilder.Entity("Models.DataSource.Entities.RealEstate", b =>
