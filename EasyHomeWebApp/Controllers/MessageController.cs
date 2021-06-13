@@ -25,11 +25,11 @@ namespace EasyHomeWebApp.Controllers
         [HttpPost]
         public async Task<ActionResult<MessageDto>> createMessage(CreateMessageDto createMessageDto)
         {
-            var username = User.GetUsername();
+            // var username = User.GetUsername();
 
             //if (username == createMessageDto.RecipentUsername.ToLower())
             //   return BadRequest("Nie możesz wysłać do siebie wiadomości.");
-            var sender = await _userRepository.GerUserByUserNameAsync(username);
+            var sender = await _userRepository.GerUserByUserNameAsync(createMessageDto.SenderUsername);
             var recipent = await _userRepository.GerUserByUserNameAsync(createMessageDto.RecipentUsername);
 
             if (recipent == null) return NotFound();

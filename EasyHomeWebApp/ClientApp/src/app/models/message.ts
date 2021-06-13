@@ -4,8 +4,8 @@ export interface Message{
     senderUsername: string;
     senderPhotoUrl: string;
     recipentId: string;
-    recipentUsername: string;
-    recipentPhotoUrl: string;
+    recipientUsername: string;
+    recipientPhotoUrl: string;
     content: string;
     dateRead?: Date;
     messageSent: Date;

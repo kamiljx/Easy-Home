@@ -22,7 +22,7 @@
     <div class="col-md-9">
         <div class="card-body">
             <mat-tab-group>
-                <mat-tab label="memberDetail"> 
+                <mat-tab label="member Detail"> 
                     <div class="row">
                         <div class="col-md-6">
                             <strong> Name:</strong>
@@ -53,8 +53,9 @@
                 
                 
                 </mat-tab>
-                <mat-tab label="Second"> Content 2 </mat-tab>
-                <mat-tab label="Third"> Content 3 </mat-tab>
+                <mat-tab *ngIf="isMyProfile()" label="Messages"> 
+                    <app-member-messages></app-member-messages>
+                </mat-tab>
               </mat-tab-group>
 
         </div>

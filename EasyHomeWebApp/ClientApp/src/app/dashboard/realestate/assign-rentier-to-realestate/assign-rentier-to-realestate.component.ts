@@ -34,13 +34,16 @@ export class AssignRentierToRealestateComponent implements OnInit {
 
   initializeForm(){
     this.assignRentierToRealestate = this.fb.group({
-      realEstateId: [this.realEstateId],
+      realEstateId: [this.realEstateId.valueOf()],
       userName: ['',[Validators.required, Validators.email]],
     }
     )
   }
+  returnId(){
+    return this.realEstateId
+  }
   addRentierToEstate(){
-    this.realestateService.addRentierToRealestate(this.realestateService).subscribe(
+    this.realestateService.addRentierToRealestate(this.assignRentierToRealestate.value).subscribe(
       respone =>{
         this.toastr.success('dodano')
       },error =>{

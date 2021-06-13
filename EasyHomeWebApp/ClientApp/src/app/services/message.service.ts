@@ -11,12 +11,19 @@ import { getPaginatedResult, getPaginationHeaders } from './paginatorHelper';
 export class MessageService {
 
   baseUrl = environment.apiUrl
+   currentUser$ = this.accountService.getCurrentUser()
   constructor(private http: HttpClient, private accountService: AccountService) { }
 
   getMessages(pageNumber, pageSize, container) {
     let params = getPaginationHeaders(pageNumber, pageSize);
     params = params.append('Container', container);
-    let currentUser$ = this.accountService.getCurrentUser()
-    return getPaginatedResult<Message[]>(this.baseUrl + 'message/' + currentUser$ , params, this.http);
+    return getPaginatedResult<Message[]>(this.baseUrl + 'message/' + this.currentUser$ , params, this.http);
+  }
+  getMessageThread(username: string) {
+    return this.http.get<Message[]>(this.baseUrl + 'message/thread/' + this.currentUser$ +'/'+ username);
+  }
+  sendMessage(model: any){
+    console.log(model)
+    return this.http.post(this.baseUrl + 'message', model)
   }
 }
