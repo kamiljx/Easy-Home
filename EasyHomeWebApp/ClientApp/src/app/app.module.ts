@@ -37,6 +37,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
 import { MemberListComponent } from './member/member-list/member-list.component';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { MessagesComponent } from './dashboard/messages/messages.component';
+import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import { MemberMessagesComponent } from './member/member-messages/member-messages.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -62,6 +66,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     RealEstateDetailComponent,
     AddRealestateDetailAnnouncementComponent,
     MemberListComponent,
+    MessagesComponent,
+    ConfirmDialogComponent,
+    MemberMessagesComponent,
 
   ],
   entryComponents:[
@@ -102,6 +109,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [
     HttpClient,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
+
   ],
   bootstrap: [AppComponent],
 })

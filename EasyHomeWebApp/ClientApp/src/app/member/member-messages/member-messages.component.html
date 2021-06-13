@@ -1,0 +1,62 @@
+<div class="card">
+    <div class="card-body"
+        #scrollMe
+        style="overflow: scroll; height: 535px;"
+        [scrollTop]="scrollMe.scrollHeight"
+    >
+        <div *ngIf="messages?.length === 0">
+            No messages
+        </div>
+
+        <ul 
+            *ngIf="messages?.length > 0" 
+            class="chat">
+            <li *ngFor="let message of messages">
+                <div>
+                    <span class="chat-img float-right">
+                        <img class="rounded-circle" src="{{message.senderPhotoUrl || './assets/img/user/user.png'}}" 
+                            alt="{{message.senderUsername}}">
+                    </span>
+                    <div class="chat-body">
+                        <div class="header">
+                            <small class="text-muted">
+                                <span class="fa fa-clock-o">{{message.messageSent | timeago}}</span>
+                                <span class="text-danger" *ngIf="!message.dateRead 
+                                    && message.senderUsername !== username">
+                                    (unread)
+                                </span>
+                                <span class="text-success" *ngIf="message.dateRead 
+                                    && message.senderUsername !== username">
+                                    (read {{message.dateRead | timeago}})
+                                </span>
+                            </small>
+                        </div>
+                        <p>{{message.content}}</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        
+        <!-- <div class="card-footer">
+            <form>
+                <div class="input-group">
+                    <input type="text" class="form-control input-sm" placeholder="Send message">
+                </div>
+            </form>
+        </div> -->
+    </div>
+        <div class="form-group ">
+            <form [formGroup]='message' (ngSubmit)="sendMessage()" autocomplete="off">
+                <mat-form-field class="full-width" >
+                    <mat-label>Send message</mat-label>
+                    <textarea matInput matTextareaAutosize formControlName="content" [errorStateMatcher]="matcher"
+                    placeholder="Send message to {{username}}" #maxMessage></textarea>
+                    <mat-error *ngIf="message.invalid && message.touched">error</mat-error>
+                    <mat-hint align="end">{{maxMessage.value.length}} / 3000</mat-hint>
+                </mat-form-field>
+                <button mat-raised-button color="primary" 
+                [disabled]="!message.valid" 
+                type="submit">Submit</button>
+            </form>
+        </div>
+</div>
