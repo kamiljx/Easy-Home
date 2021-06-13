@@ -26,10 +26,7 @@ export class RealestateService {
   }
 
   addRentierToRealestate(model:any){
+    console.log(model)
      return this.http.post(this.baseUrl + 'realestate/addrentier', model)
-  }
-  getRealestates(){
-    let params = new HttpParams().set('Name', this.currentUser)
-     console.log( this.http.get<Realestate[]>(this.baseUrl + 'realestate/name',{params: params}))
   }
 }

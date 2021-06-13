@@ -52,9 +52,7 @@ openDialog() {
 addRentierToRealEstate(id: number){
   this.realestateId = id;
   const dialogRef = this.dialog.open(AssignRentierToRealestateComponent, {
-    data: {
-      realestateId: this.realestateId
-    }
+    data: this.realestateId
   });
 
   dialogRef.afterClosed().subscribe(result => {
