@@ -53,5 +53,12 @@ namespace DataSource.Repository
 
             dbContext.SaveChanges();
         }
+
+        public void DeletePayment(int paymentId)
+        {
+            Payment payment = dbContext.Payments.FirstOrDefault(p => p.Id == paymentId);
+            dbContext.Payments.Remove(payment);
+            dbContext.SaveChanges();
+        }
     }
 }

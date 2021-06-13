@@ -10,5 +10,6 @@ namespace DataSource.Repository
         IEnumerable<Payment> GetPaymentsForRealEstate(int realEstateId);
         IEnumerable<Payment> GetNotPaidPayments();
         void ModifyPayment(Payment payment);
+        void DeletePayment(int paymentId);
     }
 }

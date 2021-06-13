@@ -9,6 +9,7 @@ namespace Models.Interfaces
     {
         bool AddPayment(PaymentDto paymentDto);
         bool RealizePayment(int paymentId, int rentierId);
-        bool ModifyPaymentStatus(int paymentId, int paymentStatus)
+        bool ModifyPaymentStatus(int paymentId, int paymentStatus);
+        bool DeletePayment(int paymentId);
     }
 }

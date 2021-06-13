@@ -30,7 +30,7 @@ namespace EasyHomeWebApp.Controllers
             }
             else
             {
-                return BadRequest(paymentDto);
+                return BadRequest("Couldn't add payment, ID: " + paymentDto);
             }
         }
 
@@ -45,20 +45,38 @@ namespace EasyHomeWebApp.Controllers
             }
             else
             {
-                return BadRequest(paymentId);
+                return BadRequest("Couldn't pay for this payment, ID: " + paymentId);
             }
         }
 
         [HttpPut("modifystatus")]
         public IActionResult ChangePaymentStatus(int paymentId, int paymentStatus)
         {
-            return Ok();
+            bool result = paymentService.ModifyPaymentStatus(paymentId, paymentStatus);
+
+            if (result)
+            {
+                return Ok("Success");
+            }
+            else
+            {
+                return BadRequest("Couldn't modify payment status, ID: " + paymentId);
+            }
         }
 
         [HttpDelete("deletepayment")]
         public IActionResult DeletePayment(int paymentId)
         {
-            return Ok();
+            bool result = paymentService.DeletePayment(paymentId);
+
+            if (result)
+            {
+                return Ok("Success");
+            }
+            else
+            {
+                return BadRequest("Couldn't delete payment, ID: " + paymentId);
+            }
         }
 
     }

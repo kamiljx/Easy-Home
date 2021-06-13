@@ -15,15 +15,12 @@ namespace DataSource
     {
         
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        {    
+        {
         }
 
         public ApplicationDbContext() : base()
         {
         }
-        
-
-        // PONIŻEJ DbEntity<> dodawać
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -50,6 +47,8 @@ namespace DataSource
             builder.Entity<RealEstate>()
                 .HasOne(o => o.Owner)
                 .WithMany(ow => ow.OwnEstates);
+
+
         }
 
         public DbSet<RealEstate> RealEstates { get; set; }

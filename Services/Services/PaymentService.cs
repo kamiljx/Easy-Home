@@ -91,5 +91,21 @@ namespace Services.Services
 
             return true;
         }
+
+        public bool DeletePayment(int paymentId)
+        {
+            try
+            {
+                unitOfWork.PaymentRepository.DeletePayment(paymentId);
+            }
+            catch (Exception)
+            {
+                unitOfWork.Rollback();
+                throw;
+            }
+            unitOfWork.Commit();
+
+            return true;
+        }
     }
 }
