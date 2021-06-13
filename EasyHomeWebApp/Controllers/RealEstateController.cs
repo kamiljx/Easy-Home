@@ -23,13 +23,22 @@ namespace EasyHomeWebApp.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("name")]
-        public async Task<IQueryable<RealEstate>> GetRealEstatesByName(string Name)
+        [HttpGet("owner")]
+        public async Task<IQueryable<RealEstate>> GetRealEstatesByOwnerName(string Name)
         {
             var user = await _userManager.FindByNameAsync(Name);
             var realEstates = _context.RealEstates.Where(x => x.Owner == user);
             return realEstates;
         }
+
+        [HttpGet("rentier")]
+        public async Task<RealEstate> GetRealEstatesByRentierName(string Name)
+        {
+            var user = await _userManager.FindByNameAsync(Name);
+            var realEstate = await _context.RealEstates.Where(x => x.Rentiers.Contains(user)).FirstOrDefaultAsync();
+            return realEstate;
+        }
+
 
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] RealEstateDto realEstateDto)
