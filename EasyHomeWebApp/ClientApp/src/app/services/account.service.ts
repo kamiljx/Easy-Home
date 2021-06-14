@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, Input } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ApiUrls } from 'src/api';
 import { User } from '../models/user';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
@@ -14,8 +13,8 @@ import { PresenceService } from './presence.service';
 export class AccountService {
   @Input() loggedIn: boolean
   token: string;
-  userRole: string ="not asigned";
   userName: string;
+  userRole: string;
   baseUrl = environment.apiUrl
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
@@ -51,17 +50,25 @@ export class AccountService {
   getCurrentToken(){
     this.token = JSON.parse(localStorage.getItem('user')).token;
   }
-  decodeToken(){
-     const decodeToken = this.helper.decodeToken(this.token)
-    //  this.currentUser$.role = decodeToken.role
-     this.userRole = decodeToken.role
+  getDecodedToken(token) {
+    console.log( JSON.parse(atob(token.split('.')[1])))
+
+    return JSON.parse(atob(token.split('.')[1]));
   }
   setCurrentUser(user: User){
+    user.role = [];
+    const roles = this.getDecodedToken(user.token).role;
+    Array.isArray(roles) ? user.role = roles : user.role.push(roles);
+    this.userRole = roles
     this.currentUserSource.next(user)
   }
   logout(){
     localStorage.removeItem('user')
     this.currentUserSource.next(null)
     this.presence.stopHubConnection()
+  }
+
+  isOwner(){
+    console.log()
   }
 }

@@ -1,0 +1,39 @@
+<h2 mat-dialog-title >Create payment</h2>
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]='payments' (ngSubmit)="addPayment()" autocomplete="off">
+    <div class="row paymentRow">
+        <app-material-text-form-input [formControl]='payments.controls["Name"]' [validate]="'name'" [label]="'name'" [icon]="'create'" [hint]="'Payment name'" [translatedFrom]="'payments'" ></app-material-text-form-input>
+   
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="PaymentDeadline">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>      
+
+    </div>
+    <div class="row paymentRow">
+        <app-material-text-form-input [formControl]='payments.controls["Description"]' [validate]="'description'" [label]="'description'" [icon]="'description'" [hint]="'Payment description'" [translatedFrom]="'payments'" ></app-material-text-form-input>
+        
+        <mat-form-field appearance="fill">
+            <mat-label>Choose rentiers to pay</mat-label>
+            <mat-select [formControl]='payments.controls["PayersId"]' multiple>
+                <mat-option *ngFor="let rentiers of realEstateRentier" [value]="rentiers.id">{{rentiers.userName}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        
+
+    </div>
+    </form>
+<p> {{payments.value | json}}</p>
+
+</mat-dialog-content>
+<div class="button-row">
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" 
+  mat-dialog-close 
+      [disabled]="!payments.valid" 
+      (click)="addPayment()"
+      type="submit">Submit</button>
+    </mat-dialog-actions>
+  </div>
