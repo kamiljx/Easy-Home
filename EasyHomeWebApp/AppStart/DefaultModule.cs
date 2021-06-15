@@ -14,6 +14,7 @@ namespace EasyHomeWebApp.AppStart
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
             builder.RegisterType<PaymentRepository>().As<IPaymentRepository>().InstancePerLifetimeScope();
             builder.RegisterType<PaymentService>().As<IPaymentService>().InstancePerLifetimeScope();
+            builder.RegisterType<IdentityRepository>().As<IIdentityRepository>().InstancePerLifetimeScope();
 
             base.Load(builder);
         }

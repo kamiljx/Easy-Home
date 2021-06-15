@@ -17,10 +17,7 @@ namespace EasyHomeWebApp.AppStart
 
             builder.RegisterModule(new DefaultModule());
 
-            var container = builder.Build();
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-
-            return container;
+            return builder.Build();
         }
     }
 }
