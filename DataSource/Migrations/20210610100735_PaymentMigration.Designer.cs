@@ -4,14 +4,16 @@ using DataSource;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataSource.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210610100735_PaymentMigration")]
+    partial class PaymentMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -286,49 +288,6 @@ namespace DataSource.Migrations
                     b.ToTable("AspNetUserRoles");
                 });
 
-            modelBuilder.Entity("Models.DataSource.Entities.Message", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DateRead")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("MessageSent")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("ReciepientDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("RecipientId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("RecipientUserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("SebderDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("SenderId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SenderUserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RecipientId");
-
-                    b.HasIndex("SenderId");
-
-                    b.ToTable("Messages");
-                });
-
             modelBuilder.Entity("Models.DataSource.Entities.Payment", b =>
                 {
                     b.Property<int>("Id")
@@ -493,25 +452,6 @@ namespace DataSource.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Models.DataSource.Entities.Message", b =>
-                {
-                    b.HasOne("Models.DataSource.ApplicationUser", "Recipient")
-                        .WithMany("MessagesRecieved")
-                        .HasForeignKey("RecipientId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Models.DataSource.ApplicationUser", "Sender")
-                        .WithMany("MessagesSend")
-                        .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Recipient");
-
-                    b.Navigation("Sender");
-                });
-
             modelBuilder.Entity("Models.DataSource.Entities.Payment", b =>
                 {
                     b.HasOne("Models.DataSource.Entities.RealEstate", "RealEstate")
@@ -532,10 +472,6 @@ namespace DataSource.Migrations
 
             modelBuilder.Entity("Models.DataSource.ApplicationUser", b =>
                 {
-                    b.Navigation("MessagesRecieved");
-
-                    b.Navigation("MessagesSend");
-
                     b.Navigation("OwnEstates");
 
                     b.Navigation("UserRoles");
