@@ -49,8 +49,6 @@ namespace EasyHomeWebApp.Controllers
         
         public async Task<ActionResult<UserDto>> Register([FromBody] RegisterDto registerDto)
         {
-
-
             var user = new ApplicationUser
             {
                 UserName = registerDto.Email,
