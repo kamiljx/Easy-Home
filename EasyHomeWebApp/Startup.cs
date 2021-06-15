@@ -1,4 +1,5 @@
 using Autofac;
+using Autofac.Integration.Mvc;
 using DataSource;
 using EasyHomeWebApp.AppStart;
 using EasyHomeWebApp.Extensions;
@@ -17,6 +18,7 @@ using Models.DataSource;
 using Models.Interfaces;
 using Services.Services;
 using System.Text;
+using System.Web.Mvc;
 
 namespace EasyHomeWebApp
 {
@@ -34,6 +36,7 @@ namespace EasyHomeWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             container = AutofacConfig.ConfigureContainer();
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
             
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
