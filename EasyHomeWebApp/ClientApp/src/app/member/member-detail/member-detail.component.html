@@ -1,1 +1,86 @@
-<p>member-detail works!</p>
+<div class="row" *ngIf="member">
+    <div class="col-md-3">
+        <div class="card">
+            <img src="{{member.photoUrl || './assets/img/user/user.png'}}" alt="{{member.email}}"
+            class="card-img-top ">
+        </div>
+        <div class="member-date">
+            <div>
+                <strong>last online:</strong>
+                <p>{{member.lastActive}}</p>
+            </div>
+            <div>
+                <strong>Created:</strong>
+                <p>{{member.created}}</p>
+            </div>
+            <div>
+                <strong>Location:</strong>
+                <p>{{member.city}},{{member.state}} {{member.country}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="card-body">
+            <mat-tab-group>
+                <mat-tab label="member Detail"> 
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong> Name:</strong>
+                            <p>{{member.firstName}} {{member.lastName}}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Date of birth:</strong>
+                            <p>{{member.dateOfBirth}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong>Age:</strong>
+                            <p>{{member.age}}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>gender:</strong>
+                            <p>{{member.gender}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong>real estate count:</strong>
+                            <p>{{member.realEstateCount}}</p>
+                        </div>
+                    </div>
+                
+                
+                
+                </mat-tab>
+                <mat-tab *ngIf="isMyProfile()" label="Messages"> 
+                    <app-member-messages></app-member-messages>
+                </mat-tab>
+              </mat-tab-group>
+
+        </div>
+    </div>  
+</div>
+
+
+
+
+<!-- <div>
+    <strong>Name:</strong>
+    <p>{{member.firstName}} {{member.lastName}}</p>
+</div>
+<div>
+
+</div>
+<div>
+    <strong>gender:</strong>
+    <p>{{member.gender}}</p>
+</div>
+<div>
+    <strong>real estate count:</strong>
+    <p>{{member.realEstateCount}}</p>
+</div>
+<div>
+    <strong>Location:</strong>
+    <p>{{member.city}}, {{member.country}}</p>
+</div> -->
