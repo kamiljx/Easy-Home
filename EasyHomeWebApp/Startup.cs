@@ -1,4 +1,5 @@
 using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Autofac.Integration.Mvc;
 using DataSource;
 using EasyHomeWebApp.AppStart;
@@ -35,9 +36,6 @@ namespace EasyHomeWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            container = AutofacConfig.ConfigureContainer();
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-            
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -53,6 +51,11 @@ namespace EasyHomeWebApp
             {
                 options.UseSqlServer(Configuration.GetConnectionString("ConnectionString"), providerOptions => providerOptions.EnableRetryOnFailure());
             });
+        }
+
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterModule(new DefaultModule());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -12,9 +12,9 @@ namespace DataSource
         private IPaymentRepository paymentRepository;
         private IIdentityRepository identityRepository;
 
-        public UnitOfWork()
+        public UnitOfWork(ApplicationDbContext dbContext)
         {
-            _dbContext = new ApplicationDbContext();
+            _dbContext = dbContext;
         }
 
         public IIdentityRepository IdentityRepository
