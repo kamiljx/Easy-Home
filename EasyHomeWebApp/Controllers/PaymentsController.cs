@@ -19,6 +19,13 @@ namespace EasyHomeWebApp.Controllers
             this.paymentService = paymentService;
         }
 
+        public IEnumerable<Payment> GetPayments(int realEstateId)
+        {
+            IEnumerable<Payment> payments = paymentService.GetPayments(realEstateId);
+
+            return payments;
+        }
+
         [HttpPost("addpayment")]
         public IActionResult AddPayment([FromBody] PaymentDto paymentDto)
         {

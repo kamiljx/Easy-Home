@@ -15,6 +15,7 @@ namespace DataSource.Repository
         {
             this.dbContext = dbContext;
         }
+
         public void AddPaymentToRealEstate(Payment payment)
         {
             dbContext.Payments.Add(payment);

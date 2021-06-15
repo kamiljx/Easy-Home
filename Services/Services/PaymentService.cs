@@ -17,6 +17,13 @@ namespace Services.Services
         {
             this.unitOfWork = unitOfWork;
         }
+
+        public IEnumerable<Payment> GetPayments(int realEstateId)
+        {
+            IEnumerable<Payment> payments = unitOfWork.PaymentRepository.GetPaymentsForRealEstate(realEstateId);
+            return payments;
+        }
+
         public bool AddPayment(PaymentDto paymentDto)
         {
             try
