@@ -34,20 +34,22 @@ namespace Services.Services
                     ReceiverBankAccount = paymentDto.ReceiverBankAccount,
                     Amount = paymentDto.Amount,
                     Description = paymentDto.Description,
-                    CreatedAt = paymentDto.CreatedAt,
-                    PaymentDeadline = paymentDto.PaymentDeadline,
-                    PayedAt = paymentDto.PayedAt,
+                    CreatedAt = DateTime.UtcNow,
+                    PaymentDeadline = DateTime.Parse(paymentDto.PaymentDeadline),
+                    PayedAt = null,
                     Status = (PaymentStatus)paymentDto.PaymentStatus
                 };
 
                 List<ApplicationUser> payers = new List<ApplicationUser>();
-                foreach(var u in paymentDto.Payers)
+                foreach (var u in paymentDto.Payers)
                 {
                     ApplicationUser user = unitOfWork.IdentityRepository.GetUserById(u);
                     payers.Add(user);
                 }
-
                 newPayment.Payers = payers;
+
+                RealEstate realEstate = unitOfWork.RealEstateRepository.GetRealEstateById(paymentDto.RealEstateId);
+                newPayment.RealEstate = realEstate;
 
                 unitOfWork.PaymentRepository.AddPaymentToRealEstate(newPayment);
             }
@@ -67,7 +69,7 @@ namespace Services.Services
             {
                 Payment payment = unitOfWork.PaymentRepository.GetPayment(paymentId);
                 payment.Status = PaymentStatus.Paid;
-
+                payment.PayedAt = new DateTime();
                 unitOfWork.PaymentRepository.ModifyPayment(payment);
             }
             catch (Exception)
