@@ -18,8 +18,10 @@ namespace DataSource.Repository
 
         public void AddPaymentToRealEstate(Payment payment)
         {
-            dbContext.Payments.Add(payment);
-            dbContext.SaveChanges();
+            if (payment != null)
+            {
+                dbContext.Payments.Add(payment);
+            }
         }
 
         public Payment GetPayment(int paymentId)
@@ -51,15 +53,12 @@ namespace DataSource.Repository
             {
                 _payment = payment;
             }
-
-            dbContext.SaveChanges();
         }
 
         public void DeletePayment(int paymentId)
         {
             Payment payment = dbContext.Payments.FirstOrDefault(p => p.Id == paymentId);
             dbContext.Payments.Remove(payment);
-            dbContext.SaveChanges();
         }
     }
 }

@@ -14,9 +14,7 @@ namespace Models.DTOs
         public string ReceiverBankAccount { get; set; }
         public decimal Amount { get; set; }
         public string Description { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime PaymentDeadline { get; set; }
-        public DateTime? PayedAt { get; set; }
+        public string PaymentDeadline { get; set; }
         public int PaymentStatus { get; set; }
     }
 }

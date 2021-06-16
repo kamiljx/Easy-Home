@@ -7,8 +7,8 @@ namespace DataSource
     {
         IIdentityRepository IdentityRepository { get; }
         IPaymentRepository PaymentRepository { get; }
+        IRealEstateRepository RealEstateRepository { get; }
         void Commit();
-
         void Rollback();
     }
 }
