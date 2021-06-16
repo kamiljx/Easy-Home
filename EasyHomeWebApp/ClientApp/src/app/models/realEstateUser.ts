@@ -1,7 +1,7 @@
 export interface realEstateUser{
     realEstateId: 6;
     firstName: string;
-    LastName: string;
+    lastName: string;
     id: number;
     userName: string;
 

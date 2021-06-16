@@ -44,6 +44,7 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { MemberMessagesComponent } from './member/member-messages/member-messages.component';
 import { RealEstatePaymentComponent } from './dashboard/realestate/real-estate-detail/real-estate-payment/real-estate-payment.component';
 import { AddRealEstatePaymentComponent } from './dashboard/realestate/real-estate-detail/real-estate-payment/add-real-estate-payment/add-real-estate-payment.component';
+import { GetRentiersComponent } from './dashboard/realestate/real-estate-detail/get-rentiers/get-rentiers.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -74,6 +75,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MemberMessagesComponent,
     RealEstatePaymentComponent,
     AddRealEstatePaymentComponent,
+    GetRentiersComponent,
 
   ],
   entryComponents:[

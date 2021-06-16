@@ -26,7 +26,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 
 export class RealEstateDetailComponent implements OnInit {
-  realEstateId: number;
+  @Output() realEstateId: number;
   validationErrors: string[] =[];
   specificRealEstate: any;
   label = 'danger';

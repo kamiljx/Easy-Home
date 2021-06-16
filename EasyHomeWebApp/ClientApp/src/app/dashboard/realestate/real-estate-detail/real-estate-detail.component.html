@@ -2,42 +2,49 @@
   <h1 class="mat-h1"> {{specificRealEstate.name}}</h1>
   <mat-tab-group>
     <mat-tab label="Announcements">  
-      <mat-grid-list cols="2" fxFlexAlign="stretch">
-        <mat-grid-tile >
-          <mat-card class="dashboard-card" fxLayoutAlign="layout-align">
-            <mat-card-header>
-              <mat-card-title>
-                Ogloszenia
-                <button mat-icon-button class="more-button" color="primary" (click)="addAnnouncement()">
-                  <mat-icon>add</mat-icon>
-                </button>
-              </mat-card-title>
-            </mat-card-header>
-            <mat-card-content class="dashboard-card-content" *ngFor="let element of announcementsArr" >
-               
-              <mat-card  class="cardWithLabel {{element.type}}">
-                <mat-card-header color="red">
+      <div class="row">
+        <div class="col-md-8">
+          <app-get-rentiers [realEstateId]="realEstateId"></app-get-rentiers>
+        </div>
+        <div class="col-md-3">
+          <mat-grid-list cols="1" fxFlexAlign="stretch">
+            <mat-grid-tile >
+              <mat-card class="dashboard-card" fxLayoutAlign="layout-align">
+                <mat-card-header>
                   <mat-card-title>
-                    {{element.title}}
-                    <button mat-icon-button class="more-button" color="primary" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-                      <mat-icon>more_vert</mat-icon>
+                    Ogloszenia
+                    <button mat-icon-button class="more-button" color="primary" (click)="addAnnouncement()">
+                      <mat-icon>add</mat-icon>
                     </button>
-                    <mat-menu #menu="matMenu" xPosition="before">
-                      <button mat-menu-item (click)="deleteAnnouncement(element.id)">Remove</button>
-                    </mat-menu>
                   </mat-card-title>
                 </mat-card-header>
-                <mat-card-content  class="dashboard-card-content">
-                 {{element.description }}
+                <mat-card-content class="dashboard-card-content" *ngFor="let element of announcementsArr" >
+                   
+                  <mat-card  class="cardWithLabel {{element.type}}">
+                    <mat-card-header color="red">
+                      <mat-card-title>
+                        {{element.title}}
+                        <button mat-icon-button class="more-button" color="primary" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+                          <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu" xPosition="before">
+                          <button mat-menu-item (click)="deleteAnnouncement(element.id)">Remove</button>
+                        </mat-menu>
+                      </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content  class="dashboard-card-content">
+                     {{element.description }}
+                    </mat-card-content>
+                  </mat-card>
                 </mat-card-content>
               </mat-card>
-            </mat-card-content>
-          </mat-card>
-        </mat-grid-tile>
-      </mat-grid-list>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </div>
+      </div>
      </mat-tab>
     <mat-tab label="Payments">
-      <app-real-estate-payment></app-real-estate-payment>
+      <app-real-estate-payment ></app-real-estate-payment>
     </mat-tab>
     <mat-tab label="Third"> Content 3 </mat-tab>
   </mat-tab-group>

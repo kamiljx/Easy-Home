@@ -5,10 +5,11 @@
 .dashboard-card {
   position: absolute;
   top: 15px;
-  left: 15px;
+  left: 0px;
   right: 15px;
   bottom: 15px;
   overflow: auto;
+  float: right;
 }
 
 .more-button {
