@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { AddRealEstatePaymentComponent } from './add-real-estate-payment/add-real-estate-payment.component';
@@ -10,15 +10,21 @@ import { AddRealEstatePaymentComponent } from './add-real-estate-payment/add-rea
 })
 export class RealEstatePaymentComponent implements OnInit {
   realEstateId;
-  constructor(private dialog: MatDialog, private route: ActivatedRoute) { }
+  @Input() specificRealEstate;
+  constructor(private dialog: MatDialog, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.realEstateId = this.route.snapshot.params['id']
+    this.realEstateId = +this.activatedRoute.snapshot.params['id']
+    console.log(this.specificRealEstate + "1")
+    console.log(typeof this.realEstateId)
   }
   openDialog() {
     const dialogRef = this.dialog.open(AddRealEstatePaymentComponent, {
       width: '40%',
-      data: this.realEstateId
+      data: {
+        realEstateId: this.realEstateId,
+        specificRealEstate: this.specificRealEstate
+      }
     });
   
     dialogRef.afterClosed().subscribe(result => {

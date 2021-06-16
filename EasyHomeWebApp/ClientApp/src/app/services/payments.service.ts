@@ -12,6 +12,7 @@ export class PaymentsService {
 
 
   addRealEstatePayment(model:any){
-    return this.http.post(this.baseUrl + 'realestate/payments/addpayment', model)
+    console.log(model)
+    return this.http.post(this.baseUrl + 'payments/addpayment', model)
   }
 }

@@ -1,4 +1,4 @@
-﻿using DataSource;
+﻿
 using Models.DataSource;
 using Models.DataSource.Entities;
 using Models.DTOs;
@@ -6,6 +6,7 @@ using Models.Enums;
 using Models.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Services.Services
@@ -18,9 +19,9 @@ namespace Services.Services
             this.unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<Payment> GetPayments(int realEstateId)
+        public IQueryable<Payment> GetPayments(int realEstateId)
         {
-            IEnumerable<Payment> payments = unitOfWork.PaymentRepository.GetPaymentsForRealEstate(realEstateId);
+            IQueryable<Payment> payments = unitOfWork.PaymentRepository.GetPaymentsForRealEstate(realEstateId);
             return payments;
         }
 
@@ -53,10 +54,10 @@ namespace Services.Services
 
                 unitOfWork.PaymentRepository.AddPaymentToRealEstate(newPayment);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 unitOfWork.Rollback();
-                throw;
+                throw new Exception(@$"Exception message: {e.Message}. \n StackTrace: {e.StackTrace} \n Source: {e.Source}\n Inner Exception: {e.InnerException}");
             }
             unitOfWork.Commit();
 
@@ -91,7 +92,7 @@ namespace Services.Services
 
                 unitOfWork.PaymentRepository.ModifyPayment(payment);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 unitOfWork.Rollback();
                 throw;
