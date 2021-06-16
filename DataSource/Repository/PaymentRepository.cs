@@ -18,7 +18,10 @@ namespace DataSource.Repository
 
         public void AddPaymentToRealEstate(Payment payment)
         {
-            dbContext.Payments.Add(payment);
+            if (payment != null)
+            {
+                dbContext.Payments.Add(payment);
+            }
         }
 
         public Payment GetPayment(int paymentId)

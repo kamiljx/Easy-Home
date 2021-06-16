@@ -34,7 +34,7 @@ namespace Services.Services
                     ReceiverBankAccount = paymentDto.ReceiverBankAccount,
                     Amount = paymentDto.Amount,
                     Description = paymentDto.Description,
-                    CreatedAt = new DateTime(),
+                    CreatedAt = DateTime.UtcNow,
                     PaymentDeadline = DateTime.Parse(paymentDto.PaymentDeadline),
                     PayedAt = null,
                     Status = (PaymentStatus)paymentDto.PaymentStatus
@@ -46,8 +46,10 @@ namespace Services.Services
                     ApplicationUser user = unitOfWork.IdentityRepository.GetUserById(u);
                     payers.Add(user);
                 }
-
                 newPayment.Payers = payers;
+
+                RealEstate realEstate = unitOfWork.RealEstateRepository.GetRealEstateById(paymentDto.RealEstateId);
+                newPayment.RealEstate = realEstate;
 
                 unitOfWork.PaymentRepository.AddPaymentToRealEstate(newPayment);
             }
@@ -67,7 +69,7 @@ namespace Services.Services
             {
                 Payment payment = unitOfWork.PaymentRepository.GetPayment(paymentId);
                 payment.Status = PaymentStatus.Paid;
-                //payed at dodać
+                payment.PayedAt = new DateTime();
                 unitOfWork.PaymentRepository.ModifyPayment(payment);
             }
             catch (Exception)

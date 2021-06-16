@@ -11,6 +11,7 @@ namespace DataSource
 
         private IPaymentRepository paymentRepository;
         private IIdentityRepository identityRepository;
+        private IRealEstateRepository realEstateRepository;
 
         public UnitOfWork(ApplicationDbContext dbContext)
         {
@@ -40,6 +41,19 @@ namespace DataSource
                 }
 
                 return paymentRepository;
+            }
+        }
+
+        public IRealEstateRepository RealEstateRepository
+        {
+            get
+            {
+                if(realEstateRepository == null)
+                {
+                    realEstateRepository = new RealEstateRepository(_dbContext);
+                }
+
+                return realEstateRepository;
             }
         }
 
