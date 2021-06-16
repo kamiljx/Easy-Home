@@ -19,9 +19,10 @@ namespace EasyHomeWebApp.Controllers
             this.paymentService = paymentService;
         }
 
-        public IEnumerable<Payment> GetPayments(int realEstateId)
+        [HttpGet("getpayments")]
+        public IQueryable<Payment> GetPayments(int realEstateId)
         {
-            IEnumerable<Payment> payments = paymentService.GetPayments(realEstateId);
+            var payments = paymentService.GetPayments(realEstateId);
 
             return payments;
         }

@@ -1,5 +1,6 @@
 ﻿using Models.DataSource.Entities;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DataSource.Repository
 {
@@ -7,7 +8,8 @@ namespace DataSource.Repository
     {
         void AddPaymentToRealEstate(Payment payment);
         Payment GetPayment(int paymentId);
-        IEnumerable<Payment> GetPaymentsForRealEstate(int realEstateId);
+        
+        IQueryable<Payment> GetPaymentsForRealEstate(int realEstateId);
         IEnumerable<Payment> GetNotPaidPayments();
         void ModifyPayment(Payment payment);
         void DeletePayment(int paymentId);
