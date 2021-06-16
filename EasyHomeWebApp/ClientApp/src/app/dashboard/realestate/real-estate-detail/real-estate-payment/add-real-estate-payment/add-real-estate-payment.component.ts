@@ -16,7 +16,7 @@ export class AddRealEstatePaymentComponent implements OnInit {
   realEstateId: number;
   realEstateRentier: realEstateUser[];
   validationErrors: string[] =[];
-  constructor(private payment: PaymentsService, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, private realestateService: RealestateService, private toastr: ToastrService) {
+  constructor(private paymentService: PaymentsService, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, private realestateService: RealestateService, private toastr: ToastrService) {
     this.realEstateId = data.realEstateId
    }
 
@@ -30,7 +30,6 @@ export class AddRealEstatePaymentComponent implements OnInit {
   intializeForm(){
     this.payments = this.fb.group({
     realEstateId: [this.realEstateId],
-    PaymentDeadline: [  ,[Validators.required]],
     PayersId: [[], [Validators.required,]],
     Amount: [ parseInt('0'),[Validators.required]],
     Name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
@@ -47,26 +46,15 @@ export class AddRealEstatePaymentComponent implements OnInit {
     })
 }
 addPayment(){
-  this.payment.addRealEstatePayment(this.payments.value).subscribe(
-    respone =>{
-      this.toastr.success('dodano')
-    },error =>{
-      this.validationErrors = error
-      this.toastr.error(error.error)
-    }
-  )
+  console.log(this.payments.value)
+  this.paymentService.addRealEstatePayment(this.payments.value).subscribe(
+    response =>{
+     this.toastr.success('Dodano')
+  }, error =>{
+    this.validationErrors = error;
+    console.log(this.validationErrors)
+    this.toastr.error(error.error)
+  })
 }
 
-
 }
-export const MY_FORMATS = {
-  parse: {
-    dateInput: 'LL',
-  },
-  display: {
-    dateInput: 'YYYY-MM-DD',
-    monthYearLabel: 'YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'YYYY',
-  },
-};

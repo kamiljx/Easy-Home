@@ -1,4 +1,4 @@
-﻿
+﻿using DataSource;
 using Models.DataSource;
 using Models.DataSource.Entities;
 using Models.DTOs;
@@ -36,7 +36,7 @@ namespace Services.Services
                     Amount = paymentDto.Amount,
                     Description = paymentDto.Description,
                     CreatedAt = DateTime.UtcNow,
-                    PaymentDeadline = DateTime.Parse(paymentDto.PaymentDeadline),
+                    PaymentDeadline = DateTime.UtcNow.AddMonths(1),
                     PayedAt = null,
                     Status = (PaymentStatus)paymentDto.PaymentStatus
                 };
@@ -57,7 +57,7 @@ namespace Services.Services
             catch (Exception e)
             {
                 unitOfWork.Rollback();
-                throw new Exception(@$"Exception message: {e.Message}. \n StackTrace: {e.StackTrace} \n Source: {e.Source}\n Inner Exception: {e.InnerException}");
+                throw new Exception($"Exception message: {e.Message}. \n StackTrace: {e.StackTrace} \n Source: {e.Source}\n Inner Exception: {e.InnerException}");
             }
             unitOfWork.Commit();
 

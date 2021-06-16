@@ -4,12 +4,12 @@
     <div class="row paymentRow">
         <app-material-text-form-input [formControl]='payments.controls["Name"]' [validate]="'name'" [label]="'name'" [icon]="'create'" [hint]="'Payment name'" [translatedFrom]="'payments'" ></app-material-text-form-input>
    
-        <mat-form-field class="example-full-width" appearance="fill">
+        <!-- <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="picker" [formControl]='payments.controls["PaymentDeadline"]'>
+            <input matInput [matDatepicker]="picker" >
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>      
+        </mat-form-field>       -->
         <!-- formControlName="PaymentDeadline" -->
     </div>
     <div class="row paymentRow">
