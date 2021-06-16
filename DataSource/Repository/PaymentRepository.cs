@@ -31,9 +31,9 @@ namespace DataSource.Repository
             return payment;
         }
 
-        public IEnumerable<Payment> GetPaymentsForRealEstate(int realEstateId)
+        public IQueryable<Payment> GetPaymentsForRealEstate(int realEstateId)
         {
-            IEnumerable<Payment> payments = dbContext.Payments.AsEnumerable().Where(p => p.RealEstate.Id == realEstateId);
+            IQueryable<Payment> payments = dbContext.Payments.AsQueryable().Where(p => p.RealEstate.Id == realEstateId);
 
             return payments;
         }

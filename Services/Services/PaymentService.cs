@@ -6,6 +6,7 @@ using Models.Enums;
 using Models.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Services.Services
@@ -18,9 +19,9 @@ namespace Services.Services
             this.unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<Payment> GetPayments(int realEstateId)
+        public IQueryable<Payment> GetPayments(int realEstateId)
         {
-            IEnumerable<Payment> payments = unitOfWork.PaymentRepository.GetPaymentsForRealEstate(realEstateId);
+            IQueryable<Payment> payments = unitOfWork.PaymentRepository.GetPaymentsForRealEstate(realEstateId);
             return payments;
         }
 
