@@ -38,10 +38,18 @@ export class RealestateComponent implements OnInit{
   }
 
   ngOnInit(): void {
-  this.getAllRealEstates()
+    this.getRentierRealEstates()
+  this.getOwnerRealEstates()
     this.storedDarkTheme = this.themeService.darkThemeValue;
     this.storedTheme = this.themeService.storedTheme;
 }
+
+isOwner(){
+  if(this.accountService.userRole === "Owner"){
+    return true;
+  }  else false;
+}
+
 openDialog() {
   const dialogRef = this.dialog.open(AddRealEstateComponent);
 
@@ -60,22 +68,36 @@ addRentierToRealEstate(id: number){
   });
 }
 
-getAllRealEstates(){
-  let resp = this.realestateService.getRealestate();
+getRentierRealEstates(){
+  if(this.accountService.userRole === "Rentier"){
+    let resp = this.realestateService.getRentierRealestate();
+    let realEstateArray = [];
+  resp.subscribe(realestate =>{
+    realEstateArray.push(realestate as Realestate[])
+    this.dataSource.data= realEstateArray
+    console.log(realestate)
+  })
+  }
+}
+getOwnerRealEstates(){
+  if(this.accountService.userRole === "Owner"){
+    let resp = this.realestateService.getRealestate();
   resp.subscribe(realestate =>{
     this.dataSource.data=realestate as Realestate[]
+    console.log(realestate)
   })
+  }
 }
 
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
+ngAfterViewInit() {
+  this.dataSource.paginator = this.paginator;
+}
    
-  toDetail(param){
-    this.rowItem = param
-    this.realestateService.specificRealEstate = this.rowItem
-    console.log(this.rowItem)
-    this.router.navigate(['details',param.id], {relativeTo: this.route},)
-  }
+toDetail(param){
+  this.rowItem = param
+  this.realestateService.specificRealEstate = this.rowItem
+  console.log(this.rowItem)
+  this.router.navigate(['details',param.id], {relativeTo: this.route},)
+}
 }

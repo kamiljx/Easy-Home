@@ -26,6 +26,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { LayoutModule } from '@angular/cdk/layout';
+import {MatNativeDateModule} from '@angular/material/core';
 import { RealestateComponent } from './dashboard/realestate/realestate.component';
 import { OptionsComponent } from './dashboard/options/options.component';
 import { MaterialTextFormInputComponent } from './forms/material-text-form-input/material-text-form-input.component';
@@ -41,6 +42,9 @@ import { MessagesComponent } from './dashboard/messages/messages.component';
 import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { MemberMessagesComponent } from './member/member-messages/member-messages.component';
+import { RealEstatePaymentComponent } from './dashboard/realestate/real-estate-detail/real-estate-payment/real-estate-payment.component';
+import { AddRealEstatePaymentComponent } from './dashboard/realestate/real-estate-detail/real-estate-payment/add-real-estate-payment/add-real-estate-payment.component';
+import { GetRentiersComponent } from './dashboard/realestate/real-estate-detail/get-rentiers/get-rentiers.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -69,6 +73,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     MessagesComponent,
     ConfirmDialogComponent,
     MemberMessagesComponent,
+    RealEstatePaymentComponent,
+    AddRealEstatePaymentComponent,
+    GetRentiersComponent,
 
   ],
   entryComponents:[
@@ -84,6 +91,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MaterialModule,
     BrowserAnimationsModule,
     MatSelectModule,
+    MatNativeDateModule,
     SharedModule,
     BsDropdownModule.forRoot(),
     RouterModule.forRoot([

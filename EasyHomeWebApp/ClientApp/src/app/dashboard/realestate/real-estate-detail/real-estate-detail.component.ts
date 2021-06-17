@@ -28,7 +28,7 @@ import { ToastrService } from 'ngx-toastr';
 export class RealEstateDetailComponent implements OnInit {
   realEstateId: number;
   validationErrors: string[] =[];
-  specificRealEstate: any;
+  specificRealEstate;
   label = 'danger';
   emptyArray: [];
   @Input('ELEMENT_DATA')  ELEMENT_DATA!:  Announcement[];
@@ -43,6 +43,7 @@ export class RealEstateDetailComponent implements OnInit {
     this.specificRealEstate = this.realestateService.specificRealEstate
     this.announcementService.realEstateId = this.realEstateId;
     this.getAllAnnouncements()
+    console.log(typeof this.realEstateId)
 
   }
   addAnnouncement(){
