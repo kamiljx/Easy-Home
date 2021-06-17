@@ -27,7 +27,10 @@
       </button>
       <span>Easy Home</span>
       <span style="flex: auto;"></span>
-      <button mat-button>
+      <button mat-button routerLink="/dashboard/messages" >
+        <mat-icon>textsms</mat-icon>
+      </button>
+      <button mat-button routerLink="/dashboard/members/{{member}}" >
         <mat-icon>person</mat-icon>
       </button>
       <button mat-button (click)="logout()">

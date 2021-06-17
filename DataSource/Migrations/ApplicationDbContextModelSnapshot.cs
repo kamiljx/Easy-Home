@@ -16,8 +16,23 @@ namespace DataSource.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.4")
+                .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("ApplicationUserPayment", b =>
+                {
+                    b.Property<int>("PayersId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PaymentsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PayersId", "PaymentsId");
+
+                    b.HasIndex("PaymentsId");
+
+                    b.ToTable("ApplicationUserPayment");
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
@@ -198,6 +213,35 @@ namespace DataSource.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Models.DataSource.Entities.Announcement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("RealEstateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RealEstateId");
+
+                    b.ToTable("Announcements");
+                });
+
             modelBuilder.Entity("Models.DataSource.Entities.AppRole", b =>
                 {
                     b.Property<int>("Id")
@@ -242,6 +286,49 @@ namespace DataSource.Migrations
                     b.ToTable("AspNetUserRoles");
                 });
 
+            modelBuilder.Entity("Models.DataSource.Entities.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DateRead")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("MessageSent")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("ReciepientDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("RecipientId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RecipientUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("SebderDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("SenderId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SenderUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RecipientId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("Messages");
+                });
+
             modelBuilder.Entity("Models.DataSource.Entities.Payment", b =>
                 {
                     b.Property<int>("Id")
@@ -249,8 +336,11 @@ namespace DataSource.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("BankAccountNumber")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -258,17 +348,24 @@ namespace DataSource.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PayerId")
+                    b.Property<DateTime?>("PayedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("PaymentDeadline")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("RealEstateId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("realEstateId")
+                    b.Property<string>("ReceiverBankAccount")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PayerId");
-
-                    b.HasIndex("realEstateId");
+                    b.HasIndex("RealEstateId");
 
                     b.ToTable("Payments");
                 });
@@ -284,26 +381,21 @@ namespace DataSource.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("OwnerId")
                         .HasColumnType("int");
 
                     b.Property<string>("ZipCode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -311,6 +403,21 @@ namespace DataSource.Migrations
                     b.HasIndex("OwnerId");
 
                     b.ToTable("RealEstates");
+                });
+
+            modelBuilder.Entity("ApplicationUserPayment", b =>
+                {
+                    b.HasOne("Models.DataSource.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("PayersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Models.DataSource.Entities.Payment", null)
+                        .WithMany()
+                        .HasForeignKey("PaymentsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -351,9 +458,20 @@ namespace DataSource.Migrations
 
             modelBuilder.Entity("Models.DataSource.ApplicationUser", b =>
                 {
-                    b.HasOne("Models.DataSource.Entities.RealEstate", null)
+                    b.HasOne("Models.DataSource.Entities.RealEstate", "RealEstate")
                         .WithMany("Rentiers")
                         .HasForeignKey("RealEstateId");
+
+                    b.Navigation("RealEstate");
+                });
+
+            modelBuilder.Entity("Models.DataSource.Entities.Announcement", b =>
+                {
+                    b.HasOne("Models.DataSource.Entities.RealEstate", "RealEstate")
+                        .WithMany("Announcements")
+                        .HasForeignKey("RealEstateId");
+
+                    b.Navigation("RealEstate");
                 });
 
             modelBuilder.Entity("Models.DataSource.Entities.AppUserRole", b =>
@@ -375,25 +493,38 @@ namespace DataSource.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Models.DataSource.Entities.Message", b =>
+                {
+                    b.HasOne("Models.DataSource.ApplicationUser", "Recipient")
+                        .WithMany("MessagesRecieved")
+                        .HasForeignKey("RecipientId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Models.DataSource.ApplicationUser", "Sender")
+                        .WithMany("MessagesSend")
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Recipient");
+
+                    b.Navigation("Sender");
+                });
+
             modelBuilder.Entity("Models.DataSource.Entities.Payment", b =>
                 {
-                    b.HasOne("Models.DataSource.ApplicationUser", "Payer")
-                        .WithMany()
-                        .HasForeignKey("PayerId");
-
-                    b.HasOne("Models.DataSource.Entities.RealEstate", "realEstate")
+                    b.HasOne("Models.DataSource.Entities.RealEstate", "RealEstate")
                         .WithMany("Payments")
-                        .HasForeignKey("realEstateId");
+                        .HasForeignKey("RealEstateId");
 
-                    b.Navigation("Payer");
-
-                    b.Navigation("realEstate");
+                    b.Navigation("RealEstate");
                 });
 
             modelBuilder.Entity("Models.DataSource.Entities.RealEstate", b =>
                 {
                     b.HasOne("Models.DataSource.ApplicationUser", "Owner")
-                        .WithMany()
+                        .WithMany("OwnEstates")
                         .HasForeignKey("OwnerId");
 
                     b.Navigation("Owner");
@@ -401,6 +532,12 @@ namespace DataSource.Migrations
 
             modelBuilder.Entity("Models.DataSource.ApplicationUser", b =>
                 {
+                    b.Navigation("MessagesRecieved");
+
+                    b.Navigation("MessagesSend");
+
+                    b.Navigation("OwnEstates");
+
                     b.Navigation("UserRoles");
                 });
 
@@ -411,6 +548,8 @@ namespace DataSource.Migrations
 
             modelBuilder.Entity("Models.DataSource.Entities.RealEstate", b =>
                 {
+                    b.Navigation("Announcements");
+
                     b.Navigation("Payments");
 
                     b.Navigation("Rentiers");

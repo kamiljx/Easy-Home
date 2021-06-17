@@ -1,0 +1,41 @@
+.grid-container {
+  margin: 20px;
+}
+
+.dashboard-card {
+  position: absolute;
+  top: 15px;
+  left: 0px;
+  right: 15px;
+  bottom: 15px;
+  overflow: auto;
+  float: right;
+}
+
+.more-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.dashboard-card-content {
+  text-align: center;
+}
+.cardWithLabel {
+  border-left-style: solid;
+}
+.warning {
+  border-left-color: yellow;
+}
+.success {
+  border-left-color: rgb(0, 208, 14);
+}
+.info {
+  border-left-color: rgb(47, 186, 156);
+}
+.primary {
+  border-left-color: blue;
+}
+.danger {
+  border-left-color: red;
+}

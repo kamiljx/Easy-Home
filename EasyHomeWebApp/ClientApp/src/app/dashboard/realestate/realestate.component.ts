@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, ViewChild, } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild, EventEmitter, } from '@angular/core';
 import { Realestate } from 'src/app/models/realestate';
 import { RealestateService } from 'src/app/services/realestate.service';
 import { MatTableDataSource } from '@angular/material/table';
@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddRealEstateComponent } from './add-realestate/add-realestate.component';
 import { AssignRentierToRealestateComponent } from './assign-rentier-to-realestate/assign-rentier-to-realestate.component';
 import { MatPaginator } from '@angular/material/paginator';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 
@@ -23,6 +24,8 @@ export class RealestateComponent implements OnInit{
   storedTheme: string
   storedDarkTheme: boolean
   realestateId;
+
+  rowItem: any;
   displayedColumns: string[] = ['id', 'name', 'city', 'zipcode', 'address', 'country', 'options'];
   
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -30,15 +33,23 @@ export class RealestateComponent implements OnInit{
 
   
   constructor(private realestateService: RealestateService, private themeService: ThemeService, private accountService: AccountService,
-    private dialog: MatDialog) {
-
+    private dialog: MatDialog, private router: Router, private route: ActivatedRoute) {
+      
   }
 
   ngOnInit(): void {
-  this.getAllRealEstates()
+    this.getRentierRealEstates()
+  this.getOwnerRealEstates()
     this.storedDarkTheme = this.themeService.darkThemeValue;
     this.storedTheme = this.themeService.storedTheme;
 }
+
+isOwner(){
+  if(this.accountService.userRole === "Owner"){
+    return true;
+  }  else false;
+}
+
 openDialog() {
   const dialogRef = this.dialog.open(AddRealEstateComponent);
 
@@ -49,9 +60,7 @@ openDialog() {
 addRentierToRealEstate(id: number){
   this.realestateId = id;
   const dialogRef = this.dialog.open(AssignRentierToRealestateComponent, {
-    data: {
-      realestateId: this.realestateId
-    }
+    data: this.realestateId
   });
 
   dialogRef.afterClosed().subscribe(result => {
@@ -59,16 +68,36 @@ addRentierToRealEstate(id: number){
   });
 }
 
-getAllRealEstates(){
-  let resp = this.realestateService.getRealestate();
+getRentierRealEstates(){
+  if(this.accountService.userRole === "Rentier"){
+    let resp = this.realestateService.getRentierRealestate();
+    let realEstateArray = [];
+  resp.subscribe(realestate =>{
+    realEstateArray.push(realestate as Realestate[])
+    this.dataSource.data= realEstateArray
+    console.log(realestate)
+  })
+  }
+}
+getOwnerRealEstates(){
+  if(this.accountService.userRole === "Owner"){
+    let resp = this.realestateService.getRealestate();
   resp.subscribe(realestate =>{
     this.dataSource.data=realestate as Realestate[]
+    console.log(realestate)
   })
+  }
 }
 
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
+ngAfterViewInit() {
+  this.dataSource.paginator = this.paginator;
+}
    
+toDetail(param){
+  this.rowItem = param
+  this.realestateService.specificRealEstate = this.rowItem
+  console.log(this.rowItem)
+  this.router.navigate(['details',param.id], {relativeTo: this.route},)
+}
 }

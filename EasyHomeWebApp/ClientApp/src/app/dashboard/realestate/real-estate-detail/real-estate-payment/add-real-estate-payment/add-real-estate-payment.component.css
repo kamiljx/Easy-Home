@@ -1,0 +1,7 @@
+.paymentRow {
+  margin: 10px;
+}
+.mat-form-field + .mat-form-field {
+  margin-left: 100px !important;
+  width: 100px;
+}

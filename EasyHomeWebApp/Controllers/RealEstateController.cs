@@ -8,6 +8,7 @@ using Models.DTOs;
 using Models.DataSource.Entities;
 using Microsoft.AspNetCore.Identity;
 using Models.DataSource;
+using Microsoft.EntityFrameworkCore;
 
 namespace EasyHomeWebApp.Controllers
 {
@@ -22,20 +23,30 @@ namespace EasyHomeWebApp.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("name")]
-        public async Task<IQueryable<RealEstate>> GetRealEstatesByName(string Name)
+        [HttpGet("owner")]
+        public async Task<IQueryable<RealEstate>> GetRealEstatesByOwnerName(string Name)
         {
             var user = await _userManager.FindByNameAsync(Name);
             var realEstates = _context.RealEstates.Where(x => x.Owner == user);
+
             return realEstates;
         }
 
+        [HttpGet("rentier")]
+        public async Task<RealEstate> GetRealEstatesByRentierName(string Name)
+        {
+            var user = await _userManager.FindByNameAsync(Name);
+            var realEstate = await _context.RealEstates.Where(x => x.Rentiers.Contains(user)).FirstOrDefaultAsync();
+            return realEstate;
+        }
+
+
         [HttpPost("create")]
-        public RealEstate Create([FromBody] RealEstateDto realEstateDto)
+        public async Task<IActionResult> Create([FromBody] RealEstateDto realEstateDto)
         {
             var realEstate = new RealEstate
             {
-                Owner = _userManager.Users.Where(u => u.UserName == realEstateDto.ownerName).FirstOrDefault(),
+                Owner = await _userManager.Users.SingleOrDefaultAsync(u => u.UserName == realEstateDto.ownerName),
                 Name = realEstateDto.name,
                 City = realEstateDto.City,
                 ZipCode = realEstateDto.ZipCode,
@@ -45,9 +56,36 @@ namespace EasyHomeWebApp.Controllers
 
             };
 
-            var result = _context.RealEstates.AddAsync(realEstate);
+            var result = await _context.RealEstates.AddAsync(realEstate);
             _context.SaveChanges();
-            return realEstate;
+
+            return Ok(realEstate);
+        }
+
+        [HttpPost("addrentier")]
+        public async Task<IActionResult> AddRentier(AddRentiersDto addRentiersDto)
+        {
+            var user = await _userManager.Users.SingleOrDefaultAsync(u => u.UserName == addRentiersDto.userName);
+            if (user == null) return BadRequest("There is no user with this email.");
+            var realEstate = _context.RealEstates.Where(e => e.Id == addRentiersDto.realEstateId).FirstOrDefault();
+            if (realEstate == null) return BadRequest("There is no real estate with this id");
+            realEstate.Rentiers = new List<ApplicationUser>();
+            realEstate.Rentiers.Add(user);
+
+            _context.SaveChanges();
+
+            return Ok(realEstate);
+        }
+
+        [HttpGet("rentiers/{realEstateId}")]
+        public async Task<IActionResult> GetAllRentiersById(int realEstateId)
+        {
+            var realEstate = await _context.RealEstates.Where(e => e.Id == realEstateId).FirstOrDefaultAsync();
+            if (realEstate == null) return BadRequest("There is no real estate with this id");
+            var rentiers = _userManager.Users.Where(u => u.RealEstateId == realEstateId);
+            
+            return Ok(rentiers);
         }
     }
+
 }

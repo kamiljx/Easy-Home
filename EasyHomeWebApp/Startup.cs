@@ -1,4 +1,8 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Autofac.Integration.Mvc;
 using DataSource;
+using EasyHomeWebApp.AppStart;
 using EasyHomeWebApp.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -15,6 +19,7 @@ using Models.DataSource;
 using Models.Interfaces;
 using Services.Services;
 using System.Text;
+using System.Web.Mvc;
 
 namespace EasyHomeWebApp
 {
@@ -26,11 +31,11 @@ namespace EasyHomeWebApp
         }
 
         public IConfiguration Configuration { get; }
+        private IContainer container;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -39,10 +44,18 @@ namespace EasyHomeWebApp
             });
 
             services.AddApplicationServices(Configuration);
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddCors();
             services.AddIdentityServices(Configuration);
-            
+            services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("ConnectionString"), providerOptions => providerOptions.EnableRetryOnFailure());
+            });
+        }
+
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterModule(new DefaultModule());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

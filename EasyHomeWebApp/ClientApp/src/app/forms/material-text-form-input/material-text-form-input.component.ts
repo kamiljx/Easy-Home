@@ -12,7 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class MaterialTextFormInputComponent implements ControlValueAccessor, OnInit {
 
   @Input() label: string;
-  @Input() type = 'text'
+  @Input() type;
   @Input() placeholder: string
   @Input() icon: string
   @Input() hint: string

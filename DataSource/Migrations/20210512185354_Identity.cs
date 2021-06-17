@@ -114,7 +114,7 @@ namespace DataSource.Migrations
                     BankAccountNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PayerId = table.Column<int>(type: "int", nullable: true),
-                    realEstateId = table.Column<int>(type: "int", nullable: true)
+                    RealEstateId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -128,11 +128,11 @@ namespace DataSource.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OwnerId = table.Column<int>(type: "int", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AccessCode = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -146,6 +146,7 @@ namespace DataSource.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    RealEstateId = table.Column<int>(type: "int", nullable: true),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -153,7 +154,6 @@ namespace DataSource.Migrations
                     ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RealEstateId = table.Column<int>(type: "int", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -230,9 +230,9 @@ namespace DataSource.Migrations
                 column: "PayerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Payments_realEstateId",
+                name: "IX_Payments_RealEstateId",
                 table: "Payments",
-                column: "realEstateId");
+                column: "RealEstateId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RealEstates_OwnerId",
@@ -280,9 +280,9 @@ namespace DataSource.Migrations
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Payments_RealEstates_realEstateId",
+                name: "FK_Payments_RealEstates_RealEstateId",
                 table: "Payments",
-                column: "realEstateId",
+                column: "RealEstateId",
                 principalTable: "RealEstates",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);

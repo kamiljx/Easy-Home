@@ -26,11 +26,25 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { LayoutModule } from '@angular/cdk/layout';
+import {MatNativeDateModule} from '@angular/material/core';
 import { RealestateComponent } from './dashboard/realestate/realestate.component';
 import { OptionsComponent } from './dashboard/options/options.component';
 import { MaterialTextFormInputComponent } from './forms/material-text-form-input/material-text-form-input.component';
 import { AddRealEstateComponent } from './dashboard/realestate/add-realestate/add-realestate.component';
 import { AssignRentierToRealestateComponent } from './dashboard/realestate/assign-rentier-to-realestate/assign-rentier-to-realestate.component';
+import { RealEstateDetailComponent } from './dashboard/realestate/real-estate-detail/real-estate-detail.component';
+import { AddRealestateDetailAnnouncementComponent } from './dashboard/realestate/real-estate-detail/add-realestate-detail-announcement/add-realestate-detail-announcement.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSelectModule } from '@angular/material/select';
+import { MemberListComponent } from './member/member-list/member-list.component';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { MessagesComponent } from './dashboard/messages/messages.component';
+import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import { MemberMessagesComponent } from './member/member-messages/member-messages.component';
+import { RealEstatePaymentComponent } from './dashboard/realestate/real-estate-detail/real-estate-payment/real-estate-payment.component';
+import { AddRealEstatePaymentComponent } from './dashboard/realestate/real-estate-detail/real-estate-payment/add-real-estate-payment/add-real-estate-payment.component';
+import { GetRentiersComponent } from './dashboard/realestate/real-estate-detail/get-rentiers/get-rentiers.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -53,11 +67,21 @@ export function HttpLoaderFactory(http: HttpClient) {
     AddRealEstateComponent,
     MaterialTextFormInputComponent,
     AssignRentierToRealestateComponent,
+    RealEstateDetailComponent,
+    AddRealestateDetailAnnouncementComponent,
+    MemberListComponent,
+    MessagesComponent,
+    ConfirmDialogComponent,
+    MemberMessagesComponent,
+    RealEstatePaymentComponent,
+    AddRealEstatePaymentComponent,
+    GetRentiersComponent,
 
   ],
   entryComponents:[
     AddRealEstateComponent,
-    AssignRentierToRealestateComponent
+    AssignRentierToRealestateComponent,
+    AddRealestateDetailAnnouncementComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -65,6 +89,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     ReactiveFormsModule,
     MaterialModule,
+    BrowserAnimationsModule,
+    MatSelectModule,
+    MatNativeDateModule,
     SharedModule,
     BsDropdownModule.forRoot(),
     RouterModule.forRoot([
@@ -88,7 +115,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     LayoutModule,
   ],
   providers: [
-    HttpClient
+    HttpClient,
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
+
   ],
   bootstrap: [AppComponent],
 })

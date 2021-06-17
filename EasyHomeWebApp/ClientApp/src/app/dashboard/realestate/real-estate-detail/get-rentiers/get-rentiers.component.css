@@ -1,0 +1,9 @@
+.card {
+  top: 15px;
+  margin-left: 15px;
+}
+
+a {
+  color: black;
+  text-decoration: none; /* no underline */
+}
