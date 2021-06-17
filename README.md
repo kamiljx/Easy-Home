@@ -27,8 +27,8 @@ Aplikacja łączy się z częścią backendową za pomocą kontrolerów API.
 Aplikacja zawiera komponenty takie jak
 
 forms (Główne metody formularzy używając formControl)
--- Date Form Input (Tworzącą metodę wyboru daty z kalendarza)
--- Text Form Input (Tworzącą metodę wprowadzania danych typu 'text')
+-- Date Form Input (Tworzący reusable component wyboru daty z kalendarza)
+-- Text Form Input (Tworzący reusable component wprowadzania danych typu 'text')
 Home (landing page aplikacji)
 HomeLogin (odpowiadający za logowanie)
 -- register (Komponent odpowiadający za tworzenie nowych użytkowników metodą API POST)
