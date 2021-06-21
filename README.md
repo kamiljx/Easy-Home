@@ -65,7 +65,6 @@ Aplikacja łączy się z częścią backendową za pomocą kontrolerów API.
 * RealEstate
 * RealEstateUser
 * user 
-Stworzony został także account service odpowiadający za pobieranie i wysyłanie danych używając API odnoszące się do użytkownika
 
 ## Services
 * Account
