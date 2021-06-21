@@ -24,16 +24,60 @@ EasyHomeWebApp
 Frontowa część aplikacji zbudowana na Angularze. Posiada również klasy C# jak Program.cs i Startup.cs
 Aplikacja łączy się z częścią backendową za pomocą kontrolerów API.
 
-Aplikacja zawiera komponenty takie jak
+# Aplikacja zawiera komponenty takie jak
 
-forms (Główne metody formularzy używając formControl)
--- Date Form Input (Tworzący reusable component wyboru daty z kalendarza)
--- Text Form Input (Tworzący reusable component wprowadzania danych typu 'text')
-Home (landing page aplikacji)
-HomeLogin (odpowiadający za logowanie)
--- register (Komponent odpowiadający za tworzenie nowych użytkowników metodą API POST)
-nav (Komponent odpowiadający za pasek nawigacji na górze strony)
-Member (Profil użytkownika)
+* forms (Główne metody formularzy używając formControl)
+** Date Form Input (Reusable component wyboru daty z kalendarza)
+** Text Form Input (Reusable component wprowadzania danych typu 'text')
+** Material Text Form Input (Reusable component ng-Material)
+
+* Home (landing page aplikacji)
+* HomeLogin (Kompponent odpowiadający za logowanie)
+* register (Komponent odpowiadający za tworzenie nowych użytkowników metodą API POST) 
+* Member (Profil użytkownika)
+* Nav (bootstrap navbar)
+
+## Dashboard (Komponent widoczny po zalogowaniu, umożliwiający zarządzanie serwisem przez użytkowników)
+* * Material-Nav (navbar & sidenav - mat-toolbar & mat-sidenav)
+* * Messages (Komponent odpowiadający za chat pomiędzy użytkownikami)
+* * Options (Komponent zawierający własciwości, personalizajcę serwisu przez użytkownika) 
+* * `RealEstate` (Komponent odpowiadający za wyświetlanie przypisanych do profilu nieruchomości)
+* ** Add-RealEstate (OpenDialog komponent służący do dodawania nieruchomości)
+* ** Add-RealEstate-Detail (Komponent zwracający szczegóły nieruchomości) 
+* ** Get-Rentiers (Komponent zwracający lokatorów)
+* ** Real-Estate-Payment (komponent służący do Tworzenia opłat) 
+* ** Add-Real-Estate-Payment (komponent służący do tworzenia płatności)  
+
+## Guard
+* Auth (Guard sprawdzający czy użytkownik jest zalogowany)
+
+## Interceptors 
+* JWT 
+* Loading
+
+## Models
+* AddRentierToRealEstate
+* Announcement
+* Member
+* Message
+* Pagination
+* Photo
+* RealEstate
+* RealEstateUser
+* user 
 Stworzony został także account service odpowiadający za pobieranie i wysyłanie danych używając API odnoszące się do użytkownika
+
+## Services
+* Account
+* Announcement
+* Busy
+* Confirm
+* Members
+* Message
+* PaginatorHelper
+* Payments
+* Presence
+* RealEstate
+* Theme
 
 W celu internacjonalizacji projektu wdrożona została metoda wyboru języka dzięki zastosowaniu ngx-translaote oraz i18n. Aplikacja wspiera dwie wersje językowe — polską i angielską. Preferencje językowe zapisywane są w LocalStorage.
