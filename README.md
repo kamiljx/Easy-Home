@@ -1,55 +1,55 @@
 EasyHome.Engine :
 1. DataSource
 
-Zawiera wszystkie komponenty aplikacji odpowiedzialne za połączenie z bazą danych:
+Contains all the application components responsible for connecting to the database:
 
-klasę implementująca wzorzec Unit of Work, która jest pośrednikiem i odpowiada za wszelkie działania z danymi i powinna zawierać w sobie wszystkie repozytoria. Klasę tą powinno się przekazywać przez Dependency Injection do kontrolerów czy serwisów (Przekazując interfejs, a nie samą implementację).
-ApplicationDbContext - główny context aplikacji z której korzysta UnitOfWork w swoich działaniach na bazie. Dziedziczy po DbContext i jest główną klasą do obsługi bazy danych ale nie powinna być wykorzystywana poza klasą UoW.
-Migrations - historia migracji do bazy danych
-Repository - wszystkie repozytoria, które mają odpowiadać za wyciąganie danych z poszczególnych tabel. Na przykład PersonRepository.cs byłoby odpowiedzialne za wyciąganie danych z tabeli Person. Tworzymy interfejs takiego repozytorium (IPersonRepository.cs) i dodajemy do klasy UnitOfWork.cs jako properties. Następnie jeśli chcemy z tego repo skorzystać w jakimś kontrolerze to przekazujemy interfejs
-(IUnitOfWork uow) w konstruktorze i odwołujemy się tak: uow.PersonRepository.Metoda()
+the class implementing the Unit of Work pattern, which is the middleman and is responsible for all actions with the data and should include all repositories. This class should be passed through Dependency Injection to controllers or services (passing the interface, not the implementation itself).
+ApplicationDbContext - the main application context that UnitOfWork uses in its operations on the database. It inherits from DbContext and it is the main class for handling the database but it should not be used outside the UnitOfWork class.
+Migrations - the history of migrations to the database
+Repository - all repositories to be responsible for pulling data from individual tables. For example, PersonRepository.cs would be responsible for pulling data from the Person table. We create an interface to such a repository (IPersonRepository.cs) and add it to the UnitOfWork.cs class as properties. Then, if we want to use this repository in some controller, we pass the interface
+(IUnitOfWork uow) in the constructor and refer to it as follows: uow.PersonRepository.Method()
 2.Models
 
-Biblioteka do przechowywania bazowych modeli aplikacji, ViewModeli do szybkiego mapowania, a także interfejsów.
+Library to store the underlying application models, ViewModels for quick mapping, and interfaces.
 
 3.Services
 
-Ta biblioteka powinna zawierać w sobie klasy, które służą do obsługi różnych komponentów aplikacji. Np. jeśli potrzebujemy klasę, która będzie odpowiadać za jakieś obliczenia, płatności i inne rzeczy spoza zakresu kontrolerów i repozytoriów to dodajemy ją w tym miejscu. Zazwyczaj klasy, które zawierają tzw. business logic powinny tam lądować.
+This library should encapsulate the classes that are used to handle the various components of the application. E.g. if we need a class that will be responsible for some calculations, payments and other things outside the scope of controllers and repositories then we add it here. Usually classes that contain so called business logic should land there.
 
 5.Commons
 
-Tutaj lądują wszystkie tzw. "helpery" i inne uniwersalne metody z których można korzystać w wielu sytuacjach. Przykładem może być klasa DateTimeFormat.cs, która odpowiadałaby za ujednolicenie daty i czasu w całej aplikacji, operacje na datach i inne pomocniczne customowe metody.
+This is where all the so-called "helpers" and other universal methods that can be used in many situations land. An example would be the DateTimeFormat.cs class, which would be responsible for standardizing the date and time throughout the application, date operations and other auxiliary custom methods.
 
 EasyHomeWebApp
-Frontowa część aplikacji zbudowana na Angularze. Posiada również klasy C# jak Program.cs i Startup.cs
-Aplikacja łączy się z częścią backendową za pomocą kontrolerów API.
+The front end of the application built on Angular. It also has C# classes like Program.cs and Startup.cs
+The application connects to the backend part using API controllers.
 
-# Aplikacja zawiera komponenty takie jak
+# The application contains components such as.
 
-* forms (Główne metody formularzy używając formControl)
-** Date Form Input (Reusable component wyboru daty z kalendarza)
-** Text Form Input (Reusable component wprowadzania danych typu 'text')
+* Forms (Main form methods using formControl)
+** Date Form Input (Reusable component for selecting date from calendar)
+** Text Form Input (Reusable component for entering text data)
 ** Material Text Form Input (Reusable component ng-Material)
 
-* Home (landing page aplikacji)
-* HomeLogin (Kompponent odpowiadający za logowanie)
-* register (Komponent odpowiadający za tworzenie nowych użytkowników metodą API POST) 
-* Member (Profil użytkownika)
+* Home (landing page of the application)
+* HomeLogin (Component responsible for login)
+* Register (API POST component for creating new users). 
+* Member (User profile)
 * Nav (bootstrap navbar)
 
-## Dashboard (Komponent widoczny po zalogowaniu, umożliwiający zarządzanie serwisem przez użytkowników)
-* * Material-Nav (navbar & sidenav - mat-toolbar & mat-sidenav)
-* * Messages (Komponent odpowiadający za chat pomiędzy użytkownikami)
-* * Options (Komponent zawierający własciwości, personalizajcę serwisu przez użytkownika) 
-* * `RealEstate` (Komponent odpowiadający za wyświetlanie przypisanych do profilu nieruchomości)
-* ** Add-RealEstate (OpenDialog komponent służący do dodawania nieruchomości)
-* ** Add-RealEstate-Detail (Komponent zwracający szczegóły nieruchomości) 
-* ** Get-Rentiers (Komponent zwracający lokatorów)
-* ** Real-Estate-Payment (komponent służący do Tworzenia opłat) 
-* ** Add-Real-Estate-Payment (komponent służący do tworzenia płatności)  
+## Dashboard (component visible after login, which allows users to manage the service)
+* Material-Nav (navbar & sidenav - mat-toolbar & mat-sidenav)
+* Messages (Component which is responsible for chat between users)
+* Options (Component containing properties, personalization of the service by the user) 
+* * `RealEstate` (Component responsible for displaying the properties assigned to the profile)
+* ** Add-RealEstate (OpenDialog component for adding real estate)
+* ** Add-RealEstate-Detail (Component that returns the property details) 
+** Get-Rentiers (component that returns tenants)
+* ** Real-Estate-Payment (component for creating payments) 
+* ** Add-Real-Estate-Payment (component for creating payments)  
 
 ## Guard
-* Auth (Guard sprawdzający czy użytkownik jest zalogowany)
+* Auth (Guard that checks if user is logged in)
 
 ## Interceptors 
 * JWT 
@@ -79,4 +79,5 @@ Aplikacja łączy się z częścią backendową za pomocą kontrolerów API.
 * RealEstate
 * Theme
 
-W celu internacjonalizacji projektu wdrożona została metoda wyboru języka dzięki zastosowaniu ngx-translaote oraz i18n. Aplikacja wspiera dwie wersje językowe — polską i angielską. Preferencje językowe zapisywane są w LocalStorage.
+In order to internationalize the project, a language selection method has been implemented by using ngx-translaote and i18n. The application supports two language versions - Polish and English. Language preferences are saved in LocalStorage.
+ Translated with www.DeepL.com/Translator (free version)
